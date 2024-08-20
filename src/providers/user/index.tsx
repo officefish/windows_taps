@@ -1,0 +1,53 @@
+import { FC, PropsWithChildren, useRef, useContext } from 'react'
+import { createStore, StoreApi, useStore } from 'zustand'
+import { createContext } from 'react' // from 'zustand/context'
+import { IUserState, IUserActions } from './types'
+import { IItem, IRef, IUserTask, IUser } from '../../types'
+
+type IUserStore = IUserState & IUserActions
+
+const createUserStore = () =>
+  createStore<IUserStore>()((set) => ({
+    user: null,
+    setUser: (user: IUser) => set(() => ({ user })),
+    items: [],
+    refferals: [],
+    dailyTasks: [],
+    allTasks: [],
+    setItems: (items: IItem[]) => set(() => ({ items })),
+    setRefferals: (refferals: IRef[]) => set(() => ({ refferals })),
+    setDailyTasks: (tasks: IUserTask[]) => set(() => ({ dailyTasks:tasks })),
+    setAllTasks: (tasks: IUserTask[]) => set(() => ({ allTasks:tasks })),
+  }))
+
+type UserStore = ReturnType<typeof createUserStore>
+const UserContext = createContext<UserStore | null>(null)
+
+//eslint-disable-next-line react-refresh/only-export-components
+export const useUserStore = () => {
+  const api = useContext(UserContext) as StoreApi<IUserStore>
+  return {
+    user: useStore(api, (state: IUserStore) => state.user),
+    setUser: useStore(api, (state: IUserStore) => state.setUser),
+    items: useStore(api, (state: IUserStore) => state.items),
+    setItems: useStore(api, (state: IUserStore) => state.setItems),
+    refferals: useStore(api, (state: IUserStore) => state.refferals),
+    dailyTasks: useStore(api, (state: IUserStore) => state.dailyTasks),
+    allTasks: useStore(api, (state: IUserStore) => state.allTasks),    
+    setRefferals: useStore(api, (state: IUserStore) => state.setRefferals),
+    setDailyTasks: useStore(api, (state: IUserStore) => state.setDailyTasks),
+    setAllTasks: useStore(api, (state: IUserStore) => state.setAllTasks),    
+  }
+}
+
+export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
+  const userStoreRef = useRef<UserStore>()
+  if (!userStoreRef.current) {
+    userStoreRef.current = createUserStore()
+  }
+  return (
+    <UserContext.Provider value={userStoreRef.current}>
+      {children}
+    </UserContext.Provider>
+  )
+}

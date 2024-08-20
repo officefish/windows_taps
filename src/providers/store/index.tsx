@@ -10,6 +10,10 @@ const createSiteStore = () =>
   createStore<IStore>()((set) => ({
     page: Page.HOME,
     setPage: (page: Page) => set(() => ({ page })),
+    isLoading: 0,
+    addLoading: () => set((state) => ({ isLoading: state.isLoading + 1 })),
+    removeLoading: () => set((state) => ({ isLoading: state.isLoading - 1 })),
+    hideLoading: () => set(() => ({ isLoading: 0 })),
   }))
 
 type Store = ReturnType<typeof createSiteStore>
@@ -21,7 +25,18 @@ export const useSiteStore = () => {
   return {
     page: useStore(api, (state: IStore) => state.page),
     setPage: useStore(api, (state: IStore) => state.setPage),
+    isLoading: useStore(api, (state: IStore) => state.isLoading),
+    addLoading: useStore(api, (state: IStore) => state.addLoading),
+    removeLoading: useStore(api, (state: IStore) => state.removeLoading),
+    hideLoading: useStore(api, (state: IStore) => state.hideLoading),
   }
+}
+
+export const useLoaderStore = () => {
+  const { addLoading, removeLoading, isLoading, hideLoading } = useSiteStore()
+  //const showLoading = () => addLoading()
+  //const hideLoading = () => removeLoading()
+  return { addLoading, removeLoading, isLoading, hideLoading }
 }
 
 export const SiteProvider: FC<PropsWithChildren> = ({ children }) => {

@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react"
+import { FC, useEffect, useState } from "react"
 import Header from "./header"
 import Content from "./content"
 import Footer from "./footer"
@@ -20,23 +20,26 @@ import useLogin from "@/hooks/api/useLogin"
 import apiFetch from "@/services/api"
 import useUpdateTasks from "@/hooks/api/useUpdateTasks"
 import useUpdateShop from "@/hooks/api/useUpdateShop"
+import { useLoaderStore } from "@/providers/store"
+import { WithLoader } from "@/components/loading"
 
-const showLoading = () => {
-  // Реализация функции showLoading
-  console.log('Show loading');
-}
+// const showLoading = () => {
+//   // Реализация функции showLoading
+//   console.log('Show loading');
+// }
 
-const hideLoading = () => {
-  // Реализация функции hideLoading
-  console.log('Hide loading');
-}
+// const hideLoading = () => {
+//   // Реализация функции hideLoading
+//   console.log('Hide loading');
+// }
 
 const Cabinet:FC = () => {
 
-  const { updateUser } = useUpdateUser(apiFetch, showLoading, hideLoading);
-  const { updateFriends } = useUpdateFriends(apiFetch, showLoading, hideLoading);
-  const { updateTasks } = useUpdateTasks(apiFetch, showLoading, hideLoading);
-  const { updateShop } = useUpdateShop(apiFetch, showLoading, hideLoading);
+  const { addLoading, removeLoading, hideLoading } = useLoaderStore();
+  const { updateUser } = useUpdateUser(apiFetch, addLoading, removeLoading);
+  const { updateFriends } = useUpdateFriends(apiFetch, addLoading, removeLoading);
+  const { updateTasks } = useUpdateTasks(apiFetch, addLoading, removeLoading);
+  const { updateShop } = useUpdateShop(apiFetch, addLoading, removeLoading);
 
   const loadResources = async () => {
     const apiRequests = [
@@ -55,20 +58,29 @@ const Cabinet:FC = () => {
     //setLoading(false);
   }
 
-  const { login } = useLogin(apiFetch, loadResources, showLoading, hideLoading);
+  //const { login } = useLogin(apiFetch, loadResources, addLoading, removeLoading);
+
 
   useEffect(() => {
+    addLoading()
+    console.log("addLoading")
     const initData = window?.Telegram 
       ? window?.Telegram?.WebApp?.initData 
       : ""
       console.log("initData: " + initData)    
 
-    login(initData)
-  
-}, [updateFriends, updateShop, updateTasks, updateUser])
+    //login(initData)
 
+    const timer = setTimeout(() => {
+      hideLoading()
+      console.log("hideLoading")
+    }, 2000); // 2 seconds delay
 
-    return (
+    return () => clearTimeout(timer) // Cleanup the timer on component unmount
+  }, [])
+
+return (
+  <WithLoader>
     <Screen>
       <Header />
       <Content>
@@ -83,7 +95,8 @@ const Cabinet:FC = () => {
       <Footer>
        <Navigation />
       </Footer> 
-    </Screen>)
+    </Screen>
+  </WithLoader>)
 }
 
 export default Cabinet
