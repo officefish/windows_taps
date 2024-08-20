@@ -15,7 +15,7 @@ const NavButton:FC<INavButton> = (props) => {
                 h-20 flex items-center justify-center 
                 m-1 
                 border-2 rounded-lg
-                ${selected ? 'text-accent border-accent' : 'text-secondary border-secondary'}`
+                ${selected ? 'text-primary border-primary' : 'text-accent border-accent'}`
             }>{title}</div>
         </Link>
         
