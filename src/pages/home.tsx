@@ -1,3 +1,4 @@
+import BoostDialog from "@/components/dialogs/boost.content";
 import UserBalance from "@/components/user.balance";
 import UserEnergy from "@/components/user.energy";
 import UserMin from "@/components/user.min";
@@ -29,6 +30,14 @@ const Home: FC = () => {
     setEnergy(newEnergy)
   }
 
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+   
+   const handleConfirm = () => {}
+
+   const handleBoost = () => {
+    setIsDialogOpen(true)
+   }
+
     return (
     <div className='w-full p-4 text-left'>
       <div className="w-full grid grid-cols-3 gap-4">
@@ -59,10 +68,14 @@ const Home: FC = () => {
               <progress className="progress progress-accent w-56 ml-4" value="40" max="100"></progress>
             </div>
           </div>
-          <div className=""><div className="btn btn-primary">Буст??</div></div>
+          <div className=""><div className="btn btn-primary" onClick={handleBoost}>Буст??</div></div>
         </div>
       </div>
     </div>
+    <BoostDialog
+                isOpen={isDialogOpen}
+                setIsOpen={setIsDialogOpen}
+                onConfirm={handleConfirm} />
    </div>)
 }
 export default Home

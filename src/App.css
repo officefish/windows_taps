@@ -35,3 +35,124 @@
   0%      {transform: perspective(80px) rotate3d(-1,-1,0,0)}
   80%,100%{transform: perspective(80px) rotate3d(-1,-1,0,-180deg)}
 }
+
+.spacer {
+  border-bottom: 1px solid currentColor;
+  width: 90%;
+  margin-left: 5%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.sm-user-name {
+  /* font-family: Poppins; */
+  font-size: 24px;
+  font-weight: 600;
+  /* line-height: 36px; */
+  text-align: left;
+  color: 0xFFF;  
+}
+
+.sm-user-status {
+  /* font-family: Poppins; */
+  font-size: 20px;
+  font-weight: 400;
+  /* line-height: 30px; */
+  text-align: left;
+  color: #787878;
+}
+
+.user-bonus {
+  height: 28px;
+  padding: 8px 9px 8px 9px;
+  border-radius: 34px;
+  opacity: 0px;
+
+  font-family: Poppins;
+  font-size: 17.14px;
+  font-weight: 800;
+  /* line-height: 25.71px; */
+  text-align: left;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tasks-title {
+  width: 90%;
+  margin-top: 8px;
+  padding-left: 5%;
+  /* font-family: Poppins; */
+  font-size: 20px;
+  font-weight: 900;
+  /* line-height: 30px; */
+  text-align: left;
+  color: var(--sc);
+}
+
+/* */
+.bg-glass {
+  /* From https://css.glass */
+  background: rgba(96, 26, 148, 0.2);
+  /* border-radius: 16px; */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(96, 26, 148, 0.3);
+
+  -webkit-transition: backdrop-filter 1000ms linear;
+  -ms-transition: backdrop-filter 1000ms linear;
+  transition: backdrop-filter 1000ms linear;
+}
+
+.modal-body {
+  background: #151515;
+  border-top: 1px solid currentColor;
+  box-shadow: 0px 0px 40px 0px currentColor;
+}
+
+.btn-close-dialog {
+  width: 64px;
+  height: 64px;
+  padding: 18px;
+  border-radius: 40px;
+  border: 0.82p;
+}
+
+.dialog-title {
+  font-family: Mulish;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 40.16px;
+  text-align: center;  
+}
+.dialog-baunty {
+  font-family: Mulish;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 40.16px;
+  text-align: center;
+  color: currentColor;
+}
+
+.dialog-description {
+  font-family: Mulish;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 25.1px;
+  text-align: center;
+}
+
+.dialog-btn {
+  width: 160px;
+  height: 40px;
+  padding: 10px 37px 10px 37px;
+  border-radius: 10px;
+  background: #8B68B7;
+  font-family: Mulish;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 25.1px;
+  text-align: left;
+}

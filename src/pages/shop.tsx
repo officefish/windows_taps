@@ -1,7 +1,8 @@
 import ShopCard from "@/components/card";
+import CardDialog from "@/components/dialogs/card.dialog";
 import { useSiteStore } from "@/providers/store";
 import { IShopCard, Page } from "@/types";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 
 const url = "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
 
@@ -57,12 +58,13 @@ const Shop: FC = () => {
       setPage(Page.SHOP)
   }, [setPage])
 
-  //const position = useBackgroundMover(7); // Adjust multiplier as needed
-
-//   const backgroundStyle = {
-//     backgroundPosition: `${position.x}% ${position.y}%`,
-//   };
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+ const [currentCard, setCurrentCard] = useState<IShopCard>(cards[0])
   
+  const handleBuy = (card: IShopCard) => {
+      setCurrentCard(card)
+      setIsDialogOpen(true)
+  }
 
     return (
     <div className="overflow-y-scroll h-screen">
@@ -70,10 +72,17 @@ const Shop: FC = () => {
             <h1 className="w-full text-center">Магазин</h1>
         </div>
        <div className='grid grid-cols-2'>
-                {cards.map((card, index) => (
-                    <ShopCard data={card} key={index} />
-                ))}
+            {cards.map((card, index) => (
+                <ShopCard data={card} key={index} handleBuy={handleBuy}/>
+            ))}
         </div>
+        <CardDialog
+                isOpen={isDialogOpen}
+                setIsOpen={setIsDialogOpen}
+                card={currentCard} 
+                onBuyClick={function (): void {
+                    throw new Error("Function not implemented.");
+                } }            />
     </div>  
     )
 }

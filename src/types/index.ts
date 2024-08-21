@@ -14,6 +14,8 @@ export interface ITelegramUser {
 
 /* User type */
 export interface IUser {
+
+    id: number
    
     name: string
     avatar: string
@@ -28,6 +30,8 @@ export interface IUser {
     energyPerSecond: number
 
     level: number
+
+    bonus: number
 }
 
 
