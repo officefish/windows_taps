@@ -40,6 +40,22 @@ export interface IItem {
     dependency: number
 }
 
+export interface IShopCardDependency {
+    title: string
+    level: number
+}
+
+export interface IShopCard {
+    saled: boolean
+    blocked: boolean
+    income: number
+    title: string
+    price: number
+    imgUrl: string
+    level: number
+    dependency?: IShopCardDependency
+}
+
 /* Refferer type */
 export interface IRef {
     photoUrl: string,
