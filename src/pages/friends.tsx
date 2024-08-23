@@ -44,7 +44,7 @@ const FriendsHeader:FC<IFriendsHeaderProps> = (props) => {
   return (
     <>
         <div>
-          <h1 className="w-full text-center">Друзья.</h1>
+          <h1 className="w-full text-center">Друзья</h1>
         </div>
         <div className='gap-2 bg-accent rounded-lg mt-4 py-4'>
           <h5 className="pb-4 col-span-5 text-center text-base-100 font-bold text-xl">Ссылка для друзей.</h5>

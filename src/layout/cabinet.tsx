@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react"
+import { FC, useEffect } from "react"
 import Header from "./header"
 import Content from "./content"
 import Footer from "./footer"
@@ -12,14 +12,14 @@ import Friends from "@/pages/friends"
 import Tasks from "@/pages/tasks"
 import Shop from "@/pages/shop"
 import Offer from "@/pages/offer"
-import useUpdateFriends from "@/hooks/api/useUpdateFriends"
-import useUpdateUser from "@/hooks/api/useUpdateUser"
-import useLogin from "@/hooks/api/useLogin"
+//import useUpdateFriends from "@/hooks/api/useUpdateFriends"
+//import useUpdateUser from "@/hooks/api/useUpdateUser"
+//import useLogin from "@/hooks/api/useLogin"
 //import { OptionsObject } from "notistack"
 
-import apiFetch from "@/services/api"
-import useUpdateTasks from "@/hooks/api/useUpdateTasks"
-import useUpdateShop from "@/hooks/api/useUpdateShop"
+//import apiFetch from "@/services/api"
+//import useUpdateTasks from "@/hooks/api/useUpdateTasks"
+//import useUpdateShop from "@/hooks/api/useUpdateShop"
 import { useLoaderStore } from "@/providers/store"
 import { WithLoader } from "@/components/loading"
 
@@ -35,28 +35,28 @@ import { WithLoader } from "@/components/loading"
 
 const Cabinet:FC = () => {
 
-  const { addLoading, removeLoading, hideLoading } = useLoaderStore();
-  const { updateUser } = useUpdateUser(apiFetch, addLoading, removeLoading);
-  const { updateFriends } = useUpdateFriends(apiFetch, addLoading, removeLoading);
-  const { updateTasks } = useUpdateTasks(apiFetch, addLoading, removeLoading);
-  const { updateShop } = useUpdateShop(apiFetch, addLoading, removeLoading);
+  const { addLoading, hideLoading } = useLoaderStore();
+  //const { updateUser } = useUpdateUser(apiFetch, addLoading, removeLoading);
+  //const { updateFriends } = useUpdateFriends(apiFetch, addLoading, removeLoading);
+  //const { updateTasks } = useUpdateTasks(apiFetch, addLoading, removeLoading);
+  //const { updateShop } = useUpdateShop(apiFetch, addLoading, removeLoading);
 
-  const loadResources = async () => {
-    const apiRequests = [
-        //updateUser(initData)
-        updateTasks(),
-        updateFriends(),
-        updateShop()
-    ];
+  // const loadResources = async () => {
+  //   const apiRequests = [
+  //       //updateUser(initData)
+  //       updateTasks(),
+  //       updateFriends(),
+  //       updateShop()
+  //   ];
 
-    // const imageRequests = [
-    //     loadImage("/referrals.png"),
-    // ];
+  //   // const imageRequests = [
+  //   //     loadImage("/referrals.png"),
+  //   // ];
 
-    await Promise.all([...apiRequests, /*...imageRequests*/])
+  //   await Promise.all([...apiRequests, /*...imageRequests*/])
 
-    //setLoading(false);
-  }
+  //   //setLoading(false);
+  // }
 
   //const { login } = useLogin(apiFetch, loadResources, addLoading, removeLoading);
 
