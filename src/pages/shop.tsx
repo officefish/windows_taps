@@ -66,6 +66,10 @@ const Shop: FC = () => {
       setIsDialogOpen(true)
   }
 
+  const onBuyClick = () => {
+    setIsDialogOpen(false)
+  }
+
     return (
     <div className="overflow-y-scroll h-screen">
         <div>
@@ -80,9 +84,7 @@ const Shop: FC = () => {
                 isOpen={isDialogOpen}
                 setIsOpen={setIsDialogOpen}
                 card={currentCard} 
-                onBuyClick={function (): void {
-                    throw new Error("Function not implemented.");
-                } }            />
+                onBuyClick={onBuyClick}            />
     </div>  
     )
 }
