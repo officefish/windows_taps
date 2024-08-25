@@ -4,8 +4,6 @@ import { useSiteStore } from "@/providers/store";
 import { IShopCard, Page } from "@/types";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 
-const url = "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-
 const categories = [
     {
         title: "Ум",
