@@ -6,6 +6,26 @@ import UserMin from "@/components/user.min";
 import { useSiteStore } from "@/providers/store";
 import { Page } from "@/types";
 import { FC, SyntheticEvent, useEffect, useState } from "react";
+import RatingDialog from "@/components/dialogs/rating.dialog";
+
+const bestUsers = [
+  {
+    name: 'Сергей Иноземцев',
+    photoUrl: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
+    income: 1400
+  },
+  {
+    name: 'Егор Летов',
+    photoUrl: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
+    income: 1200
+  },
+  {
+    name: 'Елена прекрасная',
+    photoUrl: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
+    income: 1000
+  },
+
+]
 
 const Home: FC = () => {
 
@@ -32,6 +52,7 @@ const Home: FC = () => {
   }
 
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isRatingDialogOpen, setIsRatingDialogOpen] = useState(false)
    
    const handleConfirm = () => {}
 
@@ -40,9 +61,8 @@ const Home: FC = () => {
    }
 
    const handleLevelClick = () => {
-
+    setIsRatingDialogOpen(true)
    }
-
 
     return (
     <div className='w-full px-4 text-left'>
@@ -87,6 +107,14 @@ const Home: FC = () => {
                 isOpen={isDialogOpen}
                 setIsOpen={setIsDialogOpen}
                 onConfirm={handleConfirm} />
+     <RatingDialog
+                isOpen={isRatingDialogOpen}
+                setIsOpen={setIsRatingDialogOpen}
+                level={1}
+                income={0}
+                bestUsers={bestUsers}
+                /> 
+
    </div>)
 }
 export default Home
