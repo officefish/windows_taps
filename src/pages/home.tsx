@@ -39,7 +39,7 @@ const Home: FC = () => {
    }
 
     return (
-    <div className='w-full p-4 text-left'>
+    <div className='w-full px-4 text-left'>
       <div className="w-full grid grid-cols-3 gap-4">
         <div className="col-span-2">
           <UserMin fullname={user.name} 

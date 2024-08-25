@@ -6,6 +6,10 @@
   line-height: 1;
 }
 
+body {
+  background: var(currentColor);
+}
+
 .loader {
   width: 50px;
   aspect-ratio: 1;

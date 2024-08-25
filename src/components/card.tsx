@@ -25,8 +25,8 @@ const ShopCard:FC<IShopCardProps> = (props) => {
         handleBuy(props.data)
     }
     return (
-        <div className={`card 
-        ${saled ? 'image-scaled' : 'image-full'} w-full p-2 z-0`}>
+        <div className={`card h-60 overflow-hidden
+        ${saled ? 'image-scaled border-2 border-neutral text-neutral' : 'image-full'} w-full z-0`}>
             <figure>
                 <img
                     src={imgUrl}
