@@ -1,3 +1,4 @@
+import { getRoleByLevel } from "@/local"
 import { FC, SyntheticEvent } from "react"
 
 interface IUserEnergyProps {
@@ -23,15 +24,3 @@ const UserLevel:FC<IUserEnergyProps> = (props) => {
 }
 export default UserLevel
 
-const getRoleByLevel = (level: number) => {
-    switch (level) {
-        case 1:
-            return "Листовщик"
-        case 2:
-            return "Продавец"
-        case 3:
-            return "Администратор"
-        default:
-            return "Листовщик"
-    }   
-}

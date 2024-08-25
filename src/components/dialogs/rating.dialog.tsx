@@ -6,6 +6,7 @@ import {
 // import { StyledDialog } from '@/styled/dialog.styled'
 import CloseModalBtn from '../button/close-modal.btn'
 import DialogContent from './dialog.content'
+import { getRoleByLevel } from '@/local'
 
 interface DialogProps {
   isOpen: boolean
@@ -43,7 +44,7 @@ const RatingDialog: FC<DialogProps> = (props) => {
             <CloseModalBtn handleCancel={onCancel}/>
           <DialogContent>
             <div className='flex flex-col items-center justify-center w-full mt-2'>
-                <div className='text-3xl font-bold'>Ваш текущий уровень: {level}</div>
+                <div className='text-xl font-bold'>Ваш уровень: {getRoleByLevel(level)}</div>
                 <div className='text-3xl font-bold'>Ваш доход составляет: {income}</div>
             </div>
             <div className='spacer mt-2'></div>
