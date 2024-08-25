@@ -1,6 +1,7 @@
 import BoostDialog from "@/components/dialogs/boost.content";
 import UserBalance from "@/components/user.balance";
-import UserEnergy from "@/components/user.energy";
+import UserLevel from "@/components/user.level";
+import UserIncome from "@/components/user.income";
 import UserMin from "@/components/user.min";
 import { useSiteStore } from "@/providers/store";
 import { Page } from "@/types";
@@ -38,37 +39,47 @@ const Home: FC = () => {
     setIsDialogOpen(true)
    }
 
+   const handleLevelClick = () => {
+
+   }
+
+
     return (
     <div className='w-full px-4 text-left'>
-      <div className="w-full grid grid-cols-3 gap-4">
-        <div className="col-span-2">
+      <div className="flex w-full gap-4 items-center justify-between">
           <UserMin fullname={user.name} 
           photoUrl={user.photoUrl} />
-        </div>
-        <div className="text-right flex items-center justify-end">ключи??</div>
-        <UserEnergy level="Bronse" progress={35} />
-        <div className="col-span-2 flex justify-end">
-          <UserBalance balance={balance} />
-        </div>
+          <div className="text-right flex items-start justify-end">ключи??</div>
       </div>
+        <div className="flex flex-row items-center justify-between w-full">
+          <UserLevel level={1} progress={35} onClick={handleLevelClick}/>
+          <UserIncome income={0} />
+        </div>
       <div>
       <div className="mt-4 w-full">
         <div className="flex items-center justify-center w-full">
-          <div className="rounded-3xl border-2 border-primary h-96 w-96 flex items-center justify-center">
-            <div className="w-64 h-64 cursor-pointer btn rounded-full" onClick={handleClick}>
+          <div className="rounded-3xl border-2 border-primary h-full w-96 flex flex-col items-center justify-center py-2">
+            <div className="flex flex-row justify-between items-center gap-2 w-full px-4">
+              <div className="btn btn-secondary" onClick={handleBoost}>Буст 1</div>
+              <div className="btn btn-secondary" onClick={handleBoost}>Буст 2</div>
+            </div>
+            <div className="flex flex-row justify-between items-center gap-2 mt-2">
+              <div className="col-span-2 flex justify-end">
+                <UserBalance balance={balance} />
+              </div>
+            </div>
+            <div className="w-64 h-64 cursor-pointer btn rounded-full mt-4" onClick={handleClick}>
               <img className="w-full h-full rounded-full" src="clicker-3.jpg" />
             </div>
           </div>
         </div>
-        <div className="mt-4 flex flex-row justify-between items-center">
-          <div className="flex flex-row gap-2 items-center">
+       
+          <div className="flex flex-row gap-2 items-center mt-4 w-full justify-center">
             <img className="w-12 h-12 bg-accent" src="./energy-svg.svg" />
             <div className="h-full flex flex-col items-center justify-center gap-2">
               <div className="w-full text-accent text-center">{energy} / 1000</div>
               <progress className="progress progress-accent w-56 ml-4" value="40" max="100"></progress>
             </div>
-          </div>
-          <div className=""><div className="btn btn-primary" onClick={handleBoost}>Буст??</div></div>
         </div>
       </div>
     </div>

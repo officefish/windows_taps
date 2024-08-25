@@ -8,7 +8,7 @@ interface IUserMinProps {
 const UserMin:FC<IUserMinProps> = (props) => {
     const { photoUrl, fullname } = props
     return (
-        <div className="flex flex-row h-full">
+        <div className="flex flex-row h-full items-center mt-2">
             <div className="avatar">
                 <div className="mask mask-squircle w-12">
                     <img src={photoUrl} />
