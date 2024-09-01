@@ -7,6 +7,8 @@ import { useSiteStore } from "@/providers/store";
 import { Page } from "@/types";
 import { FC, SyntheticEvent, useEffect, useState } from "react";
 import RatingDialog from "@/components/dialogs/rating.dialog";
+import { useNavigate } from "react-router-dom"
+
 
 const bestUsers = [
   {
@@ -30,6 +32,7 @@ const bestUsers = [
 const Home: FC = () => {
 
   const { setPage } = useSiteStore()
+  const navigate = useNavigate()
 
   useEffect(() => {
       setPage(Page.HOME)
@@ -56,8 +59,12 @@ const Home: FC = () => {
    
    const handleConfirm = () => {}
 
-   const handleBoost = () => {
+   const handleDaily = () => {
     setIsDialogOpen(true)
+   }
+
+   const handleMiniGame = () => {
+    navigate("/puzzle")
    }
 
    const handleLevelClick = () => {
@@ -80,8 +87,9 @@ const Home: FC = () => {
         <div className="flex items-center justify-center w-full">
           <div className="rounded-3xl border-2 border-primary h-full w-96 flex flex-col items-center justify-center py-2">
             <div className="flex flex-row justify-between items-center gap-2 w-full px-4">
-              <div className="btn btn-secondary" onClick={handleBoost}>Буст 1</div>
-              <div className="btn btn-secondary" onClick={handleBoost}>Буст 2</div>
+              <div className="btn btn-secondary btn-sm" onClick={handleDaily}>Дневная награда</div>
+              <div className="text-primary text-lg">Листовщик</div>
+              <div className="btn btn-secondary btn-sm" onClick={handleMiniGame}>Миниигра</div>
             </div>
             <div className="flex flex-row justify-between items-center gap-2 mt-2">
               <div className="col-span-2 flex justify-end">

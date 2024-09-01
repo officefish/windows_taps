@@ -160,3 +160,38 @@ body {
   line-height: 25.1px;
   text-align: left;
 }
+
+/* Puzzle styles */
+.puzzle {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(4, 100px);
+  gap: 5px;
+}
+
+.tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  font-size: 24px;
+  /* background-color: var(--s); */
+  /* border: 2px solid var(--s); */
+  @apply bg-primary text-primary-content border-primary border-2 
+  hover:border-primary 
+  focus:border-primary 
+  active:border-primary;
+  cursor: pointer;
+}
+
+.tile.empty {
+  background-color: white;
+  border: none;
+}
+
+.congrats {
+  margin-top: 20px;
+  font-size: 24px;
+  color: green;
+}

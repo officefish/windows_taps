@@ -22,6 +22,7 @@ import Offer from "@/pages/offer"
 //import useUpdateShop from "@/hooks/api/useUpdateShop"
 import { useLoaderStore } from "@/providers/store"
 import { WithLoader } from "@/components/loading"
+import Puzzle from "@/pages/puzzle"
 
 // const showLoading = () => {
 //   // Реализация функции showLoading
@@ -90,6 +91,7 @@ return (
             <Route path='/tasks' element={<Tasks/>} />
             <Route path='/shop' element={<Shop/>} />
             <Route path='/offer' element={<Offer/>} />
+            <Route path='/puzzle' element={<Puzzle/>} />
         </Routes>
       </Content>
       <Footer>

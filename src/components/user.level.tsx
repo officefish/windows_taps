@@ -18,7 +18,7 @@ const UserLevel:FC<IUserEnergyProps> = (props) => {
     return (
         <div className="flex flex-row gap-4 h-full items-center btn" onClick={onLevelClick}>
             <progress className="progress progress-accent w-24" value={progress} max="100"></progress>
-            <div className="text-accent">{getRoleByLevel(level)}</div>
+            <div className="text-accent">уровень: {level}</div>
         </div>        
     )
 }

@@ -32,12 +32,20 @@ const BoostDialog: FC<DialogProps> = (props) => {
     isOpen ? modal.showModal() : modal.close()
   })
 
+  const handleBonus = () => {
+    setIsOpen(false)
+  }
+
   return (
         <dialog className='modal overflow-hidden' ref={modalRef}>
           <div className='w-full h-screen bottom-0 absolute'>
             <CloseModalBtn handleCancel={onCancel}/>
           <DialogContent>
-           
+            <div className='flex flex-col w-full gap-4 items-center justify-center p-4'>
+              <p className='text-3xl'>Дневная награда: 300</p>
+              <div className="btn btn-secondary btn-lg" onClick={handleBonus}>Забрать награду</div>
+            </div>
+         
           </DialogContent>
         </div>
     </dialog>
