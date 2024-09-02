@@ -92,7 +92,7 @@ const Puzzle: React.FC = () => {
           ))}
         </div>
         <div className="flex flex-col gap-4 w-full items-center justify-center">
-            <p className='text-3xl'>Time Left: {formatTime(timeLeft)}</p>
+            <p className='text-3xl'>Осталось времени: {formatTime(timeLeft)}</p>
             {isSolved() && <p className="congrats">Congratulations! You solved the puzzle!</p>}
             {!isGameActive && !isSolved() && <p className="game-over">Time's up! Game over!</p>}
         <div className="btn btn-secondary" onClick={handleBack}>Вернуться</div>

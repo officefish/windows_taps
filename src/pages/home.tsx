@@ -54,13 +54,13 @@ const Home: FC = () => {
     setEnergy(newEnergy)
   }
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isBoostDialogOpen, setIsBoostDialogOpen] = useState(false)
   const [isRatingDialogOpen, setIsRatingDialogOpen] = useState(false)
    
    const handleConfirm = () => {}
 
    const handleDaily = () => {
-    setIsDialogOpen(true)
+    setIsBoostDialogOpen(true)
    }
 
    const handleMiniGame = () => {
@@ -112,8 +112,8 @@ const Home: FC = () => {
       </div>
     </div>
     <BoostDialog
-                isOpen={isDialogOpen}
-                setIsOpen={setIsDialogOpen}
+                isOpen={isBoostDialogOpen}
+                setIsOpen={setIsBoostDialogOpen}
                 onConfirm={handleConfirm} />
      <RatingDialog
                 isOpen={isRatingDialogOpen}
