@@ -5,7 +5,7 @@ const API_PREFIX = '/api/v1'
 const HOST = 'f274-5-18-176-212.ngrok-free.app'
 
 export const useAxiosPostTrigger = <T = object>({
-  protocol = 'http',
+  protocol = 'https',
   api = API_PREFIX,
   host = HOST,
   route = 'me',
