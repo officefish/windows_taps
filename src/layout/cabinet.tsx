@@ -37,6 +37,8 @@ import apiFetch from "@/services/api"
 //   console.log('Hide loading');
 // }
 
+const INIT_DATA = "user=%7B%22id%22%3A334222503%2C%22first_name%22%3A%22Sergey%22%2C%22last_name%22%3A%22Inozemcev%22%2C%22username%22%3A%22indiecaps%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&chat_instance=5932003416224221582&chat_type=private&auth_date=1725562692&hash=331fb60ae520990442e7847eae5f6a4295c29d81be892a4295e6f32731e8da66"
+
 const Cabinet:FC = () => {
 
   const { addLoading, hideLoading } = useLoaderStore();
@@ -62,49 +64,25 @@ const Cabinet:FC = () => {
     //setLoading(false);
   }
 
-  
-  const { register } = useRegister(apiFetch, loadResources, hideLoading, hideLoading);
+  const { register } = useRegister(apiFetch, loadResources, addLoading, hideLoading);
 
   //const { preflight } = usePreflight();
 
-  //const [isPreflight, setIsPreflight] = useState(false);
+  const [isPreflight, setIsPreflight] = useState(false);
   useEffect(() => {
+
+    const initData = window?.Telegram 
+    ? window?.Telegram?.WebApp?.initData 
+    : INIT_DATA;
+
+    console.log(initData)
     // Функция для выполнения асинхронных запросов
-    const runPreflightAndRegister = () => {
-      try {
-        addLoading();
-        
-        const initData = window?.Telegram 
-          ? window?.Telegram?.WebApp?.initData 
-          : "";
-  
-        console.log("initData: " + initData);
-  
-        // // Выполняем preflight запрос
-        // if (!isPreflight) {
-        //   setIsPreflight(true);
-        //   await preflight(initData);  // Ждем завершения preflight
-        // }
-  
-        // Выполняем запрос регистрации только после успешного preflight
-        register(initData);  // Ждем завершения регистрации
-  
-      } catch (error) {
-        console.error("Error during preflight or registration", error);
-      } finally {
-        // Прячем лоадер через 2 секунды после завершения всех запросов
-        const timer = setTimeout(() => {
-          hideLoading();
-        }, 2000); // 2 seconds delay
-  
-        // Очищаем таймер при размонтировании компонента
-        return () => clearTimeout(timer);
-      }
-    };
-  
-    // Вызов функции, которая выполняет preflight и регистрацию
-    runPreflightAndRegister();
-  }, [register]);
+    if (isPreflight === false) {
+      setIsPreflight(true);
+      register(initData);
+      hideLoading()
+    }
+  }, [register, isPreflight, setIsPreflight]);
 
 return (
   <WithLoader>
