@@ -28,6 +28,7 @@ export const useRegister = (apiFetch: any, loadResources: any, showLoading: any,
       } catch (error: any) {
         //console.error('Error during login:', error);
         //let message = error?.message || 'Unknown';
+        enqueueSnackbar(`Error during login: ${error.message}`, { variant: 'info' });
         enqueueSnackbar(`Error during login: ${error}`, { variant: 'error' });
       } finally {
         hideLoading(); // Hide loading state
