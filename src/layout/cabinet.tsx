@@ -24,6 +24,7 @@ import { useLoaderStore } from "@/providers/store"
 import { WithLoader } from "@/components/loading"
 import Puzzle from "@/pages/puzzle"
 import { useRegister } from "@/hooks/api/useRegister"
+import apiFetch from "@/services/api"
 //import useLogin from "@/hooks/api/useLogin"
 
 // const showLoading = () => {
@@ -44,25 +45,24 @@ const Cabinet:FC = () => {
   //const { updateTasks } = useUpdateTasks(apiFetch, addLoading, removeLoading);
   //const { updateShop } = useUpdateShop(apiFetch, addLoading, removeLoading);
 
-  // const loadResources = async () => {
-  //   const apiRequests: never[] = [
-  //       //updateUser(initData)
-  //       //updateTasks(),
-  //       //updateFriends(),
-  //       //updateShop()
-  //   ];
+  const loadResources = async () => {
+    const apiRequests: never[] = [
+        //updateUser(initData)
+        //updateTasks(),
+        //updateFriends(),
+        //updateShop()
+    ];
 
-  //   // const imageRequests = [
-  //   //     loadImage("/referrals.png"),
-  //   // ];
+    // const imageRequests = [
+    //     loadImage("/referrals.png"),
+    // ];
 
-  //   await Promise.all([...apiRequests], /*...imageRequests*/)
+    await Promise.all([...apiRequests], /*...imageRequests*/)
 
-  //   //setLoading(false);
-  // }
+    //setLoading(false);
+  }
 
-  const { register } = useRegister();
-
+  const { register } = useRegister(apiFetch, loadResources, hideLoading, hideLoading);
 
   useEffect(() => {
     addLoading()
