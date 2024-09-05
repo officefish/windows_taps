@@ -23,15 +23,15 @@ export const WithLoader:FC<PropsWithChildren<ILoadingProps>> = (props) => {
     
     const { isLoading, children } = props
 
-    const [needLoader, setNeedLoader] = useState(false)
+    // const [needLoader, setNeedLoader] = useState(false)
 
-    useEffect(() => {
-        setNeedLoader(Boolean(isLoading))
-        console.log('isLoading: ', isLoading)
-        //document.body.style.overflow = isLoading ? "hidden" : "auto"
-    }, [isLoading])
+    // useEffect(() => {
+    //     setNeedLoader(Boolean(isLoading))
+    //     console.log('isLoading: ', isLoading)
+    //     //document.body.style.overflow = isLoading ? "hidden" : "auto"
+    // }, [isLoading])
 
-    return needLoader 
+    return isLoading 
     ?   <div className="w-screen h-screen flex items-center justify-center">
             <div className="loader"></div>
         </div>
