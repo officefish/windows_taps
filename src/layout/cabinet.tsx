@@ -68,7 +68,7 @@ const Cabinet:FC = () => {
   const { preflight } = usePreflight();
 
   const [mounted, setMounted] = useState(false);
-  const [isPrfelight, setIsPrfelight] = useState(false);
+  const [isPreflight, setIsPreflight] = useState(false);
 
   useEffect(() => {
     addLoading()
@@ -78,8 +78,8 @@ const Cabinet:FC = () => {
       : ""
       console.log("initData: " + initData)  
       
-    if (!isPrfelight) {
-      setIsPrfelight(true)
+    if (!isPreflight) {
+      setIsPreflight(true)
       preflight(initData)
     } else {
       if (!mounted) {
@@ -92,7 +92,7 @@ const Cabinet:FC = () => {
     }, 2000); // 2 seconds delay
 
     return () => clearTimeout(timer) // Cleanup the timer on component unmount
-  }, [mounted, preflight])
+  }, [mounted, setMounted, preflight, isPreflight, setIsPreflight])
 
 return (
   <WithLoader>
