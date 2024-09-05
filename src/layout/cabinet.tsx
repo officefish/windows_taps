@@ -69,30 +69,46 @@ const Cabinet:FC = () => {
 
   const [mounted, setMounted] = useState(false);
   const [isPreflight, setIsPreflight] = useState(false);
-
   useEffect(() => {
-    addLoading()
-    
-    const initData = window?.Telegram 
-      ? window?.Telegram?.WebApp?.initData 
-      : ""
-      console.log("initData: " + initData)  
-      
-    if (!isPreflight) {
-      setIsPreflight(true)
-      preflight(initData)
-    } else {
-      if (!mounted) {
-        setMounted(true)
-        register(initData)
+    // Функция для выполнения асинхронных запросов
+    const runPreflightAndRegister = async () => {
+      try {
+        addLoading();
+        
+        const initData = window?.Telegram 
+          ? window?.Telegram?.WebApp?.initData 
+          : "";
+  
+        console.log("initData: " + initData);
+  
+        // Выполняем preflight запрос
+        if (!isPreflight) {
+          setIsPreflight(true);
+          await preflight(initData);  // Ждем завершения preflight
+        }
+  
+        // Выполняем запрос регистрации только после успешного preflight
+        if (!mounted) {
+          setMounted(true);
+          await register(initData);  // Ждем завершения регистрации
+        }
+  
+      } catch (error) {
+        console.error("Error during preflight or registration", error);
+      } finally {
+        // Прячем лоадер через 2 секунды после завершения всех запросов
+        const timer = setTimeout(() => {
+          hideLoading();
+        }, 2000); // 2 seconds delay
+  
+        // Очищаем таймер при размонтировании компонента
+        return () => clearTimeout(timer);
       }
-    }
-    const timer = setTimeout(() => {
-      hideLoading()
-    }, 2000); // 2 seconds delay
-
-    return () => clearTimeout(timer) // Cleanup the timer on component unmount
-  }, [mounted, setMounted, preflight, isPreflight, setIsPreflight])
+    };
+  
+    // Вызов функции, которая выполняет preflight и регистрацию
+    runPreflightAndRegister();
+  }, [isPreflight, mounted, preflight, register]);
 
 return (
   <WithLoader>
