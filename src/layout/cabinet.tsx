@@ -76,6 +76,7 @@ const Cabinet:FC = () => {
 
     // Trigger a timer that waits 1 second before executing the register function
     if (!isPreflight) {
+      addLoading();
       setIsPreflight(true);
 
       // Set a timeout of 1 second (1000 milliseconds)
