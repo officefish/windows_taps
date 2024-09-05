@@ -73,7 +73,7 @@ const Cabinet:FC = () => {
 
     const initData = window?.Telegram?.WebApp?.initData || INIT_DATA;
 
-    console.log(initData)
+    console.log('useEffect initData: ' + initData)
     // Функция для выполнения асинхронных запросов
     if (isPreflight === false) {
       setIsPreflight(true);
