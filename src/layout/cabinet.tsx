@@ -23,7 +23,7 @@ import Offer from "@/pages/offer"
 import { useLoaderStore } from "@/providers/store"
 import { WithLoader } from "@/components/loading"
 import Puzzle from "@/pages/puzzle"
-import { useRegister } from "@/hooks/api/useRegister"
+import { useRegister, usePreflight } from "@/hooks/api/useRegister"
 import apiFetch from "@/services/api"
 //import useLogin from "@/hooks/api/useLogin"
 
@@ -62,33 +62,32 @@ const Cabinet:FC = () => {
     //setLoading(false);
   }
 
+  
   const { register } = useRegister(apiFetch, loadResources, hideLoading, hideLoading);
+
+  const { data, serverError, preflight } = usePreflight();
 
   useEffect(() => {
     addLoading()
-    console.log("addLoading")
+    
     const initData = window?.Telegram 
       ? window?.Telegram?.WebApp?.initData 
       : ""
-      console.log("initData: " + initData)    
+      console.log("initData: " + initData)  
+      
+    if (!data) {
+      preflight(initData)
 
+    } else {
+      register(initData)
+    }
 
     const timer = setTimeout(() => {
-      
-      if (initData) {
-        //loadResources()
-        register(initData)
-      } else {
-        hideLoading()
-        console.log("hideLoading")
-      }
-      
-      //hideLoading()
-      //console.log("hideLoading")
+      hideLoading()
     }, 2000); // 2 seconds delay
 
     return () => clearTimeout(timer) // Cleanup the timer on component unmount
-  }, [])
+  }, [data, serverError, preflight])
 
 return (
   <WithLoader>

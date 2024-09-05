@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import { useSnackbar } from 'notistack' // Assuming you're using notistack for notifications
+import { useAxiosPostTrigger } from '@/services/axios.service';
 //import { useAxiosPostTrigger } from '@/services/axios.service'
 
 export const useRegister = (apiFetch: any, loadResources: any, showLoading: any, hideLoading: any) => {
@@ -24,9 +25,10 @@ export const useRegister = (apiFetch: any, loadResources: any, showLoading: any,
 
           loadResources(); // Load other resources after successful login
         }
-      } catch (error) {
-        console.error('Error during login:', error);
-        enqueueSnackbar('Error during login', { variant: 'error' });
+      } catch (error: any) {
+        //console.error('Error during login:', error);
+        //let message = error?.message || 'Unknown';
+        enqueueSnackbar(`Error during login: ${error}`, { variant: 'error' });
       } finally {
         hideLoading(); // Hide loading state
       }
@@ -37,10 +39,10 @@ export const useRegister = (apiFetch: any, loadResources: any, showLoading: any,
   return { register }
 }
 
-// export const useRegister = () => {
-//   const { data, serverError, trigger } = useAxiosPostTrigger<any>({
-//     route: 'auth/register',
-//   })
+export const usePreflight = () => {
+  const { data, serverError, trigger } = useAxiosPostTrigger<any>({
+    route: 'auth/register',
+  })
 
-//   return { data, serverError, register:trigger }
-// }
+  return { data, serverError, preflight:trigger }
+}
