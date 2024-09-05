@@ -42,6 +42,9 @@ const INIT_DATA = "user=%7B%22id%22%3A334222503%2C%22first_name%22%3A%22Sergey%2
 const Cabinet:FC = () => {
 
   const { addLoading, hideLoading } = useLoaderStore();
+
+  addLoading();
+
   //const { updateUser } = useUpdateUser(apiFetch, addLoading, removeLoading);
   //const { updateFriends } = useUpdateFriends(apiFetch, addLoading, removeLoading);
   //const { updateTasks } = useUpdateTasks(apiFetch, addLoading, removeLoading);
@@ -66,9 +69,8 @@ const Cabinet:FC = () => {
 
   const { register } = useRegister(apiFetch, loadResources, addLoading, hideLoading);
   const [isPreflight, setIsPreflight] = useState(false);
-  
+
   useEffect(() => {
-    addLoading()
     const initData = window?.Telegram?.WebApp?.initData || INIT_DATA;
 
     console.log('useEffect initData: ' + initData);
