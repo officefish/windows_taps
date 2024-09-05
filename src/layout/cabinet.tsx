@@ -68,7 +68,6 @@ const Cabinet:FC = () => {
 
   const [isPreflight, setIsPreflight] = useState(false);
   useEffect(() => {
-    addLoading()
     const initData = window?.Telegram?.WebApp?.initData || INIT_DATA;
 
     console.log('useEffect initData: ' + initData);
@@ -76,12 +75,13 @@ const Cabinet:FC = () => {
     // Trigger a timer that waits 1 second before executing the register function
     if (!isPreflight) {
       setIsPreflight(true);
+      addLoading()
 
       // Set a timeout of 1 second (1000 milliseconds)
       const timer = setTimeout(() => {
         register(initData);
         hideLoading();
-      }, 1000); // Adjust the time in milliseconds as needed (1 second = 1000ms)
+      }, 2000); // Adjust the time in milliseconds as needed (1 second = 1000ms)
 
       // Cleanup the timer in case the component unmounts
       return () => clearTimeout(timer);
