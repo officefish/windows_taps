@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react"
+import { FC, useEffect, useState } from "react"
 import Header from "./header"
 import Content from "./content"
 import Footer from "./footer"
@@ -67,6 +67,8 @@ const Cabinet:FC = () => {
 
   const { data, serverError, preflight } = usePreflight();
 
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
     addLoading()
     
@@ -75,11 +77,13 @@ const Cabinet:FC = () => {
       : ""
       console.log("initData: " + initData)  
       
-    if (!data) {
+    if (!mounted) {
+      setMounted(true)
       preflight(initData)
-
     } else {
-      register(initData)
+      if (!data && !serverError) {
+        register(initData)
+      }
     }
 
     const timer = setTimeout(() => {
@@ -87,7 +91,7 @@ const Cabinet:FC = () => {
     }, 2000); // 2 seconds delay
 
     return () => clearTimeout(timer) // Cleanup the timer on component unmount
-  }, [data, serverError, preflight])
+  }, [mounted, preflight])
 
 return (
   <WithLoader>
