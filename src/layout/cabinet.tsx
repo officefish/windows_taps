@@ -67,7 +67,6 @@ const Cabinet:FC = () => {
 
   //const { preflight } = usePreflight();
 
-  const [mounted, setMounted] = useState(false);
   //const [isPreflight, setIsPreflight] = useState(false);
   useEffect(() => {
     // Функция для выполнения асинхронных запросов
@@ -88,10 +87,7 @@ const Cabinet:FC = () => {
         // }
   
         // Выполняем запрос регистрации только после успешного preflight
-        if (!mounted) {
-          setMounted(true);
-          register(initData);  // Ждем завершения регистрации
-        }
+        register(initData);  // Ждем завершения регистрации
   
       } catch (error) {
         console.error("Error during preflight or registration", error);
@@ -108,7 +104,7 @@ const Cabinet:FC = () => {
   
     // Вызов функции, которая выполняет preflight и регистрацию
     runPreflightAndRegister();
-  }, [mounted, register]);
+  }, [register]);
 
 return (
   <WithLoader>
