@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios"
 import { useCallback, useEffect, useState } from "react"
 
 const API_PREFIX = '/api/v1'
-const HOST = 'localhost'
+const HOST = 'f274-5-18-176-212.ngrok-free.app'
 
 export const useAxiosPostTrigger = <T = object>({
   protocol = 'http',
