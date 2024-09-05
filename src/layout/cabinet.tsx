@@ -23,7 +23,7 @@ import Offer from "@/pages/offer"
 import { useLoaderStore } from "@/providers/store"
 import { WithLoader } from "@/components/loading"
 import Puzzle from "@/pages/puzzle"
-import { useRegister, usePreflight } from "@/hooks/api/useRegister"
+import { useRegister } from "@/hooks/api/useRegister"
 import apiFetch from "@/services/api"
 //import useLogin from "@/hooks/api/useLogin"
 
@@ -65,13 +65,13 @@ const Cabinet:FC = () => {
   
   const { register } = useRegister(apiFetch, loadResources, hideLoading, hideLoading);
 
-  const { preflight } = usePreflight();
+  //const { preflight } = usePreflight();
 
   const [mounted, setMounted] = useState(false);
-  const [isPreflight, setIsPreflight] = useState(false);
+  //const [isPreflight, setIsPreflight] = useState(false);
   useEffect(() => {
     // Функция для выполнения асинхронных запросов
-    const runPreflightAndRegister = async () => {
+    const runPreflightAndRegister = () => {
       try {
         addLoading();
         
@@ -81,16 +81,16 @@ const Cabinet:FC = () => {
   
         console.log("initData: " + initData);
   
-        // Выполняем preflight запрос
-        if (!isPreflight) {
-          setIsPreflight(true);
-          await preflight(initData);  // Ждем завершения preflight
-        }
+        // // Выполняем preflight запрос
+        // if (!isPreflight) {
+        //   setIsPreflight(true);
+        //   await preflight(initData);  // Ждем завершения preflight
+        // }
   
         // Выполняем запрос регистрации только после успешного preflight
         if (!mounted) {
           setMounted(true);
-          await register(initData);  // Ждем завершения регистрации
+          register(initData);  // Ждем завершения регистрации
         }
   
       } catch (error) {
@@ -108,7 +108,7 @@ const Cabinet:FC = () => {
   
     // Вызов функции, которая выполняет preflight и регистрацию
     runPreflightAndRegister();
-  }, [isPreflight, mounted, preflight, register]);
+  }, [mounted, register]);
 
 return (
   <WithLoader>
