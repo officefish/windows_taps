@@ -1,6 +1,6 @@
 /* HTML: <div class="loader"></div> */
 //import { useLoaderStore } from "@/providers/store"
-import { FC, PropsWithChildren, useEffect, useState } from "react"
+import { FC, PropsWithChildren } from "react"
 
 
 const Loading:FC = () => {
