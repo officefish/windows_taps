@@ -66,19 +66,25 @@ const Cabinet:FC = () => {
 
   const { register } = useRegister(apiFetch, loadResources, addLoading, hideLoading);
 
-  //const { preflight } = usePreflight();
-
   const [isPreflight, setIsPreflight] = useState(false);
   useEffect(() => {
 
     const initData = window?.Telegram?.WebApp?.initData || INIT_DATA;
 
-    console.log('useEffect initData: ' + initData)
-    // Функция для выполнения асинхронных запросов
-    if (isPreflight === false) {
+    console.log('useEffect initData: ' + initData);
+
+    // Trigger a timer that waits 1 second before executing the register function
+    if (!isPreflight) {
       setIsPreflight(true);
-      register(initData);
-      hideLoading()
+
+      // Set a timeout of 1 second (1000 milliseconds)
+      const timer = setTimeout(() => {
+        register(initData);
+        hideLoading();
+      }, 1000); // Adjust the time in milliseconds as needed (1 second = 1000ms)
+
+      // Cleanup the timer in case the component unmounts
+      return () => clearTimeout(timer);
     }
   }, [register, isPreflight, setIsPreflight]);
 
