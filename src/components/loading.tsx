@@ -1,5 +1,5 @@
 /* HTML: <div class="loader"></div> */
-import { useLoaderStore } from "@/providers/store"
+//import { useLoaderStore } from "@/providers/store"
 import { FC, PropsWithChildren, useEffect, useState } from "react"
 
 
@@ -13,11 +13,15 @@ const Loading:FC = () => {
     )
 }
 
+interface ILoadingProps {
+    isLoading: boolean
+}
+
 export default Loading
 
-export const WithLoader:FC<PropsWithChildren> = ({ children }) => {
+export const WithLoader:FC<PropsWithChildren<ILoadingProps>> = (props) => {
     
-    const { isLoading } = useLoaderStore()
+    const { isLoading, children } = props
 
     const [needLoader, setNeedLoader] = useState(false)
 

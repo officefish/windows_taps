@@ -3,14 +3,13 @@ import { useSnackbar } from 'notistack' // Assuming you're using notistack for n
 import { useAxiosPostTrigger } from '@/services/axios.service';
 //import { useAxiosPostTrigger } from '@/services/axios.service'
 
-export const useRegister = (apiFetch: any, loadResources: any, showLoading: any, hideLoading: any) => {
+export const useRegister = (apiFetch: any, loadResources: any) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const register = useCallback(
     async (initData: string) => {
    
       try {
-        showLoading(); // Show loading state
         const res = await apiFetch('/auth/register', 'POST', { initData }, enqueueSnackbar);
         if (res.status === true) {
           const user = res.data;
@@ -31,10 +30,9 @@ export const useRegister = (apiFetch: any, loadResources: any, showLoading: any,
         //enqueueSnackbar(`Error during login: ${error.message}`, { variant: 'info' });
         enqueueSnackbar(`Error during login: ${error}`, { variant: 'error' });
       } finally {
-        hideLoading(); // Hide loading state
       }
     },
-    [apiFetch, enqueueSnackbar, loadResources, showLoading, hideLoading] // Dependencies
+    [apiFetch, enqueueSnackbar, loadResources] // Dependencies
   )
 
   return { register }

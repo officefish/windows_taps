@@ -20,7 +20,7 @@ import Offer from "@/pages/offer"
 //import apiFetch from "@/services/api"
 //import useUpdateTasks from "@/hooks/api/useUpdateTasks"
 //import useUpdateShop from "@/hooks/api/useUpdateShop"
-import { useLoaderStore } from "@/providers/store"
+//import { useLoaderStore } from "@/providers/store"
 import { WithLoader } from "@/components/loading"
 import Puzzle from "@/pages/puzzle"
 import { useRegister } from "@/hooks/api/useRegister"
@@ -41,13 +41,16 @@ const INIT_DATA = "user=%7B%22id%22%3A334222503%2C%22first_name%22%3A%22Sergey%2
 
 const Cabinet:FC = () => {
 
-  const { addLoading, hideLoading } = useLoaderStore();
+  //const { addLoading, hideLoading } = useLoaderStore();
 
 
   //const { updateUser } = useUpdateUser(apiFetch, addLoading, removeLoading);
   //const { updateFriends } = useUpdateFriends(apiFetch, addLoading, removeLoading);
   //const { updateTasks } = useUpdateTasks(apiFetch, addLoading, removeLoading);
   //const { updateShop } = useUpdateShop(apiFetch, addLoading, removeLoading);
+
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const loadResources = async () => {
     const apiRequests: never[] = [
@@ -66,7 +69,7 @@ const Cabinet:FC = () => {
     //setLoading(false);
   }
 
-  const { register } = useRegister(apiFetch, loadResources, addLoading, hideLoading);
+  const { register } = useRegister(apiFetch, loadResources);
   const [isPreflight, setIsPreflight] = useState(false);
 
   useEffect(() => {
@@ -76,13 +79,14 @@ const Cabinet:FC = () => {
 
     // Trigger a timer that waits 1 second before executing the register function
     if (!isPreflight) {
-      addLoading();
+      //addLoading();
       setIsPreflight(true);
 
       // Set a timeout of 1 second (1000 milliseconds)
       const timer = setTimeout(() => {
         register(initData);
-        hideLoading();
+        setIsLoading(false);
+        //hideLoading();
       }, 2000); // Adjust the time in milliseconds as needed (1 second = 1000ms)
 
       // Cleanup the timer in case the component unmounts
@@ -91,7 +95,7 @@ const Cabinet:FC = () => {
   }, [register, isPreflight, setIsPreflight]);
 
 return (
-  <WithLoader>
+  <WithLoader isLoading={isLoading}>
     <Screen>
       <Header />
       <Content>
