@@ -17,13 +17,13 @@ import Offer from "@/pages/offer"
 //import useLogin from "@/hooks/api/useLogin"
 //import { OptionsObject } from "notistack"
 
-import apiFetch from "@/services/api"
+//import apiFetch from "@/services/api"
 //import useUpdateTasks from "@/hooks/api/useUpdateTasks"
 //import useUpdateShop from "@/hooks/api/useUpdateShop"
 import { useLoaderStore } from "@/providers/store"
 import { WithLoader } from "@/components/loading"
 import Puzzle from "@/pages/puzzle"
-import useRegister from "@/hooks/api/useRegister"
+import { useRegister } from "@/hooks/api/useRegister"
 //import useLogin from "@/hooks/api/useLogin"
 
 // const showLoading = () => {
@@ -44,24 +44,24 @@ const Cabinet:FC = () => {
   //const { updateTasks } = useUpdateTasks(apiFetch, addLoading, removeLoading);
   //const { updateShop } = useUpdateShop(apiFetch, addLoading, removeLoading);
 
-  const loadResources = async () => {
-    const apiRequests: never[] = [
-        //updateUser(initData)
-        //updateTasks(),
-        //updateFriends(),
-        //updateShop()
-    ];
+  // const loadResources = async () => {
+  //   const apiRequests: never[] = [
+  //       //updateUser(initData)
+  //       //updateTasks(),
+  //       //updateFriends(),
+  //       //updateShop()
+  //   ];
 
-    // const imageRequests = [
-    //     loadImage("/referrals.png"),
-    // ];
+  //   // const imageRequests = [
+  //   //     loadImage("/referrals.png"),
+  //   // ];
 
-    await Promise.all([...apiRequests], /*...imageRequests*/)
+  //   await Promise.all([...apiRequests], /*...imageRequests*/)
 
-    //setLoading(false);
-  }
+  //   //setLoading(false);
+  // }
 
-  const { register } = useRegister(apiFetch, loadResources, addLoading, hideLoading);
+  const { register } = useRegister();
 
 
   useEffect(() => {
@@ -76,6 +76,7 @@ const Cabinet:FC = () => {
     const timer = setTimeout(() => {
       
       if (initData) {
+        //loadResources()
         register(initData)
       } else {
         hideLoading()
