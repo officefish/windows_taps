@@ -65,9 +65,10 @@ const Cabinet:FC = () => {
   
   const { register } = useRegister(apiFetch, loadResources, hideLoading, hideLoading);
 
-  const { data, serverError, preflight } = usePreflight();
+  const { preflight } = usePreflight();
 
   const [mounted, setMounted] = useState(false);
+  const [isPrfelight, setIsPrfelight] = useState(false);
 
   useEffect(() => {
     addLoading()
@@ -77,15 +78,15 @@ const Cabinet:FC = () => {
       : ""
       console.log("initData: " + initData)  
       
-    if (!mounted) {
-      setMounted(true)
+    if (!isPrfelight) {
+      setIsPrfelight(true)
       preflight(initData)
     } else {
-      if (!data && !serverError) {
+      if (!mounted) {
+        setMounted(true)
         register(initData)
       }
     }
-
     const timer = setTimeout(() => {
       hideLoading()
     }, 2000); // 2 seconds delay
