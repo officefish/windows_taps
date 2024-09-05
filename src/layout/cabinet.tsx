@@ -68,7 +68,7 @@ const Cabinet:FC = () => {
 
   const [isPreflight, setIsPreflight] = useState(false);
   useEffect(() => {
-
+    addLoading()
     const initData = window?.Telegram?.WebApp?.initData || INIT_DATA;
 
     console.log('useEffect initData: ' + initData);
