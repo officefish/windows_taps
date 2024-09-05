@@ -17,12 +17,14 @@ import Offer from "@/pages/offer"
 //import useLogin from "@/hooks/api/useLogin"
 //import { OptionsObject } from "notistack"
 
-//import apiFetch from "@/services/api"
+import apiFetch from "@/services/api"
 //import useUpdateTasks from "@/hooks/api/useUpdateTasks"
 //import useUpdateShop from "@/hooks/api/useUpdateShop"
 import { useLoaderStore } from "@/providers/store"
 import { WithLoader } from "@/components/loading"
 import Puzzle from "@/pages/puzzle"
+import useRegister from "@/hooks/api/useRegister"
+//import useLogin from "@/hooks/api/useLogin"
 
 // const showLoading = () => {
 //   // Реализация функции showLoading
@@ -42,24 +44,24 @@ const Cabinet:FC = () => {
   //const { updateTasks } = useUpdateTasks(apiFetch, addLoading, removeLoading);
   //const { updateShop } = useUpdateShop(apiFetch, addLoading, removeLoading);
 
-  // const loadResources = async () => {
-  //   const apiRequests = [
-  //       //updateUser(initData)
-  //       updateTasks(),
-  //       updateFriends(),
-  //       updateShop()
-  //   ];
+  const loadResources = async () => {
+    const apiRequests: never[] = [
+        //updateUser(initData)
+        //updateTasks(),
+        //updateFriends(),
+        //updateShop()
+    ];
 
-  //   // const imageRequests = [
-  //   //     loadImage("/referrals.png"),
-  //   // ];
+    // const imageRequests = [
+    //     loadImage("/referrals.png"),
+    // ];
 
-  //   await Promise.all([...apiRequests, /*...imageRequests*/])
+    await Promise.all([...apiRequests], /*...imageRequests*/)
 
-  //   //setLoading(false);
-  // }
+    //setLoading(false);
+  }
 
-  //const { login } = useLogin(apiFetch, loadResources, addLoading, removeLoading);
+  const { register } = useRegister(apiFetch, loadResources, addLoading, hideLoading);
 
 
   useEffect(() => {
@@ -70,11 +72,18 @@ const Cabinet:FC = () => {
       : ""
       console.log("initData: " + initData)    
 
-    //login(initData)
 
     const timer = setTimeout(() => {
-      hideLoading()
-      console.log("hideLoading")
+      
+      if (initData) {
+        register(initData)
+      } else {
+        hideLoading()
+        console.log("hideLoading")
+      }
+      
+      //hideLoading()
+      //console.log("hideLoading")
     }, 2000); // 2 seconds delay
 
     return () => clearTimeout(timer) // Cleanup the timer on component unmount

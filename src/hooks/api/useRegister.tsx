@@ -1,15 +1,15 @@
-import { useCallback } from 'react';
-import { useSnackbar } from 'notistack'; // Assuming you're using notistack for notifications
+import { useCallback } from 'react'
+import { useSnackbar } from 'notistack' // Assuming you're using notistack for notifications
 
-const useLogin = (apiFetch: any, loadResources: any, showLoading: any, hideLoading: any) => {
+const useRegister = (apiFetch: any, loadResources: any, showLoading: any, hideLoading: any) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const login = useCallback(
+  const register = useCallback(
     async (initData: string) => {
-    
+   
       try {
         showLoading(); // Show loading state
-        const res = await apiFetch('/auth/login', 'POST', { initData }, enqueueSnackbar);
+        const res = await apiFetch('/auth/register', 'POST', { initData }, enqueueSnackbar);
         if (res.status === true) {
           const user = res.data;
           const unsafeData = window?.Telegram?.WebApp?.initDataUnsafe || null;
@@ -33,7 +33,7 @@ const useLogin = (apiFetch: any, loadResources: any, showLoading: any, hideLoadi
     [apiFetch, enqueueSnackbar, loadResources, showLoading, hideLoading] // Dependencies
   )
 
-  return { login }
+  return { register }
 }
 
-export default useLogin;
+export default useRegister;

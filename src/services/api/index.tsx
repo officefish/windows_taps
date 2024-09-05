@@ -3,7 +3,7 @@ import Auth from "./auth"
 //import { useCallback } from 'react';
 let activeRequests = 0;
 
-const apiURL = import.meta.env.VITE_API_URL || 'https://pussy.puffdrc20.com/api'
+const apiURL = import.meta.env.VITE_API_URL || 'localhost:8001/api/v1'
 
 export default async function apiFetch(
     url: string, 
