@@ -43,7 +43,6 @@ const Cabinet:FC = () => {
 
   const { addLoading, hideLoading } = useLoaderStore();
 
-  addLoading();
 
   //const { updateUser } = useUpdateUser(apiFetch, addLoading, removeLoading);
   //const { updateFriends } = useUpdateFriends(apiFetch, addLoading, removeLoading);
