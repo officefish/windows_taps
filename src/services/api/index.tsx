@@ -3,7 +3,7 @@ import { OptionsObject } from 'notistack';
 //import { useCallback } from 'react';
 let activeRequests = 0;
 
-const apiURL = import.meta.env.VITE_API_URL || 'https://f274-5-18-176-212.ngrok-free.app/api/v1'
+const apiURL = import.meta.env.VITE_API_URL || 'https://6f15-5-18-176-212.ngrok-free.app/api/v1'
 
 export default async function apiFetch(
     url: string, 
