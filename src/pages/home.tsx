@@ -9,6 +9,7 @@ import { FC, SyntheticEvent, useEffect, useState } from "react";
 import RatingDialog from "@/components/dialogs/rating.dialog";
 import { useNavigate } from "react-router-dom"
 import { useUserStore } from "@/providers/user";
+import { getRankNameByRank } from "@/services/game.service";
 
 
 const bestUsers = [
@@ -100,7 +101,7 @@ const Home: FC = () => {
           <div className="rounded-3xl border-2 border-primary h-full w-96 flex flex-col items-center justify-center py-2">
             <div className="flex flex-row justify-between items-center gap-2 w-full px-4">
               <div className="btn btn-secondary btn-sm" onClick={handleDaily}>Дневная награда</div>
-              <div className="text-primary text-lg">Листовщик</div>
+              <div className="text-primary text-lg">{getRankNameByRank(player?.rankId || 0)}</div>
               <div className="btn btn-secondary btn-sm" onClick={handleMiniGame}>Миниигра</div>
             </div>
             <div className="flex flex-row justify-between items-center gap-2 mt-2">
@@ -118,7 +119,7 @@ const Home: FC = () => {
             <img className="w-12 h-12 bg-accent" src="./energy-svg.svg" />
             <div className="h-full flex flex-col items-center justify-center gap-2">
               <div className="w-full text-accent text-center">{energy} / {player?.honeyMax}</div>
-              <progress className="progress progress-accent w-56 ml-4" value="40" max="100"></progress>
+              <progress className="progress progress-accent w-56 ml-4" value={energy} max={player?.honeyMax}></progress>
             </div>
         </div>
       </div>
