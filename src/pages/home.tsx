@@ -88,12 +88,12 @@ const Home: FC = () => {
     <div className='w-full px-4 text-left'>
       <div className="flex w-full gap-4 items-center justify-between">
           <UserMin fullname={`${player?.firstName} ${player?.lastName}`} 
-          photoUrl={user.photoUrl} />
+          photoUrl={player?.imageUrl || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'} />
           <div className="text-right flex items-start justify-end">ключи??</div>
       </div>
         <div className="flex flex-row items-center justify-between w-full">
-          <UserLevel level={1} progress={35} onClick={handleLevelClick}/>
-          <UserIncome income={0} />
+          <UserLevel level={player?.levelId || 0} progress={35} onClick={handleLevelClick}/>
+          <UserIncome income={player?.incomePerHour || 0} />
         </div>
       <div>
       <div className="mt-4 w-full">

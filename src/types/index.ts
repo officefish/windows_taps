@@ -30,6 +30,9 @@ export interface IPlayer {
     referralProfit: number
     tgId: number 
     username: string
+    imageUrl: string | null
+    active: boolean
+    incomePerHour: number
 }
 
 
