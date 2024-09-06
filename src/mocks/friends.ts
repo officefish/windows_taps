@@ -18,7 +18,10 @@ export const mockFriends: IPlayer[] = [
       createdAt: new Date(),
       honeyLatest: 0,
       honeyMax: 0,
-      referralProfit: 0
+      referralProfit: 0,
+      active: false,
+      incomePerHour: 0,
+      imageUrl: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
    },
 
    {
@@ -37,7 +40,10 @@ export const mockFriends: IPlayer[] = [
     createdAt: new Date(),
     honeyLatest: 0,
     honeyMax: 0,
-    referralProfit: 0
+    referralProfit: 0,
+    active: false,
+    incomePerHour: 0,
+    imageUrl: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
   },
 
   {
@@ -56,7 +62,10 @@ export const mockFriends: IPlayer[] = [
     createdAt: new Date(),
     honeyLatest: 0,
     honeyMax: 0,
-    referralProfit: 0
+    referralProfit: 0,
+    active: false,
+    incomePerHour: 0,
+    imageUrl: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
  },
 
 ];

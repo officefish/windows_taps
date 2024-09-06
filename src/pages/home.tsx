@@ -49,13 +49,6 @@ const Home: FC = () => {
       setPage(Page.HOME)
   }, [setPage])
 
-  const user = {
-    name: 'Сергей Иноземцев',
-    photoUrl: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
-  }
-
- 
-
   const [balance, setBalance] = useState(player?.balance || 100)
   const [energy, setEnergy] = useState(player?.honeyLatest || 100)
   
