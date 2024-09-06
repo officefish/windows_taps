@@ -1,10 +1,15 @@
 import { useCallback } from 'react'
 import { useSnackbar } from 'notistack' // Assuming you're using notistack for notifications
 import { useAxiosPostTrigger } from '@/services/axios.service';
+import Auth from '@/services/api/auth';
+import { useUserStore } from '@/providers/user';
+import { IPlayer } from '@/types';
 //import { useAxiosPostTrigger } from '@/services/axios.service'
 
 export const useRegister = (apiFetch: any, loadResources: any) => {
   const { enqueueSnackbar } = useSnackbar();
+
+  const { setPlayer } = useUserStore();
 
   const register = useCallback(
     async (initData: string) => {
@@ -12,15 +17,25 @@ export const useRegister = (apiFetch: any, loadResources: any) => {
       try {
         const res = await apiFetch('/auth/register', 'POST', { initData }, enqueueSnackbar);
 
-        console.log(res);
-        if (res.status === true) {
-          const user = res.data;
-         
-          console.log(`res.data: ${res.data}`);
-          const unsafeData = window?.Telegram?.WebApp?.initDataUnsafe || null;
-          if (unsafeData && unsafeData.user) {
-            user.fullname = `${unsafeData.user.first_name} ${unsafeData.user.last_name}`;
-          }
+        /* Set tokens */
+        if (res.accessToken) {
+          Auth.accessToken = res.accessToken;
+        }
+
+        if (res.refreshToken) {
+          Auth.refreshToken = res.refreshToken;
+        }
+        
+        if (res.player) {
+
+          const player = res.player as IPlayer;
+          setPlayer(player);
+
+          console.log(player);
+          // const unsafeData = window?.Telegram?.WebApp?.initDataUnsafe || null;
+          // if (unsafeData && unsafeData.user) {
+          //   user.fullname = `${unsafeData.user.first_name} ${unsafeData.user.last_name}`;
+          // }
           //setUser(user);
 
           // Assuming Auth is a global object or imported from somewhere

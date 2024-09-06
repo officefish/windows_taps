@@ -1,20 +1,38 @@
 class Auth {
-    private static readonly tokenKey = 'token';
+    private static readonly accessTokenKey = 'access_token';
+    private static readonly refreshTokenKey = 'refress_token';
+
   
-    static get token(): string | null {
-      return localStorage.getItem(this.tokenKey);
+    static get accessToken(): string | null {
+      return localStorage.getItem(this.accessTokenKey);
     }
   
-    static set token(value: string | null) {
+    static set accessToken(value: string | null) {
       if (value) {
-        localStorage.setItem(this.tokenKey, value);
+        localStorage.setItem(this.accessTokenKey, value);
       } else {
-        localStorage.removeItem(this.tokenKey);
+        localStorage.removeItem(this.accessTokenKey);
       }
     }
   
-    static clearToken(): void {
-      localStorage.removeItem(this.tokenKey);
+    static clearAccessToken(): void {
+      localStorage.removeItem(this.accessTokenKey);
     }
+
+    static get refreshToken(): string | null {
+      return localStorage.getItem(this.refreshTokenKey);
+    }
+
+    static set refreshToken(value: string | null) {
+      if (value) {
+        localStorage.setItem(this.refreshTokenKey, value);
+      } else {
+        localStorage.removeItem(this.refreshTokenKey);
+      }
+    }
+
+    static clearRefreshToken(): void {
+      localStorage.removeItem(this.refreshTokenKey);
+    } 
   }
 export default Auth

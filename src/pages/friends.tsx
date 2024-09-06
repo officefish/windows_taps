@@ -1,6 +1,6 @@
 import { mockFriends } from "@/mocks/friends";
 import { useSiteStore } from "@/providers/store";
-import { IUser, Page } from "@/types";
+import { IPlayer, Page } from "@/types";
 import { FC, useEffect, useState } from "react";
 
 
@@ -99,35 +99,36 @@ const FriendsNav: FC<IFriendsNavProps> = (props) => {
 }
 
 interface UserItemProps {
-  user: IUser
+  player: IPlayer
 }
 
 interface FriendsListProps {
-  friends: IUser[]
+  friends: IPlayer[]
 }   
 
 const FriendsList: FC<FriendsListProps> = (props) => {
   const { friends } = props
   return <div className="mt-4 w-full flex flex-col gap-4 z-0">
-      {friends.map((friend, i) => <UserItem key={i} user={friend} />)}
+      {friends.map((friend, i) => <UserItem key={i} player={friend} />)}
   </div>
 }
 
 const UserItem: FC<UserItemProps> = (props) => {
-  const { user } = props
+  const { player } = props
   
   return <div className="w-full flex flex-row justify-between h-[52px]">
       <div className="flex flex-row gap-2 items-center">
-          <img className="w-[36px] h-[36px] rounded-full" src={user.avatar} alt={user.name} />
+          <img className="w-[36px] h-[36px] rounded-full" 
+          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt={player.username} />
           <div className="flex flex-col">
-              <div className="sm-user-name">{user.name}</div>
+              <div className="sm-user-name">{player.username}</div>
               <div className="sm-user-status">
-                  {user.active ? `Active · ${user.energyPerSecond}%` : `Inactive · ${user.balance} Tap`}
+                  {true ? `Active · ${player.referralProfit}%` : `Inactive · ${player.balance} Tap`}
               </div>
           </div>
       </div>
       <div className="flex items-center justify-center">
-          <div className={`user-bonus ${user.active ? 'bg-[#696969]' : 'bg-[#886867]'} `}>+{user.bonus}</div>
+          <div className={`user-bonus ${true ? 'bg-[#696969]' : 'bg-[#886867]'} `}>+{player.referralProfit}</div>
       </div>
   </div>
 }

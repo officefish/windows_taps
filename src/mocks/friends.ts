@@ -1,58 +1,62 @@
-import { IUser } from "@/types";
+import { IPlayer } from "@/types";
 
-export const mockFriends: IUser[] = [
+export const mockFriends: IPlayer[] = [
 
-    {
-        id: 0,
-        name: "Алексей Кочнев",
-        avatar: "https://i.pravatar.cc/300",
-        active: true,
-        balance: 100,
-        energy: 30,
-        currentEnergy: 10,
-        photoUrl: "https://i.pravatar.cc/300",
-        energyPerSecond: 4,
-        level: 2,
-        bonus: 4
-    },
-    {
-        id: 1,
-        name: "Антон Гаврилов",
-        avatar: "https://i.pravatar.cc/301",
-        active: true,
-        balance: 200,
-        energy: 30,
-        currentEnergy: 10,
-        photoUrl: "https://i.pravatar.cc/301",
-        energyPerSecond: 9,
-        level: 1,
-        bonus: 6
-    },
-    {
-        id: 3,
-        name: "Егор Летов",
-        avatar: "https://i.pravatar.cc/302",
-        active: false,
-        balance: 200,
-        energy: 30,
-        currentEnergy: 10,
-        photoUrl: "https://i.pravatar.cc/302",
-        energyPerSecond: 9,
-        level: 1,
-        bonus: 6
-    },
-    {
-        id: 4,
-        name: "Елена Прекрасная",
-        avatar: "https://i.pravatar.cc/303",
-        active: false,
-        balance: 600,
-        energy: 30,
-        currentEnergy: 10,
-        photoUrl: "https://i.pravatar.cc/303",
-        energyPerSecond: 9,
-        level: 1,
-        bonus: 6
-    }
+   {
+      id: '',
+      username: "userandranders03Hf72nf5Nfa941412",
+      firstName: "Тестовыи",
+      lastName: "gjkmpjdfntkm",
+      balance: 0,
+      levelId: 1,
+      rankId: 1,
+      lastLogin: new Date(),
+      lastLogout: null,
+      invitedById: null,
+      isPremium: false,
+      tgId: 0,
+      createdAt: new Date(),
+      honeyLatest: 0,
+      honeyMax: 0,
+      referralProfit: 0
+   },
+
+   {
+    id: '',
+    username: "userandranders03Hf72nf5Nfa941412",
+    firstName: "Тестовыи",
+    lastName: "gjkmpjdfntkm",
+    balance: 0,
+    levelId: 1,
+    rankId: 1,
+    lastLogin: new Date(),
+    lastLogout: null,
+    invitedById: null,
+    isPremium: false,
+    tgId: 0,
+    createdAt: new Date(),
+    honeyLatest: 0,
+    honeyMax: 0,
+    referralProfit: 0
+  },
+
+  {
+    id: '',
+    username: "userandranders03Hf72nf5Nfa941412",
+    firstName: "Тестовыи",
+    lastName: "gjkmpjdfntkm",
+    balance: 0,
+    levelId: 1,
+    rankId: 1,
+    lastLogin: new Date(),
+    lastLogout: null,
+    invitedById: null,
+    isPremium: false,
+    tgId: 0,
+    createdAt: new Date(),
+    honeyLatest: 0,
+    honeyMax: 0,
+    referralProfit: 0
+ },
 
 ];

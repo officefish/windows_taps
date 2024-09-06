@@ -8,6 +8,7 @@ import { Page } from "@/types";
 import { FC, SyntheticEvent, useEffect, useState } from "react";
 import RatingDialog from "@/components/dialogs/rating.dialog";
 import { useNavigate } from "react-router-dom"
+import { useUserStore } from "@/providers/user";
 
 
 const bestUsers = [
@@ -34,6 +35,14 @@ const Home: FC = () => {
   const { setPage } = useSiteStore()
   const navigate = useNavigate()
 
+  const { player } = useUserStore()
+
+  useEffect(() => {
+    if (player) {
+      console.log(player)
+    }
+  }, [player])
+
   useEffect(() => {
       setPage(Page.HOME)
   }, [setPage])
@@ -42,6 +51,8 @@ const Home: FC = () => {
     name: 'Сергей Иноземцев',
     photoUrl: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
   }
+
+ 
 
   const [balance, setBalance] = useState(100)
   const [energy, setEnergy] = useState(100)

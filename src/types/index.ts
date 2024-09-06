@@ -13,25 +13,23 @@ export interface ITelegramUser {
 }
 
 /* User type */
-export interface IUser {
-
-    id: number
-   
-    name: string
-    avatar: string
-    
-    active: boolean
-    balance: number
-
-    energy: number
-    currentEnergy: number
-    
-    photoUrl: string
-    energyPerSecond: number
-
-    level: number
-
-    bonus: number
+export interface IPlayer {
+    balance: number 
+    createdAt: string | Date 
+    firstName: string
+    honeyLatest: number
+    honeyMax: number
+    id: string
+    invitedById: string | null 
+    isPremium: boolean 
+    lastLogin: string | Date
+    lastLogout: string | Date | null 
+    lastName: string 
+    levelId: number | null 
+    rankId: number | null
+    referralProfit: number
+    tgId: number 
+    username: string
 }
 
 

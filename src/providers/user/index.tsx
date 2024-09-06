@@ -2,14 +2,14 @@ import { FC, PropsWithChildren, useRef, useContext } from 'react'
 import { createStore, StoreApi, useStore } from 'zustand'
 import { createContext } from 'react' // from 'zustand/context'
 import { IUserState, IUserActions } from './types'
-import { IItem, IRef, IUserTask, IUser } from '../../types'
+import { IItem, IRef, IUserTask, IPlayer } from '../../types'
 
 type IUserStore = IUserState & IUserActions
 
 const createUserStore = () =>
   createStore<IUserStore>()((set) => ({
-    user: null,
-    setUser: (user: IUser) => set(() => ({ user })),
+    player: null,
+    setPlayer: (player: IPlayer) => set(() => ({ player })),
     items: [],
     refferals: [],
     dailyTasks: [],
@@ -27,8 +27,8 @@ const UserContext = createContext<UserStore | null>(null)
 export const useUserStore = () => {
   const api = useContext(UserContext) as StoreApi<IUserStore>
   return {
-    user: useStore(api, (state: IUserStore) => state.user),
-    setUser: useStore(api, (state: IUserStore) => state.setUser),
+    player: useStore(api, (state: IUserStore) => state.player),
+    setPlayer: useStore(api, (state: IUserStore) => state.setPlayer),
     items: useStore(api, (state: IUserStore) => state.items),
     setItems: useStore(api, (state: IUserStore) => state.setItems),
     refferals: useStore(api, (state: IUserStore) => state.refferals),

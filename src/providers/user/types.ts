@@ -1,6 +1,6 @@
-import { IUser, IRef, IUserTask, IItem } from "@/types"
+import { IPlayer, IRef, IUserTask, IItem } from "@/types"
   export interface IUserState {
-    user: IUser | null
+    player: IPlayer | null
     items: IItem[]
     refferals: IRef[]
     dailyTasks: IUserTask[]
@@ -8,7 +8,7 @@ import { IUser, IRef, IUserTask, IItem } from "@/types"
   }
   
   export interface IUserActions {
-    setUser: (user: IUser) => void
+    setPlayer: (user: IPlayer) => void
     setItems: (model: IItem[]) => void
     setRefferals: (refferals: IRef[]) => void
     setDailyTasks: (tasks: IUserTask[]) => void
