@@ -1,9 +1,9 @@
 export const getRankNameByRank = (rank: number) => {
     switch (rank) {
         case 0:
-            return 'Листовщик';
+            return 'Бездельник';
         case 1:
-            return 'Любитель';
+            return 'Листовщик';
         case 2:
             return 'Продвинутый';
         case 3:
