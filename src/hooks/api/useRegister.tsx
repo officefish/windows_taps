@@ -11,8 +11,11 @@ export const useRegister = (apiFetch: any, loadResources: any) => {
    
       try {
         const res = await apiFetch('/auth/register', 'POST', { initData }, enqueueSnackbar);
+        console.log(`res.status: ${res.status}`);
         if (res.status === true) {
           const user = res.data;
+         
+          console.log(`res.data: ${res.data}`);
           const unsafeData = window?.Telegram?.WebApp?.initDataUnsafe || null;
           if (unsafeData && unsafeData.user) {
             user.fullname = `${unsafeData.user.first_name} ${unsafeData.user.last_name}`;
