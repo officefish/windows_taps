@@ -11,9 +11,8 @@ export const useRegister = (apiFetch: any, loadResources: any) => {
    
       try {
         const res = await apiFetch('/auth/register', 'POST', { initData }, enqueueSnackbar);
-        console.log(`res: ${res}`);
 
-        console.log(`res.status: ${res.status}`);
+        console.log(res);
         if (res.status === true) {
           const user = res.data;
          
