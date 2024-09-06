@@ -39,6 +39,7 @@ const Home: FC = () => {
 
   useEffect(() => {
     if (player) {
+      console.log('player data from store! :', player)
       console.log(player)
     }
   }, [player])
