@@ -50,7 +50,7 @@ const Home: FC = () => {
   }, [setPage])
 
   const [balance, setBalance] = useState(player?.balance || 100)
-  const [energy, setEnergy] = useState(player?.honeyLatest || 100)
+  const [energy, setEnergy] = useState(player?.energyLatest || 100)
   
   const handleClick = (e: SyntheticEvent<HTMLDivElement>) => {
     e.preventDefault()
@@ -111,8 +111,8 @@ const Home: FC = () => {
           <div className="flex flex-row gap-2 items-center mt-4 w-full justify-center">
             <img className="w-12 h-12 bg-accent" src="./energy-svg.svg" />
             <div className="h-full flex flex-col items-center justify-center gap-2">
-              <div className="w-full text-accent text-center">{energy} / {player?.honeyMax}</div>
-              <progress className="progress progress-accent w-56 ml-4" value={energy} max={player?.honeyMax}></progress>
+              <div className="w-full text-accent text-center">{energy} / {player?.energyMax}</div>
+              <progress className="progress progress-accent w-56 ml-4" value={energy} max={player?.energyMax}></progress>
             </div>
         </div>
       </div>

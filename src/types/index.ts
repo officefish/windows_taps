@@ -17,8 +17,8 @@ export interface IPlayer {
     balance: number 
     createdAt: string | Date 
     firstName: string
-    honeyLatest: number
-    honeyMax: number
+    energyLatest: number
+    energyMax: number
     id: string
     invitedById: string | null 
     isPremium: boolean 
