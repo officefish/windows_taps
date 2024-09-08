@@ -39,6 +39,7 @@ export interface IDailyQuest {
     claimedToday: boolean
     streak: number
     nextReward: number
+    recieved?: boolean
 }
 
 

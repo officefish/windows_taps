@@ -31,12 +31,22 @@ const createUserStore = () =>
           })
         }),
     items: [],
-    dailyQuest: { claimedToday: false, streak: 0, nextReward: 0 },
+    dailyQuest: { claimedToday: false, streak: 0, nextReward: 0, recieved: false },
     refferals: [],
     dailyTasks: [],
     allTasks: [],
     setItems: (items: IItem[]) => set(() => ({ items })),
     setDailyQuest: (dailyQuest: IDailyQuest) => set(() => ({ dailyQuest })),
+    updateDailyQuest: (recieved: boolean) => {
+      set((state) => {
+        return ({
+          dailyQuest: {
+            ...state.dailyQuest, // Preserve the other properties of the player
+            recieved,
+          },
+        })
+      })
+    },
     setRefferals: (refferals: IRef[]) => set(() => ({ refferals })),
     setDailyTasks: (tasks: IUserTask[]) => set(() => ({ dailyTasks:tasks })),
     setAllTasks: (tasks: IUserTask[]) => set(() => ({ allTasks:tasks })),
@@ -56,6 +66,7 @@ export const useUserStore = () => {
     items: useStore(api, (state: IUserStore) => state.items),
     setItems: useStore(api, (state: IUserStore) => state.setItems),
     dailyQuest: useStore(api, (state: IUserStore) => state.dailyQuest),
+    updateDailyQuest: useStore(api, (state: IUserStore) => state.updateDailyQuest),
     setDailyQuest: useStore(api, (state: IUserStore) => state.setDailyQuest),
     refferals: useStore(api, (state: IUserStore) => state.refferals),
     dailyTasks: useStore(api, (state: IUserStore) => state.dailyTasks),

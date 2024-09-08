@@ -1,4 +1,4 @@
-import DailyDialog from "@/components/dialogs/daily.content";
+import DailyDialog from "@/components/dialogs/daily.dialog";
 import UserBalance from "@/components/user.balance";
 import UserLevel from "@/components/user.level";
 import UserIncome from "@/components/user.income";
@@ -127,7 +127,7 @@ const Home: FC = () => {
                 isOpen={isDailyDialogOpen}
                 setIsOpen={setIsDailyDialogOpen}
                 onConfirm={handleConfirm} 
-                dailyQuest={dailyQuest}
+                dailyQuestData={dailyQuest}
                 />
      <RatingDialog
                 isOpen={isRatingDialogOpen}
