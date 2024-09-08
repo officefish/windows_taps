@@ -41,32 +41,16 @@ const Home: FC = () => {
 
   const { player } = useUserStore()
 
-
   const { farm } = useFarm(apiFetch)
   const { updateEnergy } = useUpdateEnergy(apiFetch)
-  //const { updateBalance } = useUpdateBalance(apiFetch)
-
-  useEffect(() => {
-    if (player) {
-      console.log('player data from store! :', player)
-      console.log(player)
-    }
-  }, [player])
 
   useEffect(() => {
       setPage(Page.HOME)
   }, [setPage])
-
-  //const [balance, ] = useState(player?.balance || 100)
-  //const [energy, ] = useState(player?.energyLatest || 100)
   
   const handleClick = (e: SyntheticEvent<HTMLDivElement>) => {
     e.preventDefault()
     farm({ energy: 1, money: 1 })
-    //setBalance(balance + 1)
-    //let newEnergy = energy - 1
-    //if (newEnergy < 0) newEnergy = 0
-    //setEnergy(newEnergy)
   }
 
   const [isBoostDialogOpen, setIsBoostDialogOpen] = useState(false)

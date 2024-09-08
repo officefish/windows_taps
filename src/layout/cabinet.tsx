@@ -25,6 +25,7 @@ import { WithLoader } from "@/components/loading"
 import Puzzle from "@/pages/puzzle"
 import { useRegister } from "@/hooks/api/useRegister"
 import apiFetch from "@/services/api"
+import { useDailyQuestInfo } from "@/hooks/api/useDailyQuestInfo"
 //import useLogin from "@/hooks/api/useLogin"
 
 // const showLoading = () => {
@@ -43,18 +44,20 @@ const Cabinet:FC = () => {
 
   //const { addLoading, hideLoading } = useLoaderStore();
 
-
   //const { updateUser } = useUpdateUser(apiFetch, addLoading, removeLoading);
   //const { updateFriends } = useUpdateFriends(apiFetch, addLoading, removeLoading);
   //const { updateTasks } = useUpdateTasks(apiFetch, addLoading, removeLoading);
   //const { updateShop } = useUpdateShop(apiFetch, addLoading, removeLoading);
 
+  const { dailyQuestInfo } = useDailyQuestInfo(apiFetch);
+
 
   const [isLoading, setIsLoading] = useState(true);
 
   const loadResources = async () => {
-    const apiRequests: never[] = [
-        //updateUser(initData)
+    const apiRequests = [
+      dailyQuestInfo(),  
+      //updateUser(initData)
         //updateTasks(),
         //updateFriends(),
         //updateShop()
