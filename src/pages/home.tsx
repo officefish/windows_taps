@@ -89,11 +89,12 @@ const Home: FC = () => {
 
    useEffect(() => {
     
-    const updateBalance = async () => {
+    const updateEnergy = async () => {
       try {
         const response = await fetch(`https://d616-5-18-176-212.ngrok-free.app/api/v1/player/energy`, 
         {
-        method: 'GET',
+        body: JSON.stringify({ energy: 0 }),
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
 			// 'UserId': String(window.Telegram?.WebApp?.initDataUnsafe?.user?.id) || "0",
@@ -120,7 +121,7 @@ const Home: FC = () => {
       }
     }
     // Set up the interval to run the updateStats function every 5 seconds (5000ms)
-    const intervalId = setInterval(updateBalance, 10000); 
+    const intervalId = setInterval(updateEnergy, 10000); 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, [apiFetch]); // The effect depends on this method
