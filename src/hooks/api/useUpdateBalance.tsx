@@ -14,7 +14,7 @@ export const useUpdateBalance = (apiFetch: any) => {
     async () => {
    
       try {
-        const res = await apiFetch('/player/balance', 'GET', {}, enqueueSnackbar);
+        const res = await apiFetch('/player/balance', 'GET', enqueueSnackbar);
         if (res.balance) {
           updatePlayerBalance(res.balance)
         }
