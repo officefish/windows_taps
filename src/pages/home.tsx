@@ -12,7 +12,9 @@ import { useUserStore } from "@/providers/user";
 import { getRankNameByRank } from "@/services/game.service";
 import { useFarm } from "@/hooks/api/useFarmMoney";
 import apiFetch from "@/services/api"
-import { useUpdateBalance } from "@/hooks/api/useUpdateBalance";
+//import { useUpdateBalance } from "@/hooks/api/useUpdateBalance";
+import { enqueueSnackbar } from "notistack";
+import Auth from "@/services/api/auth";
 
 
 const bestUsers = [
@@ -43,7 +45,7 @@ const Home: FC = () => {
 
 
   const { farm } = useFarm(apiFetch)
-  const { updateBalance } = useUpdateBalance(apiFetch)
+  //const { updateBalance } = useUpdateBalance(apiFetch)
 
   useEffect(() => {
     if (player) {
@@ -85,12 +87,43 @@ const Home: FC = () => {
     setIsRatingDialogOpen(true)
    }
 
-   useEffect(() => {    
+   useEffect(() => {
+    
+    const updateBalance = async () => {
+      try {
+        const response = await fetch(`https://d616-5-18-176-212.ngrok-free.app/api/v1/player/balance`, 
+        {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+			// 'UserId': String(window.Telegram?.WebApp?.initDataUnsafe?.user?.id) || "0",
+             ...(Auth.accessToken ? {
+                 "Authorization": "Bearer " + Auth.accessToken
+             } : {})
+            },
+        });
+        const data = await response.json();
+        console.log(data)
+
+        //const res = await apiFetch('/player/balance', 'GET', null, enqueueSnackbar);
+        //console.log(res)
+        //if (res.balance) {
+        //  updatePlayerBalance(res.balance)
+        //}
+        
+      } catch (error: any) {
+        //console.error('Error during login:', error);
+        //let message = error?.message || 'Unknown';
+        //enqueueSnackbar(`Error during login: ${error.message}`, { variant: 'info' });
+        enqueueSnackbar(`Error during update energy: ${error}`, { variant: 'error' });
+      } finally {
+      }
+    }
     // Set up the interval to run the updateStats function every 5 seconds (5000ms)
-    const intervalId = setInterval(updateBalance, 5000); 
+    const intervalId = setInterval(updateBalance, 10000); 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
-  }, [updateBalance]); // The effect depends on this method
+  }, [apiFetch]); // The effect depends on this method
 
     return (
     <div className='w-full px-4 text-left'>
