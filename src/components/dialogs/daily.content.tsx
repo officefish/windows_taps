@@ -6,19 +6,22 @@ import {
 // import { StyledDialog } from '@/styled/dialog.styled'
 import CloseModalBtn from '../button/close-modal.btn'
 import DialogContent from './dialog.content'
+import { IDailyQuest } from '@/types'
 
 interface DialogProps {
   isOpen: boolean
   setIsOpen: (status: boolean) => void
+  dailyQuest: IDailyQuest
   onConfirm: () => void
 }
 
-const BoostDialog: FC<DialogProps> = (props) => {
+const DailyDialog: FC<DialogProps> = (props) => {
   const modalRef = useRef<HTMLDialogElement>(null)
 
   const {
     setIsOpen,
     isOpen,
+    dailyQuest
   } = props
 
   function onCancel(): void {
@@ -42,8 +45,11 @@ const BoostDialog: FC<DialogProps> = (props) => {
             <CloseModalBtn handleCancel={onCancel}/>
           <DialogContent>
             <div className='flex flex-col w-full gap-4 items-center justify-center p-4'>
-              <p className='text-3xl'>Дневная награда: 300</p>
-              <div className="btn btn-secondary btn-lg" onClick={handleBonus}>Забрать награду</div>
+              <p className='text-3xl'>Дневная награда: {dailyQuest?.nextReward}</p>
+              {dailyQuest?.claimedToday && <p className='text-3xl'>Вы уже получили награду</p>}
+              {!dailyQuest?.claimedToday && 
+                <div className="btn btn-secondary btn-lg" onClick={handleBonus}>Забрать награду</div>
+              }
             </div>
          
           </DialogContent>
@@ -51,4 +57,4 @@ const BoostDialog: FC<DialogProps> = (props) => {
     </dialog>
   )
 }
-export default BoostDialog
+export default DailyDialog

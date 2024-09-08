@@ -1,4 +1,4 @@
-import BoostDialog from "@/components/dialogs/boost.content";
+import DailyDialog from "@/components/dialogs/daily.content";
 import UserBalance from "@/components/user.balance";
 import UserLevel from "@/components/user.level";
 import UserIncome from "@/components/user.income";
@@ -59,13 +59,13 @@ const Home: FC = () => {
     farm({ energy: 1, money: 1 })
   }
 
-  const [isBoostDialogOpen, setIsBoostDialogOpen] = useState(false)
+  const [isDailyDialogOpen, setIsDailyDialogOpen] = useState(false)
   const [isRatingDialogOpen, setIsRatingDialogOpen] = useState(false)
    
    const handleConfirm = () => {}
 
    const handleDaily = () => {
-    setIsBoostDialogOpen(true)
+    setIsDailyDialogOpen(true)
    }
 
    const handleMiniGame = () => {
@@ -123,10 +123,12 @@ const Home: FC = () => {
         </div>
       </div>
     </div>
-    <BoostDialog
-                isOpen={isBoostDialogOpen}
-                setIsOpen={setIsBoostDialogOpen}
-                onConfirm={handleConfirm} />
+    <DailyDialog
+                isOpen={isDailyDialogOpen}
+                setIsOpen={setIsDailyDialogOpen}
+                onConfirm={handleConfirm} 
+                dailyQuest={dailyQuest}
+                />
      <RatingDialog
                 isOpen={isRatingDialogOpen}
                 setIsOpen={setIsRatingDialogOpen}
