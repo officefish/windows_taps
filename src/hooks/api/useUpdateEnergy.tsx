@@ -5,16 +5,16 @@ import { useUserStore } from '@/providers/user';
 //import { IPlayer } from '@/types';
 //import { useAxiosPostTrigger } from '@/services/axios.service'
 
-export const useUpdateBalance = (apiFetch: any) => {
+export const useUpdateEnergy = (apiFetch: any) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const { updatePlayerEnergy } = useUserStore();
 
-  const updateBalance = useCallback(
+  const updateEnergy = useCallback(
     async () => {
    
       try {
-        const res = await apiFetch('/player/balance', 'GET', null, enqueueSnackbar);
+        const res = await apiFetch('/player/energy', 'POST', {energy:0}, enqueueSnackbar);
 
         if (res.energyLatest && res.energyMax) {
           updatePlayerEnergy(res.energyLatest, res.energyMax)
@@ -31,5 +31,5 @@ export const useUpdateBalance = (apiFetch: any) => {
     [apiFetch, enqueueSnackbar] // Dependencies
   )
 
-  return { updateBalance }
+  return { updateEnergy }
 }
