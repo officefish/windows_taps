@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import { useSnackbar } from 'notistack' // Assuming you're using notistack for notifications
+import { useUserStore } from '@/providers/user';
 //import { useUserStore } from '@/providers/user';
 //import { useUserStore } from '@/providers/user';
 //import { IPlayer } from '@/types';
@@ -8,14 +9,14 @@ import { useSnackbar } from 'notistack' // Assuming you're using notistack for n
 export const useDailyQuestInfo = (apiFetch: any) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  //const { updatePlayerBalance, updatePlayerEnergy } = useUserStore();
+  const { setDailyQuest } = useUserStore();
 
   const dailyQuestInfo = useCallback(
     async () => {
    
       try {
         const res = await apiFetch('/quest/daily-reward/info', 'POST', {energy:0}, enqueueSnackbar);
-       console.log(res)
+        setDailyQuest(res)
         
       } catch (error: any) {
         //console.error('Error during login:', error);

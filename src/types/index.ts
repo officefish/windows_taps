@@ -35,6 +35,12 @@ export interface IPlayer {
     incomePerHour?: number
 }
 
+export interface IDailyQuest {
+    claimedToday: boolean
+    streak: number
+    nextReward: number
+}
+
 
 /* Model/Market type */
 export interface IItem {

@@ -39,7 +39,13 @@ const Home: FC = () => {
   const { setPage } = useSiteStore()
   const navigate = useNavigate()
 
-  const { player } = useUserStore()
+  const { player, dailyQuest } = useUserStore()
+
+  useEffect(() => {
+    if (dailyQuest) {
+      console.log(dailyQuest)
+    }
+  }, [dailyQuest])
 
   const { farm } = useFarm(apiFetch)
   const { updateEnergy } = useUpdateEnergy(apiFetch)

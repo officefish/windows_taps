@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, useRef, useContext } from 'react'
 import { createStore, StoreApi, useStore } from 'zustand'
 import { createContext } from 'react' // from 'zustand/context'
 import { IUserState, IUserActions } from './types'
-import { IItem, IRef, IUserTask, IPlayer } from '../../types'
+import { IItem, IRef, IUserTask, IPlayer, IDailyQuest } from '../../types'
 
 type IUserStore = IUserState & IUserActions
 
@@ -31,10 +31,12 @@ const createUserStore = () =>
           })
         }),
     items: [],
+    dailyQuest: { claimedToday: false, streak: 0, nextReward: 0 },
     refferals: [],
     dailyTasks: [],
     allTasks: [],
     setItems: (items: IItem[]) => set(() => ({ items })),
+    setDailyQuest: (dailyQuest: IDailyQuest) => set(() => ({ dailyQuest })),
     setRefferals: (refferals: IRef[]) => set(() => ({ refferals })),
     setDailyTasks: (tasks: IUserTask[]) => set(() => ({ dailyTasks:tasks })),
     setAllTasks: (tasks: IUserTask[]) => set(() => ({ allTasks:tasks })),
@@ -53,6 +55,8 @@ export const useUserStore = () => {
     updatePlayerEnergy: useStore(api, (state: IUserStore) => state.updatePlayerEnergy),
     items: useStore(api, (state: IUserStore) => state.items),
     setItems: useStore(api, (state: IUserStore) => state.setItems),
+    dailyQuest: useStore(api, (state: IUserStore) => state.dailyQuest),
+    setDailyQuest: useStore(api, (state: IUserStore) => state.setDailyQuest),
     refferals: useStore(api, (state: IUserStore) => state.refferals),
     dailyTasks: useStore(api, (state: IUserStore) => state.dailyTasks),
     allTasks: useStore(api, (state: IUserStore) => state.allTasks),    
