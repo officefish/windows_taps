@@ -12,6 +12,7 @@ import { useUserStore } from "@/providers/user";
 import { getRankNameByRank } from "@/services/game.service";
 import { useFarm } from "@/hooks/api/useFarmMoney";
 import apiFetch from "@/services/api"
+import { useUpdateBalance } from "@/hooks/api/useUpdateBalance";
 
 
 const bestUsers = [
@@ -42,6 +43,7 @@ const Home: FC = () => {
 
 
   const { farm } = useFarm(apiFetch)
+  const { updateBalance } = useUpdateBalance(apiFetch)
 
   useEffect(() => {
     if (player) {
@@ -82,6 +84,13 @@ const Home: FC = () => {
    const handleLevelClick = () => {
     setIsRatingDialogOpen(true)
    }
+
+   useEffect(() => {    
+    // Set up the interval to run the updateStats function every 5 seconds (5000ms)
+    const intervalId = setInterval(updateBalance, 5000); 
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [updateBalance]); // The effect depends on this method
 
     return (
     <div className='w-full px-4 text-left'>
