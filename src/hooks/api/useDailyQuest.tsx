@@ -16,6 +16,8 @@ export const useDailyQuest = (apiFetch: any) => {
    
       try {
         const res = await apiFetch('/quest/daily-reward', 'POST', {energy:0}, enqueueSnackbar);
+        
+        console.log('res', res)
         updatePlayerBalance(res.balance)
         updateDailyQuest(true)
         
