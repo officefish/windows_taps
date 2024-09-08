@@ -88,7 +88,7 @@ const Home: FC = () => {
 
    useEffect(() => {
     // Set up the interval to run the updateStats function every 5 seconds (5000ms)
-    const intervalId = setInterval(updateEnergy, 10000); 
+    const intervalId = setInterval(updateEnergy, 2000); 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, [apiFetch]); // The effect depends on this method

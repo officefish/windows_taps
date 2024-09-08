@@ -16,10 +16,7 @@ export const useUpdateEnergy = (apiFetch: any) => {
       try {
         const res = await apiFetch('/player/energy', 'POST', {energy:0}, enqueueSnackbar);
 
-        console.log(res);
-
         if (res.energyLatest && res.energyMax) {
-          console.log('updatePlayerEnergy', res.energyLatest, res.energyMax);
           updatePlayerEnergy(res.energyLatest, res.energyMax)
         }
         
