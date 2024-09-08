@@ -14,25 +14,25 @@ export interface ITelegramUser {
 
 /* User type */
 export interface IPlayer {
-    balance: number 
-    createdAt: string | Date 
-    firstName: string
-    energyLatest: number
-    energyMax: number
-    id: string
-    invitedById: string | null 
-    isPremium: boolean 
-    lastLogin: string | Date
-    lastLogout: string | Date | null 
-    lastName: string 
-    levelId: number | null 
-    rankId: number | null
-    referralProfit: number
-    tgId: number 
-    username: string
-    imageUrl: string | null
-    active: boolean
-    incomePerHour: number
+    balance?: number 
+    createdAt?: string | Date
+    firstName?: string
+    energyLatest?: number
+    energyMax?: number
+    id?: string
+    invitedById?: string 
+    isPremium?: boolean 
+    lastLogin?: string | Date
+    lastLogout?: string | Date  
+    lastName?: string 
+    levelId?: number 
+    rankId?: number 
+    referralProfit?: number
+    tgId?: number 
+    username?: string
+    imageUrl?: string 
+    active?: boolean
+    incomePerHour?: number
 }
 
 

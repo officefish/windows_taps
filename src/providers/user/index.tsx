@@ -10,6 +10,26 @@ const createUserStore = () =>
   createStore<IUserStore>()((set) => ({
     player: null,
     setPlayer: (player: IPlayer) => set(() => ({ player })),
+    updatePlayerBalance: (balance: number) =>
+      set((state) => {
+        return ({
+          player: {
+            ...state.player, // Preserve the other properties of the player
+            balance,
+           
+          },
+        })
+      }),
+      updatePlayerEnergy: (energyLatest: number, energyMax: number) =>
+        set((state) => {
+          return ({
+            player: {
+              ...state.player, // Preserve the other properties of the player
+              energyLatest,
+              energyMax,
+            },
+          })
+        }),
     items: [],
     refferals: [],
     dailyTasks: [],
@@ -29,6 +49,8 @@ export const useUserStore = () => {
   return {
     player: useStore(api, (state: IUserStore) => state.player),
     setPlayer: useStore(api, (state: IUserStore) => state.setPlayer),
+    updatePlayerBalance: useStore(api, (state: IUserStore) => state.updatePlayerBalance),
+    updatePlayerEnergy: useStore(api, (state: IUserStore) => state.updatePlayerEnergy),
     items: useStore(api, (state: IUserStore) => state.items),
     setItems: useStore(api, (state: IUserStore) => state.setItems),
     refferals: useStore(api, (state: IUserStore) => state.refferals),

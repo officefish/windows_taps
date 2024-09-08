@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import { useSnackbar } from 'notistack' // Assuming you're using notistack for notifications
+import { useUserStore } from '@/providers/user';
 //import { useUserStore } from '@/providers/user';
 //import { IPlayer } from '@/types';
 //import { useAxiosPostTrigger } from '@/services/axios.service'
@@ -7,7 +8,7 @@ import { useSnackbar } from 'notistack' // Assuming you're using notistack for n
 export const useFarm = (apiFetch: any) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  //const { setPlayer } = useUserStore();
+  const { updatePlayerBalance, updatePlayerEnergy } = useUserStore();
 
   const farm = useCallback(
     async (data: {
@@ -17,15 +18,14 @@ export const useFarm = (apiFetch: any) => {
    
       try {
         const res = await apiFetch('/player/farm', 'POST', {...data}, enqueueSnackbar);
-        console.log(res);
-        // if (res.player) {
+        if (res.balance) {
+          updatePlayerBalance(res.balance)
+        }
 
-        //   const player = res.player as IPlayer;
-        //   setPlayer(player);
-
-        //   console.log(player);
-
-        // }
+        if (res.energyLatest && res.energyLatest) {
+          updatePlayerEnergy(res.energyLatest, res.energyMax)
+        }
+        
       } catch (error: any) {
         //console.error('Error during login:', error);
         //let message = error?.message || 'Unknown';
