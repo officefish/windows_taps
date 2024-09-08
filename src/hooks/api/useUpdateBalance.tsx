@@ -8,16 +8,13 @@ import { useUserStore } from '@/providers/user';
 export const useUpdateBalance = (apiFetch: any) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const { updatePlayerBalance, updatePlayerEnergy } = useUserStore();
+  const { updatePlayerEnergy } = useUserStore();
 
   const updateBalance = useCallback(
     async () => {
    
       try {
         const res = await apiFetch('/player/balance', 'GET', enqueueSnackbar);
-        if (res.balance) {
-          updatePlayerBalance(res.balance)
-        }
 
         if (res.energyLatest && res.energyMax) {
           updatePlayerEnergy(res.energyLatest, res.energyMax)
