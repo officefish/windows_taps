@@ -1,4 +1,5 @@
 import { OptionsObject } from 'notistack';
+import Auth from './auth';
 //import Auth from "./auth"
 //import { useCallback } from 'react';
 let activeRequests = 0;
@@ -24,9 +25,9 @@ export default async function apiFetch(
         headers: {
             'Content-Type': 'application/json',
 			// 'UserId': String(window.Telegram?.WebApp?.initDataUnsafe?.user?.id) || "0",
-            // ...(Auth.token ? {
-            //     "Authorization": "Bearer " + Auth.token
-            // } : {})
+             ...(Auth.accessToken ? {
+                 "Authorization": "Bearer " + Auth.accessToken
+             } : {})
             },
 		// keepalive: keepalive
     };
