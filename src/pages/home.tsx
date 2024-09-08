@@ -91,7 +91,7 @@ const Home: FC = () => {
     
     const updateBalance = async () => {
       try {
-        const response = await fetch(`https://d616-5-18-176-212.ngrok-free.app/api/v1/player/balance`, 
+        const response = await fetch(`https://d616-5-18-176-212.ngrok-free.app/api/v1/player/energy`, 
         {
         method: 'GET',
         headers: {
