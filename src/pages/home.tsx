@@ -5,7 +5,7 @@ import UserIncome from "@/components/user.income";
 import UserMin from "@/components/user.min";
 import { useSiteStore } from "@/providers/store";
 import { Page } from "@/types";
-import { FC, SyntheticEvent, useEffect, useState } from "react";
+import { FC, SyntheticEvent, useCallback, useEffect, useState } from "react";
 import RatingDialog from "@/components/dialogs/rating.dialog";
 import { useNavigate } from "react-router-dom"
 import { useUserStore } from "@/providers/user";
@@ -76,15 +76,15 @@ const Home: FC = () => {
     setIsRatingDialogOpen(true)
    }
 
-   const updateEnergyInterval = () => {
-    if (!player) return
-    if (
-      player.energyLatest && 
-      player.energyMax &&
-      player.energyLatest < player.energyMax) {
-      updateEnergy()
+   const updateEnergyInterval = useCallback(() => {
+    if (!player) return;
+  
+    const energyLatest = player.energyLatest || 0;
+  
+    if (player.energyMax && energyLatest < player.energyMax) {
+      updateEnergy();
     }
-   }
+  }, [player, player?.energyLatest, player?.energyMax, updateEnergy]);
 
    useEffect(() => {
     // Set up the interval to run the updateStats function every 5 seconds (5000ms)
