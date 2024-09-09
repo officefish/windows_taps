@@ -41,14 +41,6 @@ const Home: FC = () => {
 
   const { player, dailyQuest } = useUserStore()
 
-  const [energyLatest, setEnergyLatest] = useState(player?.energyLatest || 0)
-  const [energyMax, setEnergyMax] = useState(player?.energyMax || 0)
-
-  useEffect(() => {
-    setEnergyLatest(player?.energyLatest || 0)
-    setEnergyMax(player?.energyMax || 0)
-  }, [player, player?.energyLatest, player?.energyMax])
-
   useEffect(() => {
     if (dailyQuest) {
       console.log(dailyQuest)
@@ -99,10 +91,10 @@ const Home: FC = () => {
 
    useEffect(() => {
     // Set up the interval to run the updateStats function every 5 seconds (5000ms)
-    const intervalId = setInterval(() => updateEnergyInterval(energyLatest, energyMax), 2000); 
+    const intervalId = setInterval(() => updateEnergyInterval(player?.energyLatest || 0, player?.energyMax || 300), 2000); 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
-  }, [apiFetch]); // The effect depends on this method
+  }, [apiFetch, player]); // The effect depends on this method
 
     return (
     <div className='w-full px-4 text-left'>
@@ -138,8 +130,8 @@ const Home: FC = () => {
           <div className="flex flex-row gap-2 items-center mt-4 w-full justify-center">
             <img className="w-12 h-12 bg-accent" src="./energy-svg.svg" />
             <div className="h-full flex flex-col items-center justify-center gap-2">
-              <div className="w-full text-accent text-center">{energyLatest} / {energyMax}</div>
-              <progress className="progress progress-accent w-56 ml-4" value={energyLatest} max={energyMax}></progress>
+              <div className="w-full text-accent text-center">{player?.energyLatest} / {player?.energyMax}</div>
+              <progress className="progress progress-accent w-56 ml-4" value={player?.energyLatest} max={player?.energyMax}></progress>
             </div>
         </div>
       </div>
