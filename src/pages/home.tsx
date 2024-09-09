@@ -84,7 +84,8 @@ const Home: FC = () => {
     const energyLatest = player.energyLatest || 0;
     const energyMax = player.energyMax || 300;
 
-    console.log(energyLatest, energyMax)
+    console.log('energyLatest: ' + energyLatest)
+    console.log('energyMax: ' + energyMax)
   
     if (energyLatest < energyMax) {
       console.log('UpdateEnergy')
