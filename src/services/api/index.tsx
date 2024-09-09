@@ -5,8 +5,7 @@ import Auth from './auth';
 let activeRequests = 0;
 
 //const apiURL = import.meta.env.VITE_API_URL || 'http://188.68.221.24/api/v1'
-const apiURL = import.meta.env.VITE_API_URL || 'https://d616-5-18-176-212.ngrok-free.app/api/v1'
-
+const apiURL = import.meta.env.VITE_API_URL || 'https://93bd-5-18-176-212.ngrok-free.app/api/v1'
 
 export default async function apiFetch(
     url: string, 
@@ -44,19 +43,7 @@ export default async function apiFetch(
         const response = await fetch(`${apiURL}${url}`, options);
         const data = await response.json();
 
-		if (data.message === "Guild doesn't exist") {
-			return data
-		}
-
         if (response.status === 401) {
-            throw new Error(data.message);
-        }
-
-        if (!response.ok) {
-            throw new Error(data.message || 'Something went wrong');
-        }
-
-        if (data.status === false) {
             throw new Error(data.message);
         }
 

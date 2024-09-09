@@ -41,12 +41,6 @@ const Home: FC = () => {
 
   const { player, dailyQuest } = useUserStore()
 
-  useEffect(() => {
-    if (dailyQuest) {
-      console.log(dailyQuest)
-    }
-  }, [dailyQuest])
-
   const { farm } = useFarm(apiFetch)
   const { updateEnergy } = useUpdateEnergy(apiFetch)
 
@@ -76,22 +70,19 @@ const Home: FC = () => {
     setIsRatingDialogOpen(true)
    }
 
-   const updateEnergyInterval = (eLatest: number, eMax: number) => {
-
-    console.log('UpdateEnergyInterval')
-    console.log('EnergyLatest', eLatest, 'EnergyMax', eMax)
-    
+  const updateEnergyInterval = (eLatest: number, eMax: number) => {
     if (eLatest < eMax) {
-      console.log('UpdateEnergy')
       updateEnergy();
-    } else {
-      console.log('Ignore UpdateEnergy')
-    }
+    } 
   }
 
    useEffect(() => {
     // Set up the interval to run the updateStats function every 5 seconds (5000ms)
-    const intervalId = setInterval(() => updateEnergyInterval(player?.energyLatest || 0, player?.energyMax || 300), 2000); 
+    const intervalId = setInterval(() => 
+      updateEnergyInterval(
+        player?.energyLatest || 0, 
+        player?.energyMax || 300), 
+        2000); 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, [player?.energyLatest, player?.energyMax]); // The effect depends on this method
