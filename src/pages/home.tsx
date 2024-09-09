@@ -76,7 +76,7 @@ const Home: FC = () => {
     setIsRatingDialogOpen(true)
    }
 
-   const updateEnergyInterval = useCallback(() => {
+   const updateEnergyInterval = () => {
     if (!player) return;
 
     console.log('UpdateEnergyInterval')
@@ -93,7 +93,7 @@ const Home: FC = () => {
     } else {
       console.log('Ignore UpdateEnergy')
     }
-  }, [updateEnergy]);
+  }
 
    useEffect(() => {
     // Set up the interval to run the updateStats function every 5 seconds (5000ms)
