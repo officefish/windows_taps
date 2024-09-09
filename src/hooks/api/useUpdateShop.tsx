@@ -1,35 +1,64 @@
-import { useCallback } from 'react';
-import { useSnackbar } from 'notistack'; // Assuming you're using notistack for notifications
+import { useCallback } from 'react'
+import { useSnackbar } from 'notistack' // Assuming you're using notistack for notifications
+//import { useUserStore } from '@/providers/user';
+//import { useAxiosPostTrigger } from '@/services/axios.service'
 
-const useUpdateShop = (apiFetch: any, showLoading: any, hideLoading: any) => {
+export const useUpdateShop = (apiFetch: any) => {
   const { enqueueSnackbar } = useSnackbar();
+
+  //const { setPlayer } = useUserStore();
 
   const updateShop = useCallback(
     async () => {
+   
       try {
-        showLoading(); // Show loading state
-        const res = await apiFetch(
-          '/market/getMarket',
-          'GET',
-          null,
-          enqueueSnackbar
-        );
+        const res = await apiFetch('/shop/items', 'POST', {}, enqueueSnackbar);
         console.log(res);
-        if (res.status === true) {
-          // Handle successful response
-        }
-      } catch (error) {
-        console.error('Error updating user shop:', error);
-        enqueueSnackbar('Error updating shop', { variant: 'error' });
+        
+      } catch (error: any) {
+        enqueueSnackbar(`Error during update shop: ${error}`, { variant: 'error' });
       } finally {
-        hideLoading(); // Hide loading state
       }
-      return null;
     },
-    [apiFetch, enqueueSnackbar, showLoading, hideLoading] // Dependencies
-  );
+    [apiFetch, enqueueSnackbar] // Dependencies
+  )
 
-  return { updateShop };
-};
+  return { updateShop }
+}
 
-export default useUpdateShop;
+
+// import { useCallback } from 'react';
+// import { useSnackbar } from 'notistack'; // Assuming you're using notistack for notifications
+
+// const useUpdateShop = (apiFetch: any, showLoading: any, hideLoading: any) => {
+//   const { enqueueSnackbar } = useSnackbar();
+
+//   const updateShop = useCallback(
+//     async () => {
+//       try {
+//         showLoading(); // Show loading state
+//         const res = await apiFetch(
+//           '/market/getMarket',
+//           'GET',
+//           null,
+//           enqueueSnackbar
+//         );
+//         console.log(res);
+//         if (res.status === true) {
+//           // Handle successful response
+//         }
+//       } catch (error) {
+//         console.error('Error updating user shop:', error);
+//         enqueueSnackbar('Error updating shop', { variant: 'error' });
+//       } finally {
+//         hideLoading(); // Hide loading state
+//       }
+//       return null;
+//     },
+//     [apiFetch, enqueueSnackbar, showLoading, hideLoading] // Dependencies
+//   );
+
+//   return { updateShop };
+// };
+
+// export default useUpdateShop;
