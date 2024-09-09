@@ -93,7 +93,7 @@ const Home: FC = () => {
     } else {
       console.log('Ignore UpdateEnergy')
     }
-  }, [player, updateEnergy]);
+  }, [updateEnergy]);
 
    useEffect(() => {
     // Set up the interval to run the updateStats function every 5 seconds (5000ms)
