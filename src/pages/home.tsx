@@ -5,7 +5,7 @@ import UserIncome from "@/components/user.income";
 import UserMin from "@/components/user.min";
 import { useSiteStore } from "@/providers/store";
 import { Page } from "@/types";
-import { FC, SyntheticEvent, useCallback, useEffect, useState } from "react";
+import { FC, SyntheticEvent, useEffect, useState } from "react";
 import RatingDialog from "@/components/dialogs/rating.dialog";
 import { useNavigate } from "react-router-dom"
 import { useUserStore } from "@/providers/user";
@@ -40,6 +40,14 @@ const Home: FC = () => {
   const navigate = useNavigate()
 
   const { player, dailyQuest } = useUserStore()
+
+  const [energyLatest, setEnergyLatest] = useState(player?.energyLatest || 0)
+  const [energyMax, setEnergyMax] = useState(player?.energyMax || 0)
+
+  useEffect(() => {
+    setEnergyLatest(player?.energyLatest || 0)
+    setEnergyMax(player?.energyMax || 0)
+  }, [player, player?.energyLatest, player?.energyMax])
 
   useEffect(() => {
     if (dailyQuest) {
@@ -80,13 +88,9 @@ const Home: FC = () => {
     if (!player) return;
 
     console.log('UpdateEnergyInterval')
-  
-    const energyLatest = player.energyLatest || 0;
-    const energyMax = player.energyMax || 300;
 
-    console.log('energyLatest: ' + energyLatest)
-    console.log('energyMax: ' + energyMax)
-  
+    console.log('EnergyLatest', energyLatest, 'EnergyMax', energyMax)
+    
     if (energyLatest < energyMax) {
       console.log('UpdateEnergy')
       updateEnergy();
@@ -136,8 +140,8 @@ const Home: FC = () => {
           <div className="flex flex-row gap-2 items-center mt-4 w-full justify-center">
             <img className="w-12 h-12 bg-accent" src="./energy-svg.svg" />
             <div className="h-full flex flex-col items-center justify-center gap-2">
-              <div className="w-full text-accent text-center">{player?.energyLatest} / {player?.energyMax}</div>
-              <progress className="progress progress-accent w-56 ml-4" value={player?.energyLatest} max={player?.energyMax}></progress>
+              <div className="w-full text-accent text-center">{energyLatest} / {energyMax}</div>
+              <progress className="progress progress-accent w-56 ml-4" value={energyLatest} max={energyMax}></progress>
             </div>
         </div>
       </div>
