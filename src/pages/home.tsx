@@ -94,7 +94,7 @@ const Home: FC = () => {
     const intervalId = setInterval(() => updateEnergyInterval(player?.energyLatest || 0, player?.energyMax || 300), 2000); 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
-  }, [apiFetch, player]); // The effect depends on this method
+  }, [player?.energyLatest, player?.energyMax]); // The effect depends on this method
 
     return (
     <div className='w-full px-4 text-left'>
