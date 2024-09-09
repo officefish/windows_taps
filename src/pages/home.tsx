@@ -84,14 +84,12 @@ const Home: FC = () => {
     setIsRatingDialogOpen(true)
    }
 
-   const updateEnergyInterval = () => {
-    if (!player) return;
+   const updateEnergyInterval = (eLatest: number, eMax: number) => {
 
     console.log('UpdateEnergyInterval')
-
-    console.log('EnergyLatest', energyLatest, 'EnergyMax', energyMax)
+    console.log('EnergyLatest', eLatest, 'EnergyMax', eMax)
     
-    if (energyLatest < energyMax) {
+    if (eLatest < eMax) {
       console.log('UpdateEnergy')
       updateEnergy();
     } else {
@@ -101,7 +99,7 @@ const Home: FC = () => {
 
    useEffect(() => {
     // Set up the interval to run the updateStats function every 5 seconds (5000ms)
-    const intervalId = setInterval(updateEnergyInterval, 2000); 
+    const intervalId = setInterval(() => updateEnergyInterval(energyLatest, energyMax), 2000); 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, [apiFetch]); // The effect depends on this method
