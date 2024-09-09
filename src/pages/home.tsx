@@ -82,14 +82,17 @@ const Home: FC = () => {
     console.log('UpdateEnergyInterval')
   
     const energyLatest = player.energyLatest || 0;
+    const energyMax = player.energyMax || 300;
+
+    console.log(energyLatest, energyMax)
   
-    if (player.energyMax && energyLatest < player.energyMax) {
+    if (energyLatest < energyMax) {
       console.log('UpdateEnergy')
       updateEnergy();
     } else {
       console.log('Ignore UpdateEnergy')
     }
-  }, [player, player?.energyLatest, player?.energyMax, updateEnergy]);
+  }, [player, updateEnergy]);
 
    useEffect(() => {
     // Set up the interval to run the updateStats function every 5 seconds (5000ms)
