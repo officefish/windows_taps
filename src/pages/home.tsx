@@ -78,11 +78,16 @@ const Home: FC = () => {
 
    const updateEnergyInterval = useCallback(() => {
     if (!player) return;
+
+    console.log('UpdateEnergyInterval')
   
     const energyLatest = player.energyLatest || 0;
   
     if (player.energyMax && energyLatest < player.energyMax) {
+      console.log('UpdateEnergy')
       updateEnergy();
+    } else {
+      console.log('Ignore UpdateEnergy')
     }
   }, [player, player?.energyLatest, player?.energyMax, updateEnergy]);
 
