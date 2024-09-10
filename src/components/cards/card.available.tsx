@@ -1,6 +1,6 @@
 import { useUserStore } from "@/providers/user"
 import { IShopCard } from "@/types"
-import { FC, SyntheticEvent } from "react"
+import { FC, SyntheticEvent, useEffect, useState } from "react"
 
 
 
@@ -19,6 +19,14 @@ const ShopCardAvailable:FC<IShopCardProps> = (props) => {
         e.preventDefault()
         handleBuy(props.card)
     }
+
+    const [available, setAvailable] = useState<boolean>(false)
+
+    useEffect(() => {
+        setAvailable((player?.balance || 0)  > props.card.price)
+        console.log(player?.balance)
+    }, [player?.balance])
+
     return (
         <div className={`card h-60 overflow-hidden image-full w-full z-0`}>
             <figure>
@@ -28,7 +36,7 @@ const ShopCardAvailable:FC<IShopCardProps> = (props) => {
             </figure>
             <div className={`card-body`}>
                 <div className="card-actions justify-end">
-                { player?.balance || 0  < props.card.price 
+                { available
                     ? <div className="btn btn-disabled">Недостаточно монет</div>
                     : <div className="btn btn-primary" onClick={onBuyClick}>Купить</div>    
                 }
