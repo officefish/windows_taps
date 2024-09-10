@@ -9,7 +9,6 @@ interface IShopCardProps {
 
 const ShopCardUnavailable:FC<IShopCardProps> = (props) => {
     
-
     return (
         <div className={`card h-60 overflow-hidden image-full w-full z-0`}>
             <figure>
@@ -26,13 +25,10 @@ const ShopCardUnavailable:FC<IShopCardProps> = (props) => {
                       Необходимо:
                       {props.card.dependencies.map((dependency, index) => (
                         <div className='font-bold text-md text-primary' key={index}>
-                          Наименование: {dependency.id}, уровень: {dependency.level}
+                          {dependency.name}, уровень: {dependency.level}
                         </div>
-                      ))}
-                     
-                      
+                      ))}  
                     </div>}
-                    
                 </div>
         </div>
     )
