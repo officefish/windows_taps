@@ -32,7 +32,7 @@ export interface IShopCard {
 }
 
 export interface ICategory {
-    title: string
+    name: string
     available: IShopCard[]
     unavailable: IShopCard[]
     purchased: IShopCard[]

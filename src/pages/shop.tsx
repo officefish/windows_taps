@@ -8,6 +8,7 @@ import { useUserStore } from "@/providers/user";
 import apiFetch from "@/services/api";
 import { ICategory, IShopCard, Page } from "@/types";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const Shop: FC = () => {
@@ -38,9 +39,12 @@ const Shop: FC = () => {
     setIsUpgradeDialogOpen(true)
 }
 
+  const navigate = useNavigate();
+
   const onBuyClick = () => {
-    buyCard(currentCard?.id as string)
     setIsBuyDialogOpen(false)
+    buyCard(currentCard?.id as string)
+    navigate('/shop')
   }
 
   const onUpgradeClick = () => {
@@ -53,7 +57,11 @@ const Shop: FC = () => {
   }
 
   const [tabIndex, setTabIndex] = useState(0)
+  const [categories, setCategories] = useState<ICategory[]>([])
 
+  useEffect(() => {
+    setCategories(shop)
+  }, [shop])
 
     return (
     <div className=" h-screen">
@@ -62,7 +70,7 @@ const Shop: FC = () => {
             <p className="w-full text-center">Уровень: Листовщик</p>
         </div>
         <Tabs>
-            {shop.map((category, index) => (
+            {categories.map((category, index) => (
                 <div
                     key={index}
                     className={`
@@ -72,7 +80,7 @@ const Shop: FC = () => {
                             : ""}`}
                     onClick={() => handleTabClick(index)}
                 >
-                    {category.title}
+                    {category.name}
                 </div>
             ))}
         </Tabs>
