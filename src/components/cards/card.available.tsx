@@ -38,7 +38,7 @@ const ShopCardAvailable:FC<IShopCardProps> = (props) => {
                 <div className="card-actions justify-end">
                 { available
                     ? <div className="btn btn-primary" onClick={onBuyClick}>Купить</div>   
-                    : <div className="btn btn-disabled">Недостаточно монет</div>  
+                    : <div className="text-error">Недостаточно монет</div>  
                 }
                 </div>
                     <h2 className="card-title">{props.card.name}!</h2>
