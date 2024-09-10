@@ -1,5 +1,7 @@
 import ShopCard from "@/components/cards/card";
-import CardDialog from "@/components/dialogs/card.dialog";
+import BuyCardDialog from "@/components/dialogs/buy-card.dialog";
+import UpgradeCardDialog from "@/components/dialogs/upgrade-card.dialog";
+
 import { useSiteStore } from "@/providers/store";
 import { useUserStore } from "@/providers/user";
 import { ICategory, IShopCard, Page } from "@/types";
@@ -120,22 +122,28 @@ const Shop: FC = () => {
 
   const { shop } = useUserStore()
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isBuyDialogOpen, setIsBuyDialogOpen] = useState(false)
+  const [isUpgradeDialogOpen, setIsUpgradeDialogOpen] = useState(false)
+
   const [category, setCategory] = useState<ICategory>(shop[0])
   const [currentCard, setCurrentCard] = useState<IShopCard | null>(null)
   
   const handleBuy = (card: IShopCard) => {
       setCurrentCard(card)
-      setIsDialogOpen(true)
+      setIsBuyDialogOpen(true)
   }
 
   const handleUpgrade = (card: IShopCard) => {
     setCurrentCard(card)
-    setIsDialogOpen(true)
+    setIsUpgradeDialogOpen(true)
 }
 
   const onBuyClick = () => {
-    setIsDialogOpen(false)
+    setIsBuyDialogOpen(false)
+  }
+
+  const onUpgradeClick = () => {
+    setIsUpgradeDialogOpen(false)
   }
 
   const handleTabClick = (index: number) => {
@@ -199,11 +207,18 @@ const Shop: FC = () => {
                 />
             ))}
         </div>
-        <CardDialog
-                isOpen={isDialogOpen}
-                setIsOpen={setIsDialogOpen}
-                card={currentCard} 
-                onBuyClick={onBuyClick}            />
+        <BuyCardDialog
+            isOpen={isBuyDialogOpen}
+            setIsOpen={setIsBuyDialogOpen}
+            card={currentCard} 
+            onBuyClick={onBuyClick}            
+        />
+        <UpgradeCardDialog
+            isOpen={isUpgradeDialogOpen}
+            setIsOpen={setIsUpgradeDialogOpen}
+            card={currentCard} 
+            onBuyClick={onUpgradeClick}            
+        />
     </div>  
     )
 }
