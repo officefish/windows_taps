@@ -5,7 +5,7 @@ import Auth from './auth';
 let activeRequests = 0;
 
 //const apiURL = import.meta.env.VITE_API_URL || 'http://188.68.221.24/api/v1'
-const apiURL = import.meta.env.VITE_API_URL || 'https://1d64-5-18-176-212.ngrok-free.app/api/v1'
+const apiURL = import.meta.env.VITE_API_URL || 'https://504b-5-18-176-212.ngrok-free.app/api/v1'
 
 export default async function apiFetch(
     url: string, 
