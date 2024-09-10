@@ -14,7 +14,7 @@ export const useBuyCard = (apiFetch: any) => {
       try {
         const shop = await apiFetch('/shop/buy', 'POST', { cardId }, enqueueSnackbar);
         console.log(shop)
-        setShop({...shop})
+        setShop(shop)
         navigate('/shop')
         
       } catch (error: any) {
