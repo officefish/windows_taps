@@ -14,6 +14,7 @@ export interface IShopCardDependency {
     id: string, 
     itemId: string, 
     dependsOnId: string
+    level: number
 }
 
 export interface IShopCard {

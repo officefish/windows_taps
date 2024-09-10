@@ -1,4 +1,4 @@
-import ShopCard from "@/components/card";
+import ShopCard from "@/components/cards/card";
 import CardDialog from "@/components/dialogs/card.dialog";
 import { useSiteStore } from "@/providers/store";
 import { useUserStore } from "@/providers/user";
@@ -129,6 +129,11 @@ const Shop: FC = () => {
       setIsDialogOpen(true)
   }
 
+  const handleUpgrade = (card: IShopCard) => {
+    setCurrentCard(card)
+    setIsDialogOpen(true)
+}
+
   const onBuyClick = () => {
     setIsDialogOpen(false)
   }
@@ -168,6 +173,7 @@ const Shop: FC = () => {
                 card={card} 
                 key={index} 
                 handleBuy={handleBuy}
+                handleUpgrade={handleUpgrade} 
                 saled={true}
                 blocked={false}
                 />
@@ -177,6 +183,7 @@ const Shop: FC = () => {
                 card={card} 
                 key={index} 
                 handleBuy={handleBuy}
+                handleUpgrade={handleUpgrade} 
                 saled={false}
                 blocked={false}
                 />
@@ -186,6 +193,7 @@ const Shop: FC = () => {
                 card={card} 
                 key={index} 
                 handleBuy={handleBuy}
+                handleUpgrade={handleUpgrade} 
                 saled={false}
                 blocked={true}
                 />
