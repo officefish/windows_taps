@@ -71,7 +71,7 @@ const Shop: FC = () => {
                             : ""}`}
                     onClick={() => handleTabClick(index)}
                 >
-                    {category.name}
+                    {category.categoryName}
                 </div>
             ))}
         </Tabs>
