@@ -15,7 +15,7 @@ export const useBuyCard = (apiFetch: any) => {
         const shop = await apiFetch('/shop/buy', 'POST', { cardId }, enqueueSnackbar);
         console.log(shop)
         setShop(shop)
-        navigate('/shop')
+        navigate('/')
         
       } catch (error: any) {
         enqueueSnackbar(`Error during buy card: ${error}`, { variant: 'error' });
