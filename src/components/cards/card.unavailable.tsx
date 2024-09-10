@@ -11,16 +11,13 @@ const ShopCardUnavailable:FC<IShopCardProps> = (props) => {
     
 
     return (
-        <div className={`card h-60 overflow-hidden image-scaled border-2 border-neutral text-neutral  w-full z-0`}>
+        <div className={`card h-60 overflow-hidden image-full w-full z-0`}>
             <figure>
                 <img
                     src={props.card.imageUrl}
                     alt="Shoes" />
             </figure>
             <div className={`card-body`}>
-                <div className="card-actions justify-end">
-                    <div className="btn btn-error btn-disabled">Недоступно</div>       
-                </div>
                     <h2 className="card-title">{props.card.name}!</h2>
                     <p className="text-xs">Пассивный доход (за 10 урвоень): {props.card.income}</p>
                     <p>Цена: {props.card.price}</p>
