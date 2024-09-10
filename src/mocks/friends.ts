@@ -1,4 +1,4 @@
-import { IPlayer } from "@/types";
+import { IPlayer, RankType } from "@/types";
 
 export const mockFriends: IPlayer[] = [
 
@@ -9,7 +9,7 @@ export const mockFriends: IPlayer[] = [
       lastName: "gjkmpjdfntkm",
       balance: 0,
       levelId: 1,
-      rankId: 1,
+      rank: RankType.SHEETER,
       lastLogin: new Date(),
       lastLogout: new Date(),
       invitedById: '',
@@ -31,7 +31,7 @@ export const mockFriends: IPlayer[] = [
     lastName: "gjkmpjdfntkm",
     balance: 0,
     levelId: 1,
-    rankId: 1,
+    rank: RankType.SHEETER,
     lastLogin: new Date(),
     lastLogout: new Date(),
     invitedById: '',
@@ -53,7 +53,7 @@ export const mockFriends: IPlayer[] = [
     lastName: "gjkmpjdfntkm",
     balance: 0,
     levelId: 1,
-    rankId: 1,
+    rank: RankType.SHEETER,
     lastLogin: new Date(),
     lastLogout: new Date(),
     invitedById: '',

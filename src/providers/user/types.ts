@@ -1,7 +1,7 @@
-import { IPlayer, IRef, IUserTask, IItem, IDailyQuest } from "@/types"
+import { IPlayer, ICategory, IRef, IUserTask, IDailyQuest } from "@/types"
   export interface IUserState {
     player: IPlayer | null
-    items: IItem[]
+    shop: ICategory[]
     dailyQuest: IDailyQuest
     refferals: IRef[]
     dailyTasks: IUserTask[]
@@ -12,7 +12,7 @@ import { IPlayer, IRef, IUserTask, IItem, IDailyQuest } from "@/types"
     setPlayer: (user: IPlayer) => void
     updatePlayerBalance: (balance: number) => void 
     updatePlayerEnergy: (energyLatest: number, energyMax: number) => void
-    setItems: (model: IItem[]) => void
+    setShop: (model: ICategory[]) => void
     setDailyQuest: (dailyQuest: IDailyQuest) => void
     updateDailyQuest: (recieved: boolean) => void
     setRefferals: (refferals: IRef[]) => void

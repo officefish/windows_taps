@@ -13,7 +13,7 @@ interface DialogProps {
   isOpen: boolean
   setIsOpen: (status: boolean) => void
   onBuyClick: () => void
-  card: IShopCard
+  card: IShopCard | null
 }
 
 const CardDialog: FC<DialogProps> = (props) => {
@@ -43,15 +43,15 @@ const CardDialog: FC<DialogProps> = (props) => {
             <CloseModalBtn handleCancel={onCancel}/>
           <DialogContent>
             <div className='w-full flex flex-col justify-center items-center pt-8'>
-                   <div className='dialog-title'>{card.title}</div>
-                   <div className='font-bold text-3xl text-secondary'>Цена: {card.price}</div>
-                   <div className='font-bold text-md text-primary'>Уровень: {card.level}</div>
-                   <div className='font-bold text-md text-primary'>Пассивный доход: {card.income}</div>
-                   {card.dependency && 
+                   <div className='dialog-title'>{card?.name}</div>
+                   <div className='font-bold text-3xl text-secondary'>Цена: {card?.price}</div>
+                   <div className='font-bold text-md text-primary'>Уровень: {0}</div>
+                   <div className='font-bold text-md text-primary'>Пассивный доход: {0}</div>
+                   {card && card.depenedencies && 
                     <div className="flex flex-col gap-2">
                       Необходимо:
-                      <div className='font-bold text-md text-primary'>Наименование: {card.dependency.title}</div>
-                      <div className='font-bold text-md text-primary'>Уровень: {card.dependency.level}</div>
+                      {/* <div className='font-bold text-md text-primary'>Наименование: {card.dependency.title}</div>
+                      <div className='font-bold text-md text-primary'>Уровень: {card.dependency.level}</div> */}
                     </div>
                   }
 

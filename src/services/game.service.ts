@@ -1,15 +1,15 @@
-export const getRankNameByRank = (rank: number) => {
+import { RankType } from "@/types";
+
+export const getRankNameByRank = (rank: RankType) => {
     switch (rank) {
-        case 0:
-            return 'Бездельник';
-        case 1:
+        case RankType.SHEETER:
             return 'Листовщик';
-        case 2:
-            return 'Продвинутый';
-        case 3:
-            return 'Мастер';
-        case 4:
-            return 'Гений';
+        case RankType.INSTALLER:
+            return 'Монтажник';
+        case RankType.DEALER:
+            return 'Дилер';
+        case RankType.MANUFACTURER:
+            return 'Производитель';
         default:
             return 'Листовщик';
     }

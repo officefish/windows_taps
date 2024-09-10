@@ -4,7 +4,7 @@ import UserLevel from "@/components/user.level";
 import UserIncome from "@/components/user.income";
 import UserMin from "@/components/user.min";
 import { useSiteStore } from "@/providers/store";
-import { Page } from "@/types";
+import { Page, RankType } from "@/types";
 import { FC, SyntheticEvent, useEffect, useState } from "react";
 import RatingDialog from "@/components/dialogs/rating.dialog";
 import { useNavigate } from "react-router-dom"
@@ -104,7 +104,7 @@ const Home: FC = () => {
           <div className="rounded-3xl border-2 border-primary h-full w-96 flex flex-col items-center justify-center py-2">
             <div className="flex flex-row justify-between items-center gap-2 w-full px-4">
               <div className="btn btn-secondary btn-sm" onClick={handleDaily}>Дневная награда</div>
-              <div className="text-primary text-lg">{getRankNameByRank(player?.rankId || 0)}</div>
+              <div className="text-primary text-lg">{getRankNameByRank(player?.rank || RankType.SHEETER)}</div>
               <div className="btn btn-secondary btn-sm" onClick={handleMiniGame}>Миниигра</div>
             </div>
             <div className="flex flex-row justify-between items-center gap-2 mt-2">
@@ -128,18 +128,18 @@ const Home: FC = () => {
       </div>
     </div>
     <DailyDialog
-                isOpen={isDailyDialogOpen}
-                setIsOpen={setIsDailyDialogOpen}
-                onConfirm={handleConfirm} 
-                dailyQuestData={dailyQuest}
-                />
+      isOpen={isDailyDialogOpen}
+      setIsOpen={setIsDailyDialogOpen}
+      onConfirm={handleConfirm} 
+      dailyQuestData={dailyQuest}
+      />
      <RatingDialog
-                isOpen={isRatingDialogOpen}
-                setIsOpen={setIsRatingDialogOpen}
-                level={1}
-                income={0}
-                bestUsers={bestUsers}
-                /> 
+      isOpen={isRatingDialogOpen}
+      setIsOpen={setIsRatingDialogOpen}
+      level={1}
+      income={0}
+      bestUsers={bestUsers}
+      /> 
 
    </div>)
 }

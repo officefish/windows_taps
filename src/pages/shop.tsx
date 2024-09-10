@@ -1,7 +1,8 @@
 import ShopCard from "@/components/card";
 import CardDialog from "@/components/dialogs/card.dialog";
 import { useSiteStore } from "@/providers/store";
-import { IShopCard, Page } from "@/types";
+import { useUserStore } from "@/providers/user";
+import { ICategory, IShopCard, Page } from "@/types";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 
 const categories = [
@@ -117,10 +118,11 @@ const Shop: FC = () => {
       setPage(Page.SHOP)
   }, [setPage])
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [cards, setCards] = useState<IShopCard[]>(categories[0].cards)
+  const { shop } = useUserStore()
 
-  const [currentCard, setCurrentCard] = useState<IShopCard>(cards[0])
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [category, setCategory] = useState<ICategory>(shop[0])
+  const [currentCard, setCurrentCard] = useState<IShopCard | null>(null)
   
   const handleBuy = (card: IShopCard) => {
       setCurrentCard(card)
@@ -133,7 +135,7 @@ const Shop: FC = () => {
 
   const handleTabClick = (index: number) => {
     setTabIndex(index)
-    setCards(categories[index].cards)
+    setCategory(shop[index])
   }
 
   const [tabIndex, setTabIndex] = useState(0)
@@ -161,8 +163,32 @@ const Shop: FC = () => {
             ))}
         </Tabs>
         <div className='grid grid-cols-2 bg-[yellow] gap-2 p-2 w-full'>
-            {cards.map((card, index) => (
-                <ShopCard data={card} key={index} handleBuy={handleBuy}/>
+            {category.purchased.map((card, index) => (
+                <ShopCard 
+                card={card} 
+                key={index} 
+                handleBuy={handleBuy}
+                saled={true}
+                blocked={false}
+                />
+            ))}
+            {category.available.map((card, index) => (
+                <ShopCard 
+                card={card} 
+                key={index} 
+                handleBuy={handleBuy}
+                saled={false}
+                blocked={false}
+                />
+            ))}
+            {category.unavailable.map((card, index) => (
+                <ShopCard 
+                card={card} 
+                key={index} 
+                handleBuy={handleBuy}
+                saled={false}
+                blocked={true}
+                />
             ))}
         </div>
         <CardDialog
