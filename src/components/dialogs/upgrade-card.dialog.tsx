@@ -44,8 +44,8 @@ const UpgradeCardDialog: FC<DialogProps> = (props) => {
           <DialogContent>
             <div className='w-full flex flex-col justify-center items-center pt-8'>
                 <div className='dialog-title'>Улучшить{card?.name}?</div>
-                <div className='font-bold text-3xl text-secondary'>Цена: {card?.price}</div>
-                <div className='font-bold text-md text-primary'>Уровень: {card?.level}</div>
+                <div className='font-bold text-3xl text-secondary'>Цена за улучшение: {(card?.price || 10) / 10}</div>
+                <div className='font-bold text-md text-primary'>Текущий уровень: {card?.level}</div>
                 <div className='font-bold text-md text-primary'>Текущий доход: {(card?.income || 10) / 10 * (card?.level || 1)}</div>
                 <div className='font-bold text-md text-primary'>Улучшенный доход: {(card?.income || 10) / 10 * ((card?.level || 1) + 1)}</div>
              </div>

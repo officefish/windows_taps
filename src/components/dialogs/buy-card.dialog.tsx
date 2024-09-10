@@ -46,7 +46,6 @@ const BuyCardDialog: FC<DialogProps> = (props) => {
                   
                    <div className='dialog-title'>Купить {card?.name}?</div>
                    <div className='font-bold text-3xl text-secondary'>Цена: {card?.price}</div>
-                   <div className='font-bold text-md text-primary'>Уровень: {card?.level || 1}</div>
                    <div className='font-bold text-md text-primary'>Пассивный доход: {card?.income} (за десятый уровень)</div>
              </div>
              <div className='flex flex-row items-center justify-evenly pt-4'>
