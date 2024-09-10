@@ -13,6 +13,7 @@ export const useUpdateShop = (apiFetch: any) => {
    
       try {
         const res = await apiFetch('/shop/items', 'POST', {}, enqueueSnackbar);
+        console.log(res)
         setShop(res)
         
       } catch (error: any) {
