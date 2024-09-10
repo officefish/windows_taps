@@ -28,7 +28,7 @@ const ShopCardAvailable:FC<IShopCardProps> = (props) => {
                 <div className="btn btn-primary" onClick={onBuyClick}>Купить</div>
                 </div>
                     <h2 className="card-title">{props.card.name}!</h2>
-                    <p>Пассивный доход: {props.card.income}</p>
+                    <p className="text-xs">Пассивный доход (за 10 урвоень): {props.card.income}</p>
                     <p>Цена: {props.card.price}</p>
             </div>
         </div>

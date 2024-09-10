@@ -22,7 +22,7 @@ const ShopCardUnavailable:FC<IShopCardProps> = (props) => {
                     <div className="btn btn-error btn-disabled">Недоступно</div>       
                 </div>
                     <h2 className="card-title">{props.card.name}!</h2>
-                    <p>Пассивный доход: {props.card.income}</p>
+                    <p className="text-xs">Пассивный доход (за 10 урвоень): {props.card.income}</p>
                     <p>Цена: {props.card.price}</p>
                     {props.card.depenedencies.map((dependency) => (
                         <p className="text-xs">Требуется: {dependency.id}, уровень: {dependency.level}</p>))

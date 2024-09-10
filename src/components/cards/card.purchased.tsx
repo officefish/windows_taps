@@ -30,7 +30,7 @@ const ShopCardPurchased:FC<IShopCardProps> = (props) => {
                 <div className="btn btn-secondary" onClick={onClick}>Улучшить</div>
                 </div>
                     <h2 className="card-title">{card.name}!</h2>
-                    <p>Пассивный доход: {card.income}</p>
+                    <p>Пассивный доход: {card.income / 10 * (card.level || 1)}</p>
                     <p>Цена: {card.price}</p>
                     {/*props.blocked &&
                     // props.card.dependencies && 
