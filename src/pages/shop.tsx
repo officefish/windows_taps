@@ -1,115 +1,13 @@
 import ShopCard from "@/components/cards/card";
 import BuyCardDialog from "@/components/dialogs/buy-card.dialog";
 import UpgradeCardDialog from "@/components/dialogs/upgrade-card.dialog";
+import { useBuyCard } from "@/hooks/api/useBuyCard";
 
 import { useSiteStore } from "@/providers/store";
 import { useUserStore } from "@/providers/user";
+import apiFetch from "@/services/api";
 import { ICategory, IShopCard, Page } from "@/types";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
-
-const categories = [
-    {
-        title: "Ум",
-        cards: [
-            {
-                saled: true,
-                blocked: false,
-                income: 100,
-                title: "Школа",
-                price: 100,
-                imgUrl: "shop/school.jpg",
-                level: 1
-            },
-            {
-                saled: false,
-                blocked: false,
-                income: 200,
-                title: "Университет",
-                price: 200,
-                imgUrl: "shop/university.jpg",
-                level: 1
-            },
-            {
-                saled: false,
-                blocked: false,
-                income: 200,
-                title: "Друзья",
-                price: 200,
-                imgUrl: "shop/friends.jpg",
-                level: 1
-            },
-        ]
-    },
-    {
-        title: "Физуха",
-        cards: [
-            {
-                saled: true,
-                blocked: false,
-                income: 100,
-                title: "Зарядка",
-                price: 100,
-                imgUrl: "shop/fitness.jpg",
-                level: 1
-            },
-            {
-                saled: false,
-                blocked: false,
-                income: 200,
-                title: "Тренажерный зал",
-                price: 200,
-                imgUrl: "shop/fitness-room.jpg",
-                level: 1
-            },
-        ]
-    },
-    {
-        title: "Одежда",
-        cards: [
-            {
-                saled: true,
-                blocked: false,
-                income: 100,
-                title: "Кепка",
-                price: 100,
-                imgUrl: "shop/cap.jpg",
-                level: 1
-            },
-            {
-                saled: false,
-                blocked: false,
-                income: 200,
-                title: "Ветровка",
-                price: 200,
-                imgUrl: "shop/windbreaker.jpg",
-                level: 1
-            },
-            {
-                saled: false,
-                blocked: false,
-                income: 200,
-                title: "Ботинки",
-                price: 200,
-                imgUrl: "shop/shoes.jpg",
-                level: 1
-            },
-            {
-                saled: false,
-                blocked: true,
-                income: 300,
-                title: "Джинсы",
-                price: 300,
-                imgUrl: "shop/casual-jeans.jpg",
-                level: 1,
-                dependency: {
-                    title: "Кепка",
-                    level: 1
-                }
-            }
-        ]
-    },
-]
-
 
 
 const Shop: FC = () => {
@@ -127,6 +25,8 @@ const Shop: FC = () => {
 
   const [category, setCategory] = useState<ICategory>(shop[0])
   const [currentCard, setCurrentCard] = useState<IShopCard | null>(null)
+
+  const { buyCard } = useBuyCard(apiFetch)
   
   const handleBuy = (card: IShopCard) => {
       setCurrentCard(card)
@@ -139,6 +39,7 @@ const Shop: FC = () => {
 }
 
   const onBuyClick = () => {
+    buyCard(currentCard?.id as string)
     setIsBuyDialogOpen(false)
   }
 
@@ -161,7 +62,7 @@ const Shop: FC = () => {
             <p className="w-full text-center">Уровень: Листовщик</p>
         </div>
         <Tabs>
-            {categories.map((category, index) => (
+            {shop.map((category, index) => (
                 <div
                     key={index}
                     className={`
