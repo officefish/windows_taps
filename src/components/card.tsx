@@ -23,8 +23,7 @@ const ShopCard:FC<IShopCardProps> = (props) => {
         ${props.saled ? 'image-scaled border-2 border-neutral text-neutral' : 'image-full'} w-full z-0`}>
             <figure>
                 <img
-                    //src={props.card.imgUrl}
-                    src={''}
+                    src={props.card.imageUrl}
                     alt="Shoes" />
             </figure>
             <div className={`card-body`}>
@@ -37,7 +36,7 @@ const ShopCard:FC<IShopCardProps> = (props) => {
                 }
                 </div>
                     <h2 className="card-title">{props.card.name}!</h2>
-                    <p>Пассивный доход: {0}</p>
+                    <p>Пассивный доход: {props.card.income}</p>
                     <p>Цена: {props.card.price}</p>
                     {/*props.blocked &&
                     // props.card.dependencies && 

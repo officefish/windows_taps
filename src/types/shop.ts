@@ -20,7 +20,11 @@ export interface IShopCard {
    id: string
    categoryId: string
    name: string
+   description: string
+   imageUrl: string
    price: number
+   income: number
+   level?: number
    rank: RankType 
    depenedencies: IShopCardDependency[]
 }
