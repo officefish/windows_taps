@@ -1,3 +1,4 @@
+import { useUserStore } from "@/providers/user"
 import { IShopCard } from "@/types"
 import { FC, SyntheticEvent } from "react"
 
@@ -9,6 +10,8 @@ interface IShopCardProps {
 }
 
 const ShopCardAvailable:FC<IShopCardProps> = (props) => {
+
+    const { player } = useUserStore()
     
     const handleBuy = props.onCardClick
 
@@ -25,7 +28,10 @@ const ShopCardAvailable:FC<IShopCardProps> = (props) => {
             </figure>
             <div className={`card-body`}>
                 <div className="card-actions justify-end">
-                <div className="btn btn-primary" onClick={onBuyClick}>Купить</div>
+                { player?.balance || 0  < props.card.price 
+                    ? <div className="btn btn-disabled">Недостаточно монет</div>
+                    : <div className="btn btn-primary" onClick={onBuyClick}>Купить</div>    
+                }
                 </div>
                     <h2 className="card-title">{props.card.name}!</h2>
                     <p className="text-xs">Пассивный доход (за 10 урвоень): {props.card.income}</p>

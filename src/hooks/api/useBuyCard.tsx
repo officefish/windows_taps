@@ -1,7 +1,6 @@
 import { useCallback } from 'react'
 import { useSnackbar } from 'notistack' // Assuming you're using notistack for notifications
 import { useUserStore } from '@/providers/user';
-//import { useAxiosPostTrigger } from '@/services/axios.service'
 
 export const useBuyCard = (apiFetch: any) => {
   const { enqueueSnackbar } = useSnackbar();
