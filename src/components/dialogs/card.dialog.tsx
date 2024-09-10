@@ -47,7 +47,7 @@ const CardDialog: FC<DialogProps> = (props) => {
                    <div className='font-bold text-3xl text-secondary'>Цена: {card?.price}</div>
                    <div className='font-bold text-md text-primary'>Уровень: {0}</div>
                    <div className='font-bold text-md text-primary'>Пассивный доход: {0}</div>
-                   {card && card.depenedencies && 
+                   {card && card.dependencies && 
                     <div className="flex flex-col gap-2">
                       Необходимо:
                       {/* <div className='font-bold text-md text-primary'>Наименование: {card.dependency.title}</div>

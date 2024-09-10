@@ -24,9 +24,17 @@ const ShopCardUnavailable:FC<IShopCardProps> = (props) => {
                     <h2 className="card-title">{props.card.name}!</h2>
                     <p className="text-xs">Пассивный доход (за 10 урвоень): {props.card.income}</p>
                     <p>Цена: {props.card.price}</p>
-                    {props.card.depenedencies.map((dependency) => (
-                        <p className="text-xs">Требуется: {dependency.id}, уровень: {dependency.level}</p>))
-                    }
+                    {props.card && props.card.dependencies && 
+                    <div className="flex flex-col gap-2">
+                      Необходимо:
+                      {props.card.dependencies.map((dependency, index) => (
+                        <div className='font-bold text-md text-primary' key={index}>
+                          Наименование: {dependency.id}, уровень: {dependency.level}
+                        </div>
+                      ))}
+                     
+                      
+                    </div>}
                     
                 </div>
         </div>

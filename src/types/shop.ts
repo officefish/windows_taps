@@ -27,7 +27,7 @@ export interface IShopCard {
    income: number
    level?: number
    rank: RankType 
-   depenedencies: IShopCardDependency[]
+   dependencies: IShopCardDependency[]
 }
 
 export interface ICategory {
