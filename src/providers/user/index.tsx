@@ -25,11 +25,22 @@ const createUserStore = () =>
           return ({
             player: {
               ...state.player, // Preserve the other properties of the player
+              balance: state.player?.balance || 0,
               energyLatest,
               energyMax,
             },
           })
         }),
+    updatePlayerIncome: (incomePerHour: number) =>
+      set((state) => {
+        return ({
+          player: {
+            ...state.player, // Preserve the other properties of the player
+            balance: state.player?.balance || 0,
+            incomePerHour,
+          },
+        })
+      }),
     shop: [],
     dailyQuest: { claimedToday: false, streak: 0, nextReward: 0, recieved: false },
     refferals: [],
@@ -63,6 +74,7 @@ export const useUserStore = () => {
     setPlayer: useStore(api, (state: IUserStore) => state.setPlayer),
     updatePlayerBalance: useStore(api, (state: IUserStore) => state.updatePlayerBalance),
     updatePlayerEnergy: useStore(api, (state: IUserStore) => state.updatePlayerEnergy),
+    updatePlayerIncome: useStore(api, (state: IUserStore) => state.updatePlayerIncome),
     shop: useStore(api, (state: IUserStore) => state.shop),
     setShop: useStore(api, (state: IUserStore) => state.setShop),
     dailyQuest: useStore(api, (state: IUserStore) => state.dailyQuest),

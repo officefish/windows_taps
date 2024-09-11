@@ -12,6 +12,7 @@ import { IPlayer, ICategory, IRef, IUserTask, IDailyQuest } from "@/types"
     setPlayer: (user: IPlayer) => void
     updatePlayerBalance: (balance: number) => void 
     updatePlayerEnergy: (energyLatest: number, energyMax: number) => void
+    updatePlayerIncome: (income: number) => void 
     setShop: (model: ICategory[]) => void
     setDailyQuest: (dailyQuest: IDailyQuest) => void
     updateDailyQuest: (recieved: boolean) => void

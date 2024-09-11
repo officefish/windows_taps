@@ -10,10 +10,8 @@ const UserIncome:FC<IUserBalanceProps> = (props) => {
         <div className="flex flex-row gap-3 h-full items-center">
             <div className="text-primary text-2xl">{income}</div>
             <img className="w-8 bg-primary rounded-md" src='./coin-vector-svg.svg'></img>
-            <div className="text-primary text-md">в минуту</div>
-        </div>
-       
-        
+            <div className="text-primary text-md">в час</div>
+        </div>        
     )
 }
 

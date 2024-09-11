@@ -8,7 +8,7 @@ import CloseModalBtn from '../button/close-modal.btn'
 import DialogContent from './dialog.content'
 import { IDailyQuest } from '@/types'
 import { useDailyQuest } from '@/hooks/api/useDailyQuest'
-import apiFetch from '@/services/api'
+import { apiFetch } from '@/services/api'
 
 interface DialogProps {
   isOpen: boolean

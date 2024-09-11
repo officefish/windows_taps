@@ -1,49 +1,40 @@
-import { useUserStore } from "@/providers/user"
 import { IShopCard } from "@/types"
-import { FC, SyntheticEvent, useEffect, useState } from "react"
-
-
+import { FC, SyntheticEvent } from "react"
 
 interface IShopCardProps {
     card: IShopCard
     onCardClick: (card: IShopCard) => void
+    available: boolean
 }
 
 const ShopCardAvailable:FC<IShopCardProps> = (props) => {
 
-    const { player } = useUserStore()
-    
+    const { available, card } = props
     const handleBuy = props.onCardClick
 
-    const onBuyClick = (e:SyntheticEvent<HTMLDivElement>) => {
+    const onBuyClick = (e:SyntheticEvent<HTMLButtonElement>) => {
         e.preventDefault()
         handleBuy(props.card)
     }
 
-    const [available, setAvailable] = useState<boolean>(false)
-
-    useEffect(() => {
-        setAvailable((player?.balance || 0)  > props.card.price)
-        console.log(player?.balance)
-    }, [player?.balance])
-
+   
     return (
         <div className={`card h-60 overflow-hidden image-full w-full z-0`}>
             <figure>
                 <img
-                    src={props.card.imageUrl}
-                    alt="Shoes" />
+                    src={card.imageUrl}
+                    alt={card.name} />
             </figure>
             <div className={`card-body`}>
                 <div className="card-actions justify-end">
-                { available
-                    ? <div className="btn btn-primary" onClick={onBuyClick}>Купить</div>   
-                    : <div className="text-error">Недостаточно монет</div>  
-                }
+                 <button className="btn btn-primary" onClick={onBuyClick} disabled={!available}
+                 >Купить
+                </button> 
+               
                 </div>
-                    <h2 className="card-title">{props.card.name}!</h2>
-                    <p className="text-xs">Пассивный доход (за 10 урвоень): {props.card.income}</p>
-                    <p>Цена: {props.card.price}</p>
+                    <h2 className="card-title">{card.name}!</h2>
+                    <p className="text-xs">Пассивный доход (за 10 урвоень): {card.income}</p>
+                    <p>Цена: {card.price}</p>
             </div>
         </div>
     )

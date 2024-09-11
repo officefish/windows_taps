@@ -43,7 +43,7 @@ const UpgradeCardDialog: FC<DialogProps> = (props) => {
             <CloseModalBtn handleCancel={onCancel}/>
           <DialogContent>
             <div className='w-full flex flex-col justify-center items-center pt-8'>
-                <div className='dialog-title'>Улучшить{card?.name}?</div>
+                <div className='dialog-title'>Улучшить {card?.name}?</div>
                 <div className='font-bold text-3xl text-secondary'>Цена за улучшение: {(card?.price || 10) / 10}</div>
                 <div className='font-bold text-md text-primary'>Текущий уровень: {card?.level}</div>
                 <div className='font-bold text-md text-primary'>Текущий доход: {(card?.income || 10) / 10 * (card?.level || 1)}</div>

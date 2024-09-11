@@ -5,14 +5,15 @@ import UserIncome from "@/components/user.income";
 import UserMin from "@/components/user.min";
 import { useSiteStore } from "@/providers/store";
 import { Page, RankType } from "@/types";
-import { FC, SyntheticEvent, useEffect, useState } from "react";
+import { FC, SyntheticEvent, useCallback, useEffect, useState } from "react";
 import RatingDialog from "@/components/dialogs/rating.dialog";
 import { useNavigate } from "react-router-dom"
 import { useUserStore } from "@/providers/user";
 import { getRankNameByRank } from "@/services/game.service";
 import { useFarm } from "@/hooks/api/useFarmMoney";
-import apiFetch from "@/services/api"
+import { apiFetch } from "@/services/api"
 import { useUpdateEnergy } from "@/hooks/api/useUpdateEnergy";
+import useUpdateIncome from "@/hooks/api/useUpdateIncome";
 
 
 const bestUsers = [
@@ -36,56 +37,129 @@ const bestUsers = [
 
 const Home: FC = () => {
 
-  const { setPage } = useSiteStore()
-  const navigate = useNavigate()
+  const { setPage } = useSiteStore();
+  const navigate = useNavigate();
 
-  const { player, dailyQuest } = useUserStore()
+  const { player, dailyQuest } = useUserStore();
 
-  const { farm } = useFarm(apiFetch)
-  const { updateEnergy } = useUpdateEnergy(apiFetch)
+  const { farm } = useFarm(apiFetch);
+  const { updateEnergy } = useUpdateEnergy(apiFetch);
 
+  // Убедитесь, что вызывается один раз при монтировании
   useEffect(() => {
-      setPage(Page.HOME)
-  }, [setPage])
-  
-  const handleClick = (e: SyntheticEvent<HTMLDivElement>) => {
-    e.preventDefault()
-    farm({ energy: 1, money: 1 })
-  }
+    setPage(Page.HOME);
+  }, [setPage]);
 
-  const [isDailyDialogOpen, setIsDailyDialogOpen] = useState(false)
-  const [isRatingDialogOpen, setIsRatingDialogOpen] = useState(false)
-   
-   const handleConfirm = () => {}
+  // Мемоизация обработчика клика
+  const handleClick = useCallback((e: SyntheticEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    farm({ energy: 1, money: 1 });
+  }, [farm]);
 
-   const handleDaily = () => {
-    setIsDailyDialogOpen(true)
-   }
+  const [isDailyDialogOpen, setIsDailyDialogOpen] = useState(false);
+  const [isRatingDialogOpen, setIsRatingDialogOpen] = useState(false);
 
-   const handleMiniGame = () => {
-    navigate("/puzzle")
-   }
+  const handleConfirm = useCallback(() => {}, []);
 
-   const handleLevelClick = () => {
-    setIsRatingDialogOpen(true)
-   }
+  const handleDaily = useCallback(() => {
+    setIsDailyDialogOpen(true);
+  }, []);
 
-  const updateEnergyInterval = (eLatest: number, eMax: number) => {
+  const handleMiniGame = useCallback(() => {
+    navigate("/puzzle");
+  }, [navigate]);
+
+  const handleLevelClick = useCallback(() => {
+    setIsRatingDialogOpen(true);
+  }, []);
+
+  const updateEnergyInterval = useCallback((eLatest: number, eMax: number) => {
     if (eLatest < eMax) {
       updateEnergy();
-    } 
-  }
+    }
+  }, [updateEnergy]);
 
-   useEffect(() => {
-    // Set up the interval to run the updateStats function every 5 seconds (5000ms)
+  // Интервал для обновления энергии
+  useEffect(() => {
     const intervalId = setInterval(() => 
-      updateEnergyInterval(
-        player?.energyLatest || 0, 
-        player?.energyMax || 300), 
-        2000); 
-    // Cleanup interval on component unmount
+      updateEnergyInterval(player?.energyLatest || 0, player?.energyMax || 300), 
+      2000
+    );
+
+    // Очистка интервала при размонтировании
     return () => clearInterval(intervalId);
-  }, [player?.energyLatest, player?.energyMax]); // The effect depends on this method
+  }, [player?.energyLatest, player?.energyMax, updateEnergyInterval]);
+
+  const { updateIncome } = useUpdateIncome(apiFetch);
+
+  // Интервал для обновления дохода
+  useEffect(() => {
+    const intervalId = setInterval(updateIncome, 10000);
+
+    // Очистка интервала при размонтировании
+    return () => clearInterval(intervalId);
+  }, [updateIncome]);
+
+
+  // const { setPage } = useSiteStore()
+  // const navigate = useNavigate()
+
+  // const { player, dailyQuest } = useUserStore()
+
+  // const { farm } = useFarm(apiFetch)
+  // const { updateEnergy } = useUpdateEnergy(apiFetch)
+
+  // useEffect(() => {
+  //     setPage(Page.HOME)
+  // }, [setPage])
+  
+  // const handleClick = (e: SyntheticEvent<HTMLDivElement>) => {
+  //   e.preventDefault()
+  //   farm({ energy: 1, money: 1 })
+  // }
+
+  // const [isDailyDialogOpen, setIsDailyDialogOpen] = useState(false)
+  // const [isRatingDialogOpen, setIsRatingDialogOpen] = useState(false)
+   
+  //  const handleConfirm = () => {}
+
+  //  const handleDaily = () => {
+  //   setIsDailyDialogOpen(true)
+  //  }
+
+  //  const handleMiniGame = () => {
+  //   navigate("/puzzle")
+  //  }
+
+  //  const handleLevelClick = () => {
+  //   setIsRatingDialogOpen(true)
+  //  }
+
+  // const updateEnergyInterval = (eLatest: number, eMax: number) => {
+  //   if (eLatest < eMax) {
+  //     updateEnergy();
+  //   } 
+  // }
+
+  //  useEffect(() => {
+  //   // Set up the interval to run the updateStats function every 5 seconds (5000ms)
+  //   const intervalId = setInterval(() => 
+  //     updateEnergyInterval(
+  //       player?.energyLatest || 0, 
+  //       player?.energyMax || 300), 
+  //       2000); 
+  //   // Cleanup interval on component unmount
+  //   return () => clearInterval(intervalId);
+  // }, [player?.energyLatest, player?.energyMax]); // The effect depends on this method
+
+  // const { updateIncome } = useUpdateIncome(apiFetch)
+  // useEffect(() => {
+  //   // Set up the interval to run the update Income function every 5 seconds (5000ms)
+  //   const intervalId = setInterval(updateIncome, 
+  //       10000); 
+  //   // Cleanup interval on component unmount
+  //   return () => clearInterval(intervalId);
+  // }, []); 
 
     return (
     <div className='w-full px-4 text-left'>
