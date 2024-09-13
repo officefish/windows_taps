@@ -4,8 +4,8 @@ import { useCallback, useState } from 'react';
 //import Auth from "./auth"
 //import { useCallback } from 'react';
 
-//const apiURL = import.meta.env.VITE_API_URL || 'http://188.68.221.24/api/v1'
-const apiURL = import.meta.env.VITE_API_URL || 'https://diarma.ru/api/v1'
+//const apiURL = import.meta.env.VITE_API_URL || 'http://localhost:8001/api/v1'
+const apiURL = import.meta.env.SERVER_API_URL || 'https://diarma.ru/api/v1'
 
 export async function apiFetch<T>(
     url: string, 

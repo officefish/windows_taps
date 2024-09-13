@@ -2,35 +2,44 @@ import { useCallback } from 'react'
 import { useSnackbar } from 'notistack' // Assuming you're using notistack for notifications
 import { useUserStore } from '@/providers/user'
 
-export const useFarm = (apiFetch: any, onSuccess: any) => {
+export const useGameplayTick = (apiFetch: any, onSuccess: any) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const { updatePlayerBalance, updatePlayerEnergy } = useUserStore();
 
-  const farm = useCallback(
+  const tick = useCallback(
     async (data: {
       energy: number,
       money: number,
     }) => {
    
       try {
-        const res = await apiFetch('/player/farm', 'POST', {...data}, enqueueSnackbar);
-        if (res.balance) {
-          updatePlayerBalance(res.balance)
-          onSuccess()
-        }
+        const res = await apiFetch('/player/tick', 'POST', {...data}, enqueueSnackbar);
 
         if (res.energyLatest && res.energyMax) {
           updatePlayerEnergy(res.energyLatest, res.energyMax)
         }
 
+        if (res.incomeAdded) {
+          /* do something with new passive income */
+          //updatePlayerBalance(res.money)
+        }
+
+        if (res.balance) {
+          updatePlayerBalance(res.balance)
+          onSuccess(res.balance)
+        }
+
+        onSuccess(null)
+
+
       } catch (error: any) {
 
-        enqueueSnackbar(`Error during farm: ${error}`, { variant: 'error' });
+        enqueueSnackbar(`Error during gameplay tick: ${error}`, { variant: 'error' });
       } finally {}
     },
     [apiFetch, onSuccess, enqueueSnackbar] // Dependencies
   )
 
-  return { farm, onSuccess }
+  return { tick, onSuccess }
 }
