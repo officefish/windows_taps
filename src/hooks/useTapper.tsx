@@ -17,7 +17,7 @@ const useTapper = () => {
 
     const [isRegular, setIsRegular] = useState(true)
 
-    const onSuccess = useCallback(async (balance: number | null) => {
+    const onSuccess = useCallback(async (balance: number | null, energyLatest: number) => {
         setIsRegular(true)
         setRegularBonus(networkBonus)
         setRegularFatique(networkFatique)
@@ -27,6 +27,7 @@ const useTapper = () => {
         if (balance) {
             setBalance(balance + networkBonus)
         }
+        setEnergy(Math.max(energyLatest - networkFatique, 0))
     }, [])
 
     const { tick } = useGameplayTick(apiFetch, onSuccess);
@@ -65,16 +66,16 @@ const useTapper = () => {
         e.preventDefault()
         if (invalidFatique()) return
 
-        const touchCount = e.touches.length; // Количество одновременных касаний
-        let touchBonus = 1;
+        //const touchCount = e.touches.length; // Количество одновременных касаний
+        //let touchBonus = 1;
     
-        if (touchCount === 2) {
-          touchBonus = 2; // +1 к каждому касанию, если касаний 2
-        } else if (touchCount >= 3) {
-          touchBonus = 3; // +2 к каждому касанию, если касаний 3 или более
-        }
+        // if (touchCount === 2) {
+        //   touchBonus = 2; // +1 к каждому касанию, если касаний 2
+        // } else if (touchCount >= 3) {
+        //   touchBonus = 3; // +2 к каждому касанию, если касаний 3 или более
+        // }
        
-        touch(touchBonus)  
+        touch(1)  
     }
 
     const handleDown = (e: SyntheticEvent<HTMLDivElement>) => {

@@ -133,7 +133,7 @@ const Home: FC = () => {
               </div>
             </div>
             <div className="w-64 h-64 cursor-pointer btn rounded-full mt-4" 
-            onTouchStart={handleTouch} onMouseDown={handleDown}
+            onTouchEnd={handleTouch} onMouseDown={handleDown}
             >
               <img className="w-full h-full rounded-full" src="clicker-3.jpg" />
             </div>

@@ -27,10 +27,10 @@ export const useGameplayTick = (apiFetch: any, onSuccess: any) => {
 
         if (res.balance) {
           updatePlayerBalance(res.balance)
-          onSuccess(res.balance)
+          onSuccess(res.balance, res.energyLatest)
         }
 
-        onSuccess(null)
+        onSuccess(null, res.energyLatest)
 
 
       } catch (error: any) {
