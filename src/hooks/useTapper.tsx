@@ -88,7 +88,7 @@ const useTapper = () => {
         async (
             regularBonus: number, 
             regularFatique: number,
-            energy: number
+            energy: number,
         ) => {
        
         tick({
@@ -101,7 +101,7 @@ const useTapper = () => {
         setRegularFatique(0)
         setNetworkBonus(0)
         setNetworkFatique(0)
-        //setEnergy(energy - regularFatique)
+        setEnergy(energy)
     }, [tick, setIsRegular, setNetworkBonus, setNetworkFatique])
 
     useEffect(() => {
@@ -109,7 +109,6 @@ const useTapper = () => {
             regularBonus, 
             regularFatique,
             (player?.energyLatest || 0) - regularFatique
-            
         ), 2000);
         // Очищаем интервал при размонтировании компонента
         return () => clearInterval(interval);
