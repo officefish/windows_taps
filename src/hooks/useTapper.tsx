@@ -101,7 +101,7 @@ const useTapper = () => {
         setRegularFatique(0)
         setNetworkBonus(0)
         setNetworkFatique(0)
-        setEnergy(energy)
+        setEnergy(energy - regularFatique)
     }, [tick, setIsRegular, setNetworkBonus, setNetworkFatique])
 
     useEffect(() => {
