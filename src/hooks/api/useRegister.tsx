@@ -17,7 +17,7 @@ export const useRegister = (apiFetch: any, loadResources: any) => {
 
         const initDataUnsafe = window.Telegram?.WebApp?.initDataUnsafe
         // Extract the 'startapp' command from initDataUnsafe
-        const command = initDataUnsafe.start_param;
+        const command = initDataUnsafe.start_param || initDataUnsafe.startapp;
 
         let res;
 
