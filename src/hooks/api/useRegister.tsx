@@ -14,7 +14,23 @@ export const useRegister = (apiFetch: any, loadResources: any) => {
     async (initData: string) => {
    
       try {
-        const res = await apiFetch('/auth/register', 'POST', { initData }, enqueueSnackbar);
+
+        const initDataUnsafe = window.Telegram?.WebApp?.initDataUnsafe
+        // Extract the 'startapp' command from initDataUnsafe
+        const command = initDataUnsafe.start_param;
+
+        let res;
+
+        // Example: you can handle this command by sending it to your server or using it in your app logic
+        if (command) {
+          console.log('Executing command:', command);
+          res = await apiFetch('/auth/register-with-command', 'POST', { initData, command }, enqueueSnackbar);
+          // Perform actions based on the command
+          // e.g., Fetch data, navigate to specific page, etc.
+        } else {
+          res = await apiFetch('/auth/register', 'POST', { initData }, enqueueSnackbar);
+        }
+
 
         /* Set tokens */
         if (res.accessToken) {

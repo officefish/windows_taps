@@ -26,7 +26,8 @@ declare global {
 						username: string,
 						id: number,
 						language_code: string,
-					}
+					},
+					start_param: string
 				}; // Добавлено
 				openTelegramLink: (url: string) => void; // Добавлено
 				openLink: (url: string, options?: { try_instant_view: boolean }) => void;
