@@ -27,7 +27,7 @@ const useTapper = () => {
         if (balance) {
             setBalance(balance + networkBonus)
         }
-        setEnergy(Math.max(energyLatest - networkFatique, 0))
+        setEnergy(Math.max(energyLatest, 0))
     }, [])
 
     const { tick } = useGameplayTick(apiFetch, onSuccess);
@@ -101,7 +101,7 @@ const useTapper = () => {
         setRegularFatique(0)
         setNetworkBonus(0)
         setNetworkFatique(0)
-        setEnergy(energy - regularFatique)
+        //setEnergy(energy - regularFatique)
     }, [tick, setIsRegular, setNetworkBonus, setNetworkFatique])
 
     useEffect(() => {
