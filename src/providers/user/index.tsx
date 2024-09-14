@@ -2,12 +2,12 @@ import { FC, PropsWithChildren, useRef, useContext } from 'react'
 import { createStore, StoreApi, useStore } from 'zustand'
 import { createContext } from 'react' // from 'zustand/context'
 import { IUserState, IUserActions } from './types'
-import { IRef, IUserTask, IPlayer, IDailyQuest, ICategory } from '../../types'
+import { IUserTask, IPlayer, IDailyQuest, ICategory, IReferral } from '../../types'
 
 type IUserStore = IUserState & IUserActions
 
 const createUserStore = () =>
-  createStore<IUserStore>()((set) => ({
+  createStore<IUserStore>()((set, get) => ({
     player: null,
     setPlayer: (player: IPlayer) => set(() => ({ player })),
     updatePlayerBalance: (balance: number) =>
@@ -43,7 +43,10 @@ const createUserStore = () =>
       }),
     shop: [],
     dailyQuest: { claimedToday: false, streak: 0, nextReward: 0, recieved: false },
-    refferals: [],
+    referrals: new Map<number, IReferral[]>(),
+    referralsTotal: 0,
+    referralsPage: 1,
+    referralsCode: '',
     dailyTasks: [],
     allTasks: [],
     setShop: (shop: ICategory[]) => set(() => ({ shop })),
@@ -58,7 +61,22 @@ const createUserStore = () =>
         })
       })
     },
-    setRefferals: (refferals: IRef[]) => set(() => ({ refferals })),
+    // Set referrals by page number
+    setReferrals: (numPage: number, referrals: IReferral[]) =>
+      set((state) => {
+        const updatedReferrals = new Map(state.referrals);
+        updatedReferrals.set(numPage, referrals);
+        return { referrals: updatedReferrals };
+      }),
+
+    // Get referrals by page number
+    getReferrals: (numPage: number) => {
+      const state = get();
+      return state.referrals.get(numPage) || [];
+    },
+    setReferralsTotal: (total: number) => set(() => ({ referralsTotal: total })),
+    setReferralsPage: (page: number) => set(() => ({ referralsPage: page })),
+    setReferralsCode: (code: string) => set(() => ({ referralsCode: code })),
     setDailyTasks: (tasks: IUserTask[]) => set(() => ({ dailyTasks:tasks })),
     setAllTasks: (tasks: IUserTask[]) => set(() => ({ allTasks:tasks })),
   }))
@@ -80,10 +98,17 @@ export const useUserStore = () => {
     dailyQuest: useStore(api, (state: IUserStore) => state.dailyQuest),
     updateDailyQuest: useStore(api, (state: IUserStore) => state.updateDailyQuest),
     setDailyQuest: useStore(api, (state: IUserStore) => state.setDailyQuest),
-    refferals: useStore(api, (state: IUserStore) => state.refferals),
+    refferals: useStore(api, (state: IUserStore) => state.referrals),
     dailyTasks: useStore(api, (state: IUserStore) => state.dailyTasks),
     allTasks: useStore(api, (state: IUserStore) => state.allTasks),    
-    setRefferals: useStore(api, (state: IUserStore) => state.setRefferals),
+    setRefferals: useStore(api, (state: IUserStore) => state.setReferrals),
+    getRefferals: useStore(api, (state: IUserStore) => state.getReferrals),
+    referralsPage: useStore(api, (state: IUserStore) => state.referralsPage),
+    referralsTotal: useStore(api, (state: IUserStore) => state.referralsTotal),
+    referralsCode: useStore(api, (state: IUserStore) => state.referralsCode),
+    setReferralsTotal: useStore(api, (state: IUserStore) => state.setReferralsTotal),
+    setReferralsPage: useStore(api, (state: IUserStore) => state.setReferralsPage),
+    setReferralsCode: useStore(api, (state: IUserStore) => state.setReferralsCode),
     setDailyTasks: useStore(api, (state: IUserStore) => state.setDailyTasks),
     setAllTasks: useStore(api, (state: IUserStore) => state.setAllTasks),    
   }

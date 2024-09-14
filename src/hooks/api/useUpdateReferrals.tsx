@@ -1,12 +1,19 @@
 import { useCallback } from 'react';
 import { useSnackbar } from 'notistack'; // Assuming you're using notistack for notifications
+import { useUserStore } from '@/providers/user';
 
-const useUpdateReferrals = (apiFetch: any) => {
+const useUpdateReferrals = (apiFetch: any, page: number, take: number) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const page = 1
-  const take = 5
+  const { 
+    setReferralsCode, 
+    setReferralsPage,
+    setReferralsTotal,
+    setRefferals,
+  } = useUserStore();
 
+  setReferralsPage(page);
+ 
   const updateReferrals = useCallback(
     async () => {
       try {
@@ -17,9 +24,18 @@ const useUpdateReferrals = (apiFetch: any) => {
           enqueueSnackbar
         );
         console.log(res);
-        // if (res.status === true) {
-        //   // Handle successful response
-        // }
+        if (res.referralsCode.length > 0) {
+          setReferralsCode(res.referralsCode);
+        }
+
+        if (res.referrals.length > 0) {
+          setRefferals(page, res.referrals);
+        }
+
+        if (res.count > 0) {
+          setReferralsTotal(res.count);
+        }
+
       } catch (error) {
         console.error('Error updating user friends:', error);
         enqueueSnackbar('Error updating friends', { variant: 'error' });

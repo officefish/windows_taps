@@ -33,6 +33,7 @@ export interface IRef {
     surname: string
     isActive: true
     balance: number
+    income: number
 }
 
 export interface ITask {

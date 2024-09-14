@@ -1,6 +1,7 @@
 import { mockFriends } from "@/mocks/friends";
 import { useSiteStore } from "@/providers/store";
-import { IPlayer, Page } from "@/types";
+import { useUserStore } from "@/providers/user";
+import { IPlayer, IReferral, Page } from "@/types";
 import { FC, useEffect, useState } from "react";
 
 
@@ -14,6 +15,31 @@ const Friends: FC = () => {
   useEffect(() => {
       setPage(Page.FRIENDS)
   }, [setPage])
+
+  const { 
+    referralsPage, 
+    referralsTotal,
+    referralsCode,
+    getRefferals,
+  } = useUserStore()
+
+  const [refferals, setReferrals] = useState<IReferral[]>()
+
+  useEffect(() => {
+    //if (referralsPage === 1) {
+    //  refferals.clear()
+    //}
+    if (referralsTotal) {
+      setReferrals(getRefferals(referralsPage)) //
+    }
+
+    if (referralsCode) {
+      console.log('code:', referralsCode)
+    }
+
+    console.log('refferals:', refferals)
+    
+  }, [referralsPage, getRefferals, referralsTotal, referralsCode, refferals])
 
   //const position = useBackgroundMover(7); // Adjust multiplier as needed
 

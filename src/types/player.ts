@@ -28,3 +28,20 @@ export interface IPlayer {
     active?: boolean
     incomePerHour?: number
 }
+
+export interface IReferral extends Omit<IPlayer, 
+  'balance' | 
+  'createdAt' | 
+  'energyLatest' | 
+  'energyMax' | 
+  'isPremium' | 
+  'lastLogin' | 
+  'lastLogout' | 
+  'levelId' | 
+  'rank' | 
+  'referralProfit' | 
+  'imageUrl' | 
+  'active' | 
+  'incomePerHour' |
+  'invitedById'
+  > {}
