@@ -20,6 +20,7 @@ import { apiFetch } from "@/services/api"
 import { useDailyQuestInfo } from "@/hooks/api/useDailyQuestInfo"
 import { useUpdateShop } from "@/hooks/api/useUpdateShop"
 import useUpdateIncome from "@/hooks/api/useUpdateIncome"
+import useUpdateReferrals from "@/hooks/api/useUpdateReferrals"
 
 
 const INIT_DATA = "user=%7B%22id%22%3A334222503%2C%22first_name%22%3A%22Sergey%22%2C%22last_name%22%3A%22Inozemcev%22%2C%22username%22%3A%22indiecaps%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&chat_instance=5932003416224221582&chat_type=private&auth_date=1725562692&hash=331fb60ae520990442e7847eae5f6a4295c29d81be892a4295e6f32731e8da66"
@@ -28,6 +29,7 @@ const Cabinet:FC = () => {
 
   const { dailyQuestInfo } = useDailyQuestInfo(apiFetch);
   const { updateShop } = useUpdateShop(apiFetch);
+  const { updateReferrals } = useUpdateReferrals(apiFetch);
   const { updateIncome } = useUpdateIncome(apiFetch)
   
   const [isLoading, setIsLoading] = useState(true);
@@ -37,6 +39,7 @@ const Cabinet:FC = () => {
       dailyQuestInfo(),  
       updateShop(),
       updateIncome(),
+      updateReferrals(),
       //
     ];
     await Promise.all([...apiRequests],)
