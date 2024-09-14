@@ -4,13 +4,16 @@ import { useSnackbar } from 'notistack'; // Assuming you're using notistack for 
 const useUpdateReferrals = (apiFetch: any) => {
   const { enqueueSnackbar } = useSnackbar();
 
+  const page = 1
+  const take = 5
+
   const updateReferrals = useCallback(
     async () => {
       try {
         const res = await apiFetch(
           '/player/refferals',
           'POST',
-          null,
+          {page, take},
           enqueueSnackbar
         );
         console.log(res);
@@ -23,7 +26,7 @@ const useUpdateReferrals = (apiFetch: any) => {
       } 
       return null;
     },
-    [apiFetch, enqueueSnackbar] // Dependencies
+    [apiFetch, enqueueSnackbar, page, take] // Dependencies
   );
 
   return { updateReferrals };
