@@ -25,7 +25,7 @@ const useUpdateReferrals = (apiFetch: any, page: number, take: number) => {
         );
         console.log(res);
         if (res.referralCode.length > 0) {
-          setReferralsCode(res.referralsCode);
+          setReferralsCode(res.referralCode);
         }
 
         if (res.referrals.length > 0) {
