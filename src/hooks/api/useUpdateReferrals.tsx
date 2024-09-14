@@ -24,7 +24,7 @@ const useUpdateReferrals = (apiFetch: any, page: number, take: number) => {
           enqueueSnackbar
         );
         console.log(res);
-        if (res.referralsCode.length > 0) {
+        if (res.referralCode.length > 0) {
           setReferralsCode(res.referralsCode);
         }
 
