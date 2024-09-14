@@ -29,7 +29,7 @@ const Cabinet:FC = () => {
 
   const { dailyQuestInfo } = useDailyQuestInfo(apiFetch);
   const { updateShop } = useUpdateShop(apiFetch);
-  const { updateReferrals } = useUpdateReferrals(apiFetch);
+  const { updateReferrals } = useUpdateReferrals(apiFetch, 1, 10);
   const { updateIncome } = useUpdateIncome(apiFetch)
   
   const [isLoading, setIsLoading] = useState(true);
