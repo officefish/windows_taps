@@ -37,7 +37,7 @@ const Friends: FC = () => {
 
     console.log('refferals:', refferals)
     
-  }, [referralsPage, getRefferals, referralsTotal, referralsCode, refferals])
+  }, [])
 
   //const position = useBackgroundMover(7); // Adjust multiplier as needed
 
