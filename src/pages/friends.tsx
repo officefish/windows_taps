@@ -26,9 +26,7 @@ const Friends: FC = () => {
   const [refferals, setReferrals] = useState<IReferral[]>()
 
   useEffect(() => {
-    //if (referralsPage === 1) {
-    //  refferals.clear()
-    //}
+    console.log('update referals in friend page')
     if (referralsTotal) {
       setReferrals(getRefferals(referralsPage)) //
     }
