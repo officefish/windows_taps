@@ -32,7 +32,8 @@ const Friends: FC = () => {
     }
 
     if (referralsCode) {
-      console.log('code:', referralsCode)
+      //console.log('code:', referralsCode)
+      setReferralUrl(`https://t.me/Curt_Gedel_bot/windows_taps?appname?startapp=referrerId=${referralsCode}`)
     }
 
     console.log('refferals:', refferals)
@@ -45,11 +46,11 @@ const Friends: FC = () => {
 //     backgroundPosition: `${position.x}% ${position.y}%`,
 //   };
 
-    const [refferal,] = useState("link/ref=userandranders03Hf72nf5Nfa941412") 
+    const [referralUrl, setReferralUrl] = useState("link/ref=userandranders03Hf72nf5Nfa941412") 
   
     return (
       <div className="h-screen px-4">
-        <FriendsHeader referral={refferal} />
+        <FriendsHeader referral={referralUrl} />
         <div className="spacer"></div>
         <FriendsNav numFriends={4} numLine={1} />
         <div className="spacer"></div>
