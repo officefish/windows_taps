@@ -33,7 +33,11 @@ const Friends: FC = () => {
 
     if (referralsCode) {
       //console.log('code:', referralsCode)
-      setReferralUrl(`https://t.me/Curt_Gedel_bot/windows_taps?appname?startapp=referrerId=${referralsCode}`)
+      const message = 'Hey, check out my refferal link!'
+      const url = `https://t.me/Curt_Gedel_bot/windows_taps?appname?startapp=referrerId=${referralsCode}`
+      setReferralUrl(url)
+      const tUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(message)}`;
+      setTelegramUrl(tUrl)
     }
 
     console.log('refferals:', refferals)
@@ -47,25 +51,48 @@ const Friends: FC = () => {
 //   };
 
     const [referralUrl, setReferralUrl] = useState("link/ref=userandranders03Hf72nf5Nfa941412") 
+    const [telegramUrl, setTelegramUrl] = useState("")
+
+    const handleShare = () => {
+      window.open(telegramUrl, '_blank');
+  };
+
+  const handleCopy = () => {
+    // Using the Clipboard API to copy text
+    navigator.clipboard.writeText(referralUrl)
+      .then(() => {
+        alert("Text copied to clipboard!");
+      })
+      .catch(err => {
+        console.error("Error copying text: ", err);
+      });
+  }
+
   
     return (
       <div className="h-screen px-4">
-        <FriendsHeader referral={referralUrl} />
+        <FriendsHeader referral={referralUrl} 
+        onShare={handleShare} 
+        onCopy={handleCopy}
+        />
         <div className="spacer"></div>
         <FriendsNav numFriends={4} numLine={1} />
         <div className="spacer"></div>
         {friends.length > 0 && <FriendsList friends={friends} />}
         {!friends.length && <Invite />}
-  </div>)
+      </div>
+    )
 }
 export default Friends
 
 interface IFriendsHeaderProps {
   referral: string
+  onShare: () => void
+  onCopy: () => void
 }
 
 const FriendsHeader:FC<IFriendsHeaderProps> = (props) => {
-  const {referral} = props
+  const {referral, onShare, onCopy} = props
   return (
     <>
         <div>
@@ -76,10 +103,10 @@ const FriendsHeader:FC<IFriendsHeaderProps> = (props) => {
           <div className="flex flex-row gap-2 mx-2 justify-between">
             <input className="mx-4 input px-8 w-[70%] md:w-[90%]" type="text" value={referral} onChange={()=>referral}></input>
             <div className="flex flex-row gap-2 items-center justify-center mx-2">
-              <div className="btn">
+              <div className="btn" onClick={onCopy}>
                 <img className="w-[26px] h-[26px]" src="/icons/png/tabler_copy.png" alt="copy referal" />
               </div>
-              <div className="btn mr-2">
+              <div className="btn mr-2" onClick={onShare}>
                 <img className="w-[26px] h-[26px]" src="/icons/png/tabler_share.png" alt="share referal" />
               </div>
             </div>
