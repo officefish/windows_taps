@@ -110,7 +110,6 @@ const Home: FC = () => {
 
   useEffect(() => {
     return () => { 
-      console.log('Unmounted')
       onDestroy() 
     };
   }, [onDestroy]);

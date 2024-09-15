@@ -115,13 +115,11 @@ const useTapper = () => {
       }, [regularBonus, regularFatique, player]);
 
     const onDestroy = useCallback(() => {
-        return () => {
-            farmInterval(
-                regularBonus, 
-                regularFatique,
-                (player?.energyLatest || 0) - regularFatique
-            );
-        }
+        farmInterval(
+            regularBonus, 
+            regularFatique,
+            (player?.energyLatest || 0) - regularFatique
+        )
     }, [regularBonus, regularFatique, player]);
 
     return { handleTouch, handleDown, balance, energy, onDestroy }
