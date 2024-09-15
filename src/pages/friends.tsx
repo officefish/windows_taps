@@ -1,15 +1,12 @@
-import { mockFriends } from "@/mocks/friends";
 import { useSiteStore } from "@/providers/store";
 import { useUserStore } from "@/providers/user";
-import { IPlayer, IReferral, Page } from "@/types";
+import { IReferral, Page } from "@/types";
 import { FC, useEffect, useState } from "react";
-
 
 const Friends: FC = () => {
 
   const { setPage } = useSiteStore()
 
-  const [friends,] = useState(mockFriends)
 
 
   useEffect(() => {
@@ -86,8 +83,8 @@ const Friends: FC = () => {
         <div className="spacer"></div>
         <FriendsNav numFriends={4} numLine={1} />
         <div className="spacer"></div>
-        {friends.length > 0 && <FriendsList friends={refferals || []} />}
-        {!friends.length && <Invite />}
+        {refferals && <FriendsList friends={refferals || []} />}
+        {!refferals && <Invite />}
       </div>
     )
 }
