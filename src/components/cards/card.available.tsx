@@ -33,7 +33,7 @@ const ShopCardAvailable:FC<IShopCardProps> = (props) => {
                
                 </div>
                     <h2 className="card-title">{card.name}!</h2>
-                    <p className="text-xs">Пассивный доход (за 10 урвоень): {card.income}</p>
+                    <p className="text-xs">Пассивный доход: {card.income}</p>
                     <p>Цена: {card.price}</p>
             </div>
         </div>

@@ -18,7 +18,7 @@ const ShopCardUnavailable:FC<IShopCardProps> = (props) => {
             </figure>
             <div className={`card-body`}>
                     <h2 className="card-title">{props.card.name}!</h2>
-                    <p className="text-xs">Пассивный доход (за 10 урвоень): {props.card.income}</p>
+                    <p className="text-xs">Пассивный доход: {props.card.income}</p>
                     <p>Цена: {props.card.price}</p>
                     {props.card && props.card.dependencies && 
                     <div className="flex flex-col gap-2">
