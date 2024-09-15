@@ -27,7 +27,11 @@ const Friends: FC = () => {
 
   useEffect(() => {
     console.log('update referals in friend page')
+    console.log('referralsTotal:', referralsTotal)
+    console.log('referrals', getRefferals(referralsPage))
     if (referralsTotal) {
+
+
       setReferrals(getRefferals(referralsPage)) //
     }
 

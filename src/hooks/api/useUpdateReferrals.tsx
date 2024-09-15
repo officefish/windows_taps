@@ -11,8 +11,6 @@ const useUpdateReferrals = (apiFetch: any, page: number, take: number) => {
     setReferralsTotal,
     setRefferals,
   } = useUserStore();
-
-  setReferralsPage(page);
  
   const updateReferrals = useCallback(
     async () => {
@@ -29,6 +27,7 @@ const useUpdateReferrals = (apiFetch: any, page: number, take: number) => {
         }
 
         if (res.referrals.length > 0) {
+          setReferralsPage(page);          
           setRefferals(page, res.referrals);
         }
 
