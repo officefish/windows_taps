@@ -39,9 +39,15 @@ const UpgradeCardDialog: FC<DialogProps> = (props) => {
     isOpen ? modal.showModal() : modal.close()
   })
 
-  const [upgradePrice, ] = useState(getUpdatePrice(card?.price || 1, card?.level || 1)) 
-  const [income,] = useState(getIncome(card?.income || 1, card?.level || 1))
-  const [upgradeIncome, ] = useState(getNextIncome(card?.income || 1, card?.level || 1))
+  const [upgradePrice, setUpgradePrice] = useState(1) 
+  const [income, setIncome] = useState(1)
+  const [upgradeIncome, setUpgradeIncome] = useState(1)
+
+  useEffect(() => { 
+    setUpgradePrice(getUpdatePrice(card?.price || 1, card?.level || 1))
+    setIncome(getIncome(card?.income || 1, card?.level || 1))
+    setUpgradeIncome(getNextIncome(card?.income || 1, card?.level || 1))
+  }, [card])
 
   return (
         <dialog className='modal overflow-hidden' ref={modalRef}>
