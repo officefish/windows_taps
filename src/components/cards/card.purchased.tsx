@@ -1,6 +1,6 @@
 import { getIncome, getNextIncome, getUpdatePrice } from "@/services/game.service"
 import { IShopCard } from "@/types"
-import { FC, SyntheticEvent, useState } from "react"
+import { FC, SyntheticEvent, useEffect, useState } from "react"
 
 
 
@@ -23,9 +23,16 @@ const ShopCardPurchased:FC<IShopCardProps> = (props) => {
         onCardClick(card)
     }
 
-    const [upgradePrice, ] = useState(getUpdatePrice(card.price, card.level || 1)) 
-    const [income,] = useState(getIncome(card.income, card.level || 1))
-    const [upgradeIncome, ] = useState(getNextIncome(card.income, card.level || 1))
+    const [upgradePrice, setUpgradePrice] = useState(1) 
+    const [income, setIncome] = useState(1)
+    const [upgradeIncome, setUpgradeIncome] = useState(1)
+
+    useEffect(() => { 
+        setUpgradePrice(getUpdatePrice(card?.price || 1, card?.level || 1))
+        setIncome(getIncome(card?.income || 1, card?.level || 1))
+        setUpgradeIncome(getNextIncome(card?.income || 1, card?.level || 1))
+    }, [card])
+
 
     return (
         <div className={`card h-60 overflow-hidden image-scaled border-2 border-neutral text-neutral w-full z-0`}>
