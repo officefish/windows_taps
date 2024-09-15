@@ -14,3 +14,15 @@ export const getRankNameByRank = (rank: RankType) => {
             return 'Листовщик';
     }
 }
+
+export function getUpdatePrice(price: number, level: number) {
+    return price / 10 * level
+}
+
+export function getIncome(income: number, level: number) {
+    return income + (income / 10 * level)
+}
+
+export function getNextIncome(income: number, level: number) {
+    return income + (income / 10 * (level + 1))
+}

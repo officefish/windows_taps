@@ -1,3 +1,4 @@
+import { getIncome, getNextIncome, getUpdatePrice } from "@/services/game.service"
 import { IShopCard } from "@/types"
 import { FC, SyntheticEvent, useState } from "react"
 
@@ -22,7 +23,10 @@ const ShopCardPurchased:FC<IShopCardProps> = (props) => {
         onCardClick(card)
     }
 
-    const [upgradePrice, ] = useState(card.price / 10) 
+    const [upgradePrice, ] = useState(getUpdatePrice(card.price, card.level || 1)) 
+    const [income,] = useState(getIncome(card.income, card.level || 1))
+    const [upgradeIncome, ] = useState(getNextIncome(card.income, card.level || 1))
+
     return (
         <div className={`card h-60 overflow-hidden image-scaled border-2 border-neutral text-neutral w-full z-0`}>
             <figure>
@@ -37,8 +41,8 @@ const ShopCardPurchased:FC<IShopCardProps> = (props) => {
                             <button className="btn btn-secondary" onClick={onClick} disabled={!available}>Улучшить</button>
                             <h2 className="card-title">{card.name}!</h2>
                             <p className="text-xs">Текущий уровень: {card.level}</p>
-                            <p className="text-xs">Пассивный доход: {card.income / 10 * (card.level || 1)}</p>
-                            <p className="text-xs">После улучшение: {card.income / 10 * ((card.level || 1) + 1)}</p>
+                            <p className="text-xs">Пассивный доход: {income}</p>
+                            <p className="text-xs">После улучшение: {upgradeIncome}</p>
                             <p className="text-xs">Цена за лучшение: {upgradePrice}</p> 
                         </div>
                     )}

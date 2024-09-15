@@ -1,13 +1,15 @@
 import { 
     FC, 
     useRef, 
-    useEffect, 
+    useEffect,
+    useState, 
 } from 'react'
 // import { StyledDialog } from '@/styled/dialog.styled'
 import CloseModalBtn from '../button/close-modal.btn'
 import DialogContent from './dialog.content'
 import { IShopCard } from '@/types'
 import { ArrowSVG } from '@/assets/svg'
+import { getIncome, getNextIncome, getUpdatePrice } from '@/services/game.service'
 
 interface DialogProps {
   isOpen: boolean
@@ -37,6 +39,10 @@ const UpgradeCardDialog: FC<DialogProps> = (props) => {
     isOpen ? modal.showModal() : modal.close()
   })
 
+  const [upgradePrice, ] = useState(getUpdatePrice(card?.price || 1, card?.level || 1)) 
+  const [income,] = useState(getIncome(card?.income || 1, card?.level || 1))
+  const [upgradeIncome, ] = useState(getNextIncome(card?.income || 1, card?.level || 1))
+
   return (
         <dialog className='modal overflow-hidden' ref={modalRef}>
           <div className='w-full h-screen bottom-0 absolute'>
@@ -44,10 +50,10 @@ const UpgradeCardDialog: FC<DialogProps> = (props) => {
           <DialogContent>
             <div className='w-full flex flex-col justify-center items-center pt-8'>
                 <div className='dialog-title'>Улучшить {card?.name}?</div>
-                <div className='font-bold text-3xl text-secondary'>Цена за улучшение: {(card?.price || 10) / 10}</div>
+                <div className='font-bold text-3xl text-secondary'>Цена за улучшение: {upgradePrice}</div>
                 <div className='font-bold text-md text-primary'>Текущий уровень: {card?.level}</div>
-                <div className='font-bold text-md text-primary'>Текущий доход: {(card?.income || 10) / 10 * (card?.level || 1)}</div>
-                <div className='font-bold text-md text-primary'>Улучшенный доход: {(card?.income || 10) / 10 * ((card?.level || 1) + 1)}</div>
+                <div className='font-bold text-md text-primary'>Текущий доход: {income}</div>
+                <div className='font-bold text-md text-primary'>Улучшенный доход: {upgradeIncome}</div>
              </div>
              <div className='flex flex-row items-center justify-evenly pt-4'>
                <div 
