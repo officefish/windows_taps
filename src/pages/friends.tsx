@@ -30,8 +30,6 @@ const Friends: FC = () => {
     console.log('referralsTotal:', referralsTotal)
     console.log('referrals', getRefferals(referralsPage))
     if (referralsTotal) {
-
-
       setReferrals(getRefferals(referralsPage)) //
     }
 
@@ -44,9 +42,15 @@ const Friends: FC = () => {
       setTelegramUrl(tUrl)
     }
 
-    console.log('refferals:', refferals)
     
-  }, [])
+  }, [referralsPage, 
+    referralsTotal,
+    referralsCode,
+    getRefferals])
+
+  useEffect(() => {
+    console.log('refferals', refferals)
+  }, [refferals])
 
   //const position = useBackgroundMover(7); // Adjust multiplier as needed
 
