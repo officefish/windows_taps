@@ -109,7 +109,10 @@ const Home: FC = () => {
   } = useTapper();
 
   useEffect(() => {
-    return onDestroy();
+    return () => { 
+      console.log('Unmounted')
+      onDestroy() 
+    };
   }, [onDestroy]);
 
     return (
