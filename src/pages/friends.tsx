@@ -81,7 +81,7 @@ const Friends: FC = () => {
         onCopy={handleCopy}
         />
         <div className="spacer"></div>
-        <FriendsNav numFriends={4} numLine={1} />
+        <FriendsNav numFriends={referralsTotal || 0} numLine={1} />
         <div className="spacer"></div>
         {refferals && <FriendsList friends={refferals || []} />}
         {!refferals && <Invite />}
