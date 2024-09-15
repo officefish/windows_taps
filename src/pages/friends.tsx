@@ -34,7 +34,7 @@ const Friends: FC = () => {
     if (referralsCode) {
       //console.log('code:', referralsCode)
       const message = 'Hey, check out my refferal link!'
-      const url = `https://t.me/Curt_Gedel_bot/windows_taps?appname?startapp=referrerId=${referralsCode}`
+      const url = `https://t.me/Curt_Gedel_bot/windows_taps?startapp=referrerId=${referralsCode}`
       setReferralUrl(url)
       const tUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(message)}`;
       setTelegramUrl(tUrl)
