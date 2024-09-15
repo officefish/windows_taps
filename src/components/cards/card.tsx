@@ -1,5 +1,5 @@
 import { IShopCard } from "@/types"
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import ShopCardPurchased from "./card.purchased"
 import ShopCardAvailable from "./card.available"
 import ShopCardUnavailable from "./card.unavailable"
@@ -33,8 +33,11 @@ const ShopCard:FC<IShopCardProps> = (props) => {
     }
 
     const { player } = useUserStore()
-    const [upgradePrice, ] = useState(getUpdatePrice(card.price, card.level || 1)) 
-
+    const [upgradePrice, setUpgradePrice] = useState(1) 
+  
+    useEffect(() => { 
+        setUpgradePrice(getUpdatePrice(card?.price || 1, card?.level || 1))
+    }, [card])
 
     return (
         <>{ saled 
