@@ -20,9 +20,9 @@ export function getUpdatePrice(price: number, level: number) {
 }
 
 export function getIncome(income: number, level: number) {
-    return income + (income / 10 * level)
+    return income + (income * 0.1 * (level - 1))
 }
 
 export function getNextIncome(income: number, level: number) {
-    return income + (income / 10 * (level + 1))
+    return income + (income / 10 * level)
 }
