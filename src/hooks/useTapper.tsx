@@ -111,15 +111,18 @@ const useTapper = () => {
             (player?.energyLatest || 0) - regularFatique
         ), 2000);
         // Очищаем интервал при размонтировании компонента
+        return () => clearInterval(interval);
+      }, [regularBonus, regularFatique, player]);
+
+    useEffect(() => {
         return () => {
             farmInterval(
                 regularBonus, 
                 regularFatique,
                 (player?.energyLatest || 0) - regularFatique
             );
-            clearInterval(interval);
         }
-      }, [regularBonus, regularFatique, player]);
+    }, [regularBonus, regularFatique, player]);
 
     return { handleTouch, handleDown, balance, energy }
 };
