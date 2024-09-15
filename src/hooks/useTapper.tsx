@@ -109,7 +109,7 @@ const useTapper = () => {
             regularBonus, 
             regularFatique,
             (player?.energyLatest || 0) - regularFatique
-        ), 2000);
+        ), 1000);
         // Очищаем интервал при размонтировании компонента
         return () => clearInterval(interval);
       }, [regularBonus, regularFatique, player]);
