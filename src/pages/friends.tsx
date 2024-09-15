@@ -1,13 +1,12 @@
 import { useSiteStore } from "@/providers/store";
 import { useUserStore } from "@/providers/user";
 import { IReferral, Page } from "@/types";
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 
 const Friends: FC = () => {
 
   const { setPage } = useSiteStore()
-
-
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
       setPage(Page.FRIENDS)
@@ -23,9 +22,7 @@ const Friends: FC = () => {
   const [refferals, setReferrals] = useState<IReferral[]>()
 
   useEffect(() => {
-    // console.log('update referals in friend page')
-    // console.log('referralsTotal:', referralsTotal)
-    // console.log('referrals', getRefferals(referralsPage))
+    
     if (referralsTotal) {
       setReferrals(getRefferals(referralsPage)) //
     }
@@ -45,16 +42,6 @@ const Friends: FC = () => {
     referralsCode,
     getRefferals])
 
-  // useEffect(() => {
-  //   console.log('refferals', refferals)
-  // }, [refferals])
-
-  //const position = useBackgroundMover(7); // Adjust multiplier as needed
-
-//   const backgroundStyle = {
-//     backgroundPosition: `${position.x}% ${position.y}%`,
-//   };
-
     const [referralUrl, setReferralUrl] = useState("link/ref=userandranders03Hf72nf5Nfa941412") 
     const [telegramUrl, setTelegramUrl] = useState("")
 
@@ -64,14 +51,37 @@ const Friends: FC = () => {
 
   const handleCopy = () => {
     // Using the Clipboard API to copy text
-    navigator.clipboard.writeText(referralUrl)
-      .then(() => {
-        alert("Text copied to clipboard!");
-      })
-      .catch(err => {
-        console.error("Error copying text: ", err);
-      });
+    if (navigator.clipboard) {
+      // Use Clipboard API if available
+      navigator.clipboard.writeText(referralUrl)
+        .then(() => {
+          alert("Text copied to clipboard!");
+        })
+        .catch(err => {
+          console.error("Error copying text: ", err);
+          fallbackCopyText(referralUrl);
+        });
+    } else {
+      // Fallback method
+      fallbackCopyText(referralUrl);
+    }
   }
+
+  const fallbackCopyText = useCallback((text: string) => {
+    const textArea = textAreaRef.current;
+    if (textArea) {
+      textArea.value = text;
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        alert("Text copied using fallback!");
+      } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+      }
+    } else {
+      console.error('Fallback: Text area reference is null');
+    }
+  }, [])
 
   
     return (
@@ -85,6 +95,13 @@ const Friends: FC = () => {
         <div className="spacer"></div>
         {refferals && <FriendsList friends={refferals || []} />}
         {!refferals && <Invite />}
+         {/* Hidden textarea for fallback copy */}
+     <  textarea
+        ref={textAreaRef}
+        className="invisible"
+        style={{ position: 'absolute', left: '-9999px' }}
+        readOnly
+      />
       </div>
     )
 }
