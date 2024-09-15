@@ -1,9 +1,10 @@
 import { IShopCard } from "@/types"
-import { FC } from "react"
+import { FC, useState } from "react"
 import ShopCardPurchased from "./card.purchased"
 import ShopCardAvailable from "./card.available"
 import ShopCardUnavailable from "./card.unavailable"
 import { useUserStore } from "@/providers/user"
+import { getUpdatePrice } from "@/services/game.service"
 
 interface IShopCardProps {
     card: IShopCard
@@ -32,11 +33,13 @@ const ShopCard:FC<IShopCardProps> = (props) => {
     }
 
     const { player } = useUserStore()
+    const [upgradePrice, ] = useState(getUpdatePrice(card.price, card.level || 1)) 
+
 
     return (
         <>{ saled 
             ?<ShopCardPurchased onCardClick={onUpgradeClick} card={card}
-            available={(card.price / 10 <= (player?.balance || 0)) && (card.level || 0) < 10}
+            available={(player?.balance || 0) >= upgradePrice}
             />
             :<>{ blocked
                 ?<ShopCardUnavailable card={card} />
