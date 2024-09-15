@@ -30,7 +30,6 @@ export interface IPlayer {
 }
 
 export interface IReferral extends Omit<IPlayer, 
-  'balance' | 
   'createdAt' | 
   'energyLatest' | 
   'energyMax' | 
@@ -42,6 +41,5 @@ export interface IReferral extends Omit<IPlayer,
   'referralProfit' | 
   'imageUrl' | 
   'active' | 
-  'incomePerHour' |
   'invitedById'
   > {}

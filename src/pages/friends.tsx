@@ -26,9 +26,9 @@ const Friends: FC = () => {
   const [refferals, setReferrals] = useState<IReferral[]>()
 
   useEffect(() => {
-    console.log('update referals in friend page')
-    console.log('referralsTotal:', referralsTotal)
-    console.log('referrals', getRefferals(referralsPage))
+    // console.log('update referals in friend page')
+    // console.log('referralsTotal:', referralsTotal)
+    // console.log('referrals', getRefferals(referralsPage))
     if (referralsTotal) {
       setReferrals(getRefferals(referralsPage)) //
     }
@@ -48,9 +48,9 @@ const Friends: FC = () => {
     referralsCode,
     getRefferals])
 
-  useEffect(() => {
-    console.log('refferals', refferals)
-  }, [refferals])
+  // useEffect(() => {
+  //   console.log('refferals', refferals)
+  // }, [refferals])
 
   //const position = useBackgroundMover(7); // Adjust multiplier as needed
 
@@ -86,7 +86,7 @@ const Friends: FC = () => {
         <div className="spacer"></div>
         <FriendsNav numFriends={4} numLine={1} />
         <div className="spacer"></div>
-        {friends.length > 0 && <FriendsList friends={friends} />}
+        {friends.length > 0 && <FriendsList friends={refferals || []} />}
         {!friends.length && <Invite />}
       </div>
     )
@@ -159,11 +159,11 @@ const FriendsNav: FC<IFriendsNavProps> = (props) => {
 }
 
 interface UserItemProps {
-  player: IPlayer
+  player: IReferral
 }
 
 interface FriendsListProps {
-  friends: IPlayer[]
+  friends: IReferral[]
 }   
 
 const FriendsList: FC<FriendsListProps> = (props) => {
@@ -183,12 +183,12 @@ const UserItem: FC<UserItemProps> = (props) => {
           <div className="flex flex-col">
               <div className="sm-user-name">{player.username}</div>
               <div className="sm-user-status">
-                  {true ? `Active · ${player.referralProfit}%` : `Inactive · ${player.balance} Tap`}
+                  {true ? `Active · ${player.incomePerHour}%` : `Inactive · ${player.balance} Tap`}
               </div>
           </div>
       </div>
       <div className="flex items-center justify-center">
-          <div className={`user-bonus ${true ? 'bg-[#696969]' : 'bg-[#886867]'} `}>+{player.referralProfit}</div>
+          <div className={`user-bonus ${true ? 'bg-[#696969]' : 'bg-[#886867]'} `}>+{player.incomePerHour}</div>
       </div>
   </div>
 }
