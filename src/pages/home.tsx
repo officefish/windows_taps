@@ -112,7 +112,7 @@ const Home: FC = () => {
     return () => { 
       onDestroy() 
     };
-  }, [onDestroy]);
+  }, []);
 
     return (
     <div className='w-full px-4 text-left'>
