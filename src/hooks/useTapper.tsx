@@ -114,7 +114,7 @@ const useTapper = () => {
         return () => clearInterval(interval);
       }, [regularBonus, regularFatique, player]);
 
-    useEffect(() => {
+    const onDestroy = useCallback(() => {
         return () => {
             farmInterval(
                 regularBonus, 
@@ -124,7 +124,7 @@ const useTapper = () => {
         }
     }, [regularBonus, regularFatique, player]);
 
-    return { handleTouch, handleDown, balance, energy }
+    return { handleTouch, handleDown, balance, energy, onDestroy }
 };
 
 export default useTapper;

@@ -104,8 +104,13 @@ const Home: FC = () => {
     balance,
     energy, 
     handleTouch, 
-    handleDown 
+    handleDown, 
+    onDestroy
   } = useTapper();
+
+  useEffect(() => {
+    return onDestroy();
+  }, [onDestroy]);
 
     return (
     <div className='w-full px-4 text-left'>
