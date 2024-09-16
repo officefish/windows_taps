@@ -56,7 +56,7 @@ const ShopCardPurchased:FC<IShopCardProps> = (props) => {
                     {card && card.level && card.level == 10 && (
                         <div className="card-actions justify-end">
                             <h2 className="card-title">{card.name}!</h2>
-                            <p className="text-xs">Пассивный доход: {card.income}</p>
+                            <p className="text-xs">Пассивный доход: {card.income * 2}</p>
                             <p className="text-xs">Максимальный уровень</p>
                         </div>
                     )}
