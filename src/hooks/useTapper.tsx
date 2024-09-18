@@ -122,6 +122,7 @@ const useTapper = () => {
       }, [regularBonus, regularFatique, player]);
 
     const forceTick = useCallback(() => {
+        console.log("forceTick")
         farmInterval(
             regularBonus, 
             regularFatique,

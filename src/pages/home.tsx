@@ -88,7 +88,7 @@ const Home: FC = () => {
       setMounted(true);
       forceTick();
     }
-  }, []);
+  }, [mounted, setMounted, forceTick]);
 
     return (
     <div className='w-full px-4 text-left'>
