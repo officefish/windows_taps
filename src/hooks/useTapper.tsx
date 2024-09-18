@@ -69,7 +69,7 @@ const useTapper = () => {
             setNetworkFatique(fatique)
         } 
         setBalance((player?.balance || 0) + moneyBonus)   
-        setEnergy((player?.energyLatest || 0) - fatique)
+        setEnergy((player?.energyLatest || 300) - fatique)
 
         setTaps(taps + 1)
         if (taps % 50 === 0) {
