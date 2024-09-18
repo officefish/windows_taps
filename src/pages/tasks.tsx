@@ -5,17 +5,17 @@ import { FC, SyntheticEvent, useEffect, useState } from "react"
 import { TaskFacebookSVG, TaskInstagramSVG, TaskTelegramSVG } from "@/assets/svg"
 import { allTasks, dailyTasks } from "@/mocks/tasks";
 import TaskDialog from "@/components/dialogs/task.dialog";
-import { apiFetch } from "@/services/api";
-import useUpdateTasks from "@/hooks/api/useUpdateTasks";
+//import { apiFetch } from "@/services/api";
+//import useValidateTasks from "@/hooks/api/useValidateTasks";
 
 const Tasks: FC = () => {
 
   const { setPage } = useSiteStore()
-  const { updateTasks } = useUpdateTasks(apiFetch) 
+  //const { validateTasks } = useValidateTasks(apiFetch) 
 
-  useEffect(() => {
-    updateTasks()
-  }, [updateTasks])
+  // useEffect(() => {
+  //   validateTasks()
+  // }, [validateTasks])
 
   useEffect(() => {
       setPage(Page.TASKS)
