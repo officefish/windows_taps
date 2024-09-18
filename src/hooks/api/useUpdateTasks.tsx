@@ -9,11 +9,6 @@ const useUpdateTasks = (apiFetch: any) => {
       try {
         const res = await apiFetch('/tasks', 'POST', null, enqueueSnackbar);
         console.log(res);
-        if (res.status === true) {
-          console.log('Tasks from server received');
-          //const missions = res.data.missions;
-          //setAllTasks(missions);
-        }
       } catch (error) {
         console.error('Error updating user tasks:', error);
         enqueueSnackbar('Error updating tasks', { variant: 'error' });
