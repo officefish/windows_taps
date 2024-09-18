@@ -1,5 +1,6 @@
 export * from './shop'
 export * from './player'
+export * from './task'
 
 export enum Page {
     HOME = 'home',
@@ -36,20 +37,20 @@ export interface IRef {
     income: number
 }
 
-export interface ITask {
-    id: number
-    name: string
-    rewards: number
-    isDifficult: boolean
-    endDate: string | Date      
-}
+// export interface ITask {
+//     id: number
+//     name: string
+//     rewards: number
+//     isDifficult: boolean
+//     endDate: string | Date      
+// }
 
-/* Task type */
-export interface IUserTask {
-    id: number
-    state: 0 | 1 | 2
-    activeMissionId: number
-    confirmDateTime: string | Date
-    data: ITask
-    playerId: number
-}
+// /* Task type */
+// export interface IUserTask {
+//     id: number
+//     state: 0 | 1 | 2
+//     activeMissionId: number
+//     confirmDateTime: string | Date
+//     data: ITask
+//     playerId: number
+// }

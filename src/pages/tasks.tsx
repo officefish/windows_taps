@@ -1,5 +1,5 @@
 import { useSiteStore } from "@/providers/store";
-import { IUserTask, Page } from "@/types";
+import { ITask, Page } from "@/types";
 import { FC, SyntheticEvent, useEffect, useState } from "react"
 
 import { TaskFacebookSVG, TaskInstagramSVG, TaskTelegramSVG } from "@/assets/svg"
@@ -27,9 +27,9 @@ const Tasks: FC = () => {
 
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-  const [currentTask, setCurrentTask] = useState<IUserTask>(allTasks[0])
+  const [currentTask, setCurrentTask] = useState<ITask>(allTasks[0])
 
-  const handleTaskClick = (task: IUserTask) => {
+  const handleTaskClick = (task: ITask) => {
       //console.log(task)
       setCurrentTask(task)
       setIsDialogOpen(true)
@@ -103,8 +103,8 @@ const UserBalance: FC<IUserBalanceProps> = (props) => {
 
 
 interface TaskListsProps {
-  tasks: IUserTask[]
-  onTaskCLicked: (task: IUserTask) => void
+  tasks: ITask[]
+  onTaskCLicked: (task: ITask) => void
 }
 
 const TasksList : FC<TaskListsProps> = (props) => {
@@ -119,21 +119,15 @@ const TasksList : FC<TaskListsProps> = (props) => {
 }
 
 interface TaskItemProps {
-  task: IUserTask
-  onClick: (task: IUserTask) => void
+  task: ITask
+  onClick: (task: ITask) => void
 }
 
 
 
 const TaskItem : FC<TaskItemProps> = (props) => {
-  const { task, onClick } = props
-  const { 
-    id,
-    data, 
-      //isDifficult, 
-     // endDate 
-  } = task
-  const { name, rewards } = data
+  const { task, onClick } = props  
+  const { title, baunty } = task.templateTask
 
   const completed = false
   
@@ -146,11 +140,11 @@ const TaskItem : FC<TaskItemProps> = (props) => {
       <div className="flex flex-row gap-2 items-center justify-center">
           <div className="w-[50px] h-[50px] flex items-center justify-center">
               {/* <img className="w-[36px] h-[36px]" src={icon} alt="task" /> */}
-              <Icon id={id} />
+              <Icon id={0} />
           </div>
           <div className="flex flex-col items-start justify-center gap-2">
-              <div className="task-job">{name}</div>
-              <div className={`task-baunty ${completed? "text-[#CDA6FF]" : ""}`}>+ {rewards}</div>
+              <div className="task-job">{title}</div>
+              <div className={`task-baunty ${completed? "text-[#CDA6FF]" : ""}`}>+ {baunty}</div>
           </div>
       </div>
       
