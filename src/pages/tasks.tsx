@@ -5,10 +5,17 @@ import { FC, SyntheticEvent, useEffect, useState } from "react"
 import { TaskFacebookSVG, TaskInstagramSVG, TaskTelegramSVG } from "@/assets/svg"
 import { allTasks, dailyTasks } from "@/mocks/tasks";
 import TaskDialog from "@/components/dialogs/task.dialog";
+import { apiFetch } from "@/services/api";
+import useUpdateTasks from "@/hooks/api/useUpdateTasks";
 
 const Tasks: FC = () => {
 
   const { setPage } = useSiteStore()
+  const { updateTasks } = useUpdateTasks(apiFetch) 
+
+  useEffect(() => {
+    updateTasks()
+  }, [updateTasks])
 
   useEffect(() => {
       setPage(Page.TASKS)
