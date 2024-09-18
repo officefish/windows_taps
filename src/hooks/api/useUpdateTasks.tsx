@@ -7,7 +7,7 @@ const useUpdateTasks = (apiFetch: any) => {
   const updateTasks = useCallback(
     async () => {
       try {
-        const res = await apiFetch('/tasks', 'POST', null, enqueueSnackbar);
+        const res = await apiFetch('/tasks', 'POST', {}, enqueueSnackbar);
         console.log(res);
       } catch (error) {
         console.error('Error updating user tasks:', error);
