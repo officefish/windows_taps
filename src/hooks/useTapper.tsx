@@ -72,7 +72,7 @@ const useTapper = () => {
         setEnergy((player?.energyLatest || 300) - fatique)
 
         setTaps(taps + 1)
-        if (taps % 50 === 0) {
+        if (taps >= 50) {
             console.log("taps " + taps)
             setTaps(0)
             farmInterval(moneyBonus, fatique, (player?.energyLatest || 0) - fatique)
