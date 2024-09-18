@@ -13,7 +13,6 @@ const useTapper = () => {
         setBalance,
         setEnergy,
         regularBonus,
-        networkBonus,
         regularFatique,
         networkFatique,
         isRegular,
@@ -29,13 +28,13 @@ const useTapper = () => {
 
     const onSuccess = useCallback(async (balance: number | null, energyLatest: number) => {
         setIsRegular(true)
-        setRegularBonus(networkBonus)
-        setRegularFatique(networkFatique)
+        setRegularBonus(0)
+        setRegularFatique(0)
         setNetworkBonus(0)
         setNetworkFatique(0)
 
         if (balance) {
-            setBalance(balance + networkBonus)
+            setBalance(balance)
         }
         setEnergy(Math.max(energyLatest, 0))
     }, [])
@@ -43,31 +42,23 @@ const useTapper = () => {
     const { tick } = useGameplayTick(apiFetch, onSuccess);
 
     const invalidFatique = () => {
-        if (
-            (player?.energyLatest || 0) - regularFatique <= 0 ||
-            (player?.energyLatest || 0) - networkFatique <= 0) 
-            {
-                return true 
-            }
+        if ((player?.energyLatest || 300) - regularFatique <= 0) 
+            return true 
         return false
     }
 
     const touch = (touchBonus: number) => {
+        
+        if (!isRegular) return
+        
         let moneyBonus
         let fatique 
-        if (isRegular) {
             moneyBonus = regularBonus
             moneyBonus += touchBonus
             setRegularBonus(moneyBonus)
             fatique = regularFatique + 1
             setRegularFatique(fatique)
-        } else {
-            moneyBonus = networkBonus
-            moneyBonus += touchBonus
-            setNetworkBonus(moneyBonus)
-            fatique = networkFatique + 1
-            setNetworkFatique(fatique)
-        } 
+ 
         setBalance((player?.balance || 0) + moneyBonus)   
         setEnergy((player?.energyLatest || 300) - fatique)
 
