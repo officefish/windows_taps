@@ -14,7 +14,6 @@ const useTapper = () => {
         setEnergy,
         regularBonus,
         regularFatique,
-        networkFatique,
         isRegular,
         setRegularBonus,
         setNetworkBonus,
@@ -30,8 +29,6 @@ const useTapper = () => {
         setIsRegular(true)
         setRegularBonus(0)
         setRegularFatique(0)
-        setNetworkBonus(0)
-        setNetworkFatique(0)
 
         if (balance) {
             setBalance(balance)
