@@ -1,21 +1,31 @@
-import { SyntheticEvent, useCallback, useEffect, useState } from "react";
+import { SyntheticEvent, useCallback, useEffect } from "react";
 import { apiFetch } from "@/services/api";
 import { useUserStore } from "@/providers/user";
 import { useGameplayTick } from "./api/useGameplayTick";
+import { useTapsStore } from "@/providers/tap";
 
 const useTapper = () => {
 
     const { player } = useUserStore();
-    const [balance, setBalance] = useState(player?.balance || 0)
-    const [energy, setEnergy] = useState(player?.energyLatest || 0)
+    const { 
+        balance, 
+        energy,
+        setBalance,
+        setEnergy,
+        regularBonus,
+        networkBonus,
+        regularFatique,
+        networkFatique,
+        isRegular,
+        setRegularBonus,
+        setNetworkBonus,
+        setRegularFatique,
+        setNetworkFatique,
+        setIsRegular,
+        taps,
+        setTaps
+    } = useTapsStore()
 
-    const [regularBonus, setRegularBonus] = useState(0)
-    const [networkBonus, setNetworkBonus] = useState(0)
-
-    const [regularFatique, setRegularFatique] = useState(0)
-    const [networkFatique, setNetworkFatique] = useState(0)
-
-    const [isRegular, setIsRegular] = useState(true)
 
     const onSuccess = useCallback(async (balance: number | null, energyLatest: number) => {
         setIsRegular(true)
@@ -60,21 +70,17 @@ const useTapper = () => {
         } 
         setBalance((player?.balance || 0) + moneyBonus)   
         setEnergy((player?.energyLatest || 0) - fatique)
+
+        setTaps(taps + 1)
+        if (taps % 50 === 0) {
+            setTaps(0)
+            farmInterval(moneyBonus, fatique, (player?.energyLatest || 0) - fatique)
+        }
     }
 
     const handleTouch = (e: any) => {
         e.preventDefault()
         if (invalidFatique()) return
-
-        //const touchCount = e.touches.length; // Количество одновременных касаний
-        //let touchBonus = 1;
-    
-        // if (touchCount === 2) {
-        //   touchBonus = 2; // +1 к каждому касанию, если касаний 2
-        // } else if (touchCount >= 3) {
-        //   touchBonus = 3; // +2 к каждому касанию, если касаний 3 или более
-        // }
-       
         touch(1)  
     }
 
@@ -114,7 +120,7 @@ const useTapper = () => {
         return () => clearInterval(interval);
       }, [regularBonus, regularFatique, player]);
 
-    const onDestroy = useCallback(() => {
+    const forceTick = useCallback(() => {
         farmInterval(
             regularBonus, 
             regularFatique,
@@ -122,7 +128,7 @@ const useTapper = () => {
         )
     }, [regularBonus, regularFatique, player]);
 
-    return { handleTouch, handleDown, balance, energy, onDestroy }
+    return { handleTouch, handleDown, balance, energy, forceTick }
 };
 
 export default useTapper;

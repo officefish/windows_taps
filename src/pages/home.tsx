@@ -73,45 +73,21 @@ const Home: FC = () => {
     setIsRatingDialogOpen(true);
   }, []);
 
-  // const updateEnergyInterval = useCallback((eLatest: number, eMax: number) => {
-  //   if (eLatest < eMax) {
-  //     updateEnergy();
-  //   }
-  // }, [updateEnergy]);
-
-  // // Интервал для обновления энергии
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => 
-  //     updateEnergyInterval(player?.energyLatest || 0, player?.energyMax || 300), 
-  //     2000
-  //   );
-
-  //   // Очистка интервала при размонтировании
-  //   return () => clearInterval(intervalId);
-  // }, [player?.energyLatest, player?.energyMax, updateEnergyInterval]);
-
-  // const { updateIncome } = useUpdateIncome(apiFetch);
-
-  // // Интервал для обновления дохода
-  // useEffect(() => {
-  //   const intervalId = setInterval(updateIncome, 10000);
-
-  //   // Очистка интервала при размонтировании
-  //   return () => clearInterval(intervalId);
-  // }, [updateIncome]);
-
   const { 
     balance,
     energy, 
     handleTouch, 
     handleDown, 
-    onDestroy
+    forceTick,
   } = useTapper();
 
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
-    return () => { 
-      onDestroy() 
-    };
+    if (!mounted) {
+      setMounted(true);
+      forceTick();
+    }
   }, []);
 
     return (

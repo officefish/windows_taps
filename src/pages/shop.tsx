@@ -3,6 +3,7 @@ import BuyCardDialog from "@/components/dialogs/buy-card.dialog";
 import UpgradeCardDialog from "@/components/dialogs/upgrade-card.dialog";
 import { useBuyCard } from "@/hooks/api/useBuyCard";
 import { useUpgradeCard } from "@/hooks/api/useUpgradeCard";
+import useTapper from "@/hooks/useTapper";
 
 import { useSiteStore } from "@/providers/store";
 import { useUserStore } from "@/providers/user";
@@ -17,6 +18,20 @@ const Shop: FC = () => {
   useEffect(() => {
     setPage(Page.SHOP);
   }, [setPage]);
+
+  const { 
+    balance,
+    forceTick,
+  } = useTapper();
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    if (!mounted) {
+      setMounted(true);
+      forceTick();
+    }
+  }, []);
 
   const { shop } = useUserStore();
 
@@ -99,6 +114,7 @@ const Shop: FC = () => {
     <div className="h-screen">
       <div>
         <h1 className="w-full text-center">Магазин</h1>
+        <p className="w-full text-center">Баланс: {balance}</p>
         <p className="w-full text-center">Уровень: Листовщик</p>
       </div>
       <Tabs tabIndex={tabIndex} handleTabClick={handleTabClick} shop={shop} />

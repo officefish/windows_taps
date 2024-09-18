@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren } from "react"
 import { SiteProvider } from "./store"
 import { UserProvider } from "./user"
+import { TapsProvider } from "./tap"
 import { SnackbarProvider } from "notistack"
 
 const Providers: FC <PropsWithChildren> = ({ children }) => {
@@ -10,7 +11,9 @@ const Providers: FC <PropsWithChildren> = ({ children }) => {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
             <SiteProvider>
                 <UserProvider>
-                    {children}
+                    <TapsProvider>
+                        {children}
+                    </TapsProvider>
                 </UserProvider>
             </SiteProvider>
         </SnackbarProvider>
