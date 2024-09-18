@@ -5,7 +5,7 @@ import {
 } from 'react'
 // import { StyledDialog } from '@/styled/dialog.styled'
 import { ArrowSVG, SearchSVG } from '@/assets/svg'
-import { IUserTask } from '@/types'
+import { ITask } from '@/types'
 import CloseModalBtn from '../button/close-modal.btn'
 import DialogContent from './dialog.content'
 
@@ -14,7 +14,7 @@ interface DialogProps {
   setIsOpen: (status: boolean) => void
   onCheckClick: () => void
   onJoinClick: () => void
-  task: IUserTask
+  task: ITask
 }
 
 const TaskDialog: FC<DialogProps> = (props) => {
@@ -45,8 +45,8 @@ const TaskDialog: FC<DialogProps> = (props) => {
             <CloseModalBtn handleCancel={onCancel}/>
           <DialogContent>
             <div className='w-full flex flex-col justify-center items-center pt-8'>
-                   <div className='dialog-title'>{task.data.name}</div>
-                   <div className='font-bold text-3xl text-secondary'>+{task.data.rewards}</div>
+                   <div className='dialog-title'>{task.templateTask.title}</div>
+                   <div className='font-bold text-3xl text-secondary'>+{task.templateTask.baunty}</div>
              </div>
              <div className='flex flex-row items-center justify-evenly pt-4'>
                <div 

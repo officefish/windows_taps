@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, useRef, useContext } from 'react'
 import { createStore, StoreApi, useStore } from 'zustand'
 import { createContext } from 'react' // from 'zustand/context'
 import { IUserState, IUserActions } from './types'
-import { IUserTask, IPlayer, IDailyQuest, ICategory, IReferral } from '../../types'
+import { ITask, IPlayer, IDailyQuest, ICategory, IReferral } from '../../types'
 
 type IUserStore = IUserState & IUserActions
 
@@ -48,7 +48,7 @@ const createUserStore = () =>
     referralsPage: 1,
     referralsCode: '',
     dailyTasks: [],
-    allTasks: [],
+    seasonTasks: [],
     setShop: (shop: ICategory[]) => set(() => ({ shop })),
     setDailyQuest: (dailyQuest: IDailyQuest) => set(() => ({ dailyQuest })),
     updateDailyQuest: (recieved: boolean) => {
@@ -77,8 +77,8 @@ const createUserStore = () =>
     setReferralsTotal: (total: number) => set(() => ({ referralsTotal: total })),
     setReferralsPage: (page: number) => set(() => ({ referralsPage: page })),
     setReferralsCode: (code: string) => set(() => ({ referralsCode: code })),
-    setDailyTasks: (tasks: IUserTask[]) => set(() => ({ dailyTasks:tasks })),
-    setAllTasks: (tasks: IUserTask[]) => set(() => ({ allTasks:tasks })),
+    setDailyTasks: (tasks: ITask[]) => set(() => ({ dailyTasks:tasks })),
+    setSeasonTasks: (tasks: ITask[]) => set(() => ({ seasonTasks:tasks })),
   }))
 
 type UserStore = ReturnType<typeof createUserStore>
@@ -100,7 +100,7 @@ export const useUserStore = () => {
     setDailyQuest: useStore(api, (state: IUserStore) => state.setDailyQuest),
     refferals: useStore(api, (state: IUserStore) => state.referrals),
     dailyTasks: useStore(api, (state: IUserStore) => state.dailyTasks),
-    allTasks: useStore(api, (state: IUserStore) => state.allTasks),    
+    seasonTasks: useStore(api, (state: IUserStore) => state.seasonTasks),    
     setRefferals: useStore(api, (state: IUserStore) => state.setReferrals),
     getRefferals: useStore(api, (state: IUserStore) => state.getReferrals),
     referralsPage: useStore(api, (state: IUserStore) => state.referralsPage),
@@ -110,7 +110,7 @@ export const useUserStore = () => {
     setReferralsPage: useStore(api, (state: IUserStore) => state.setReferralsPage),
     setReferralsCode: useStore(api, (state: IUserStore) => state.setReferralsCode),
     setDailyTasks: useStore(api, (state: IUserStore) => state.setDailyTasks),
-    setAllTasks: useStore(api, (state: IUserStore) => state.setAllTasks),    
+    setSeasonTasks: useStore(api, (state: IUserStore) => state.setSeasonTasks),    
   }
 }
 

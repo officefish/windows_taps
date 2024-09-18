@@ -1,4 +1,4 @@
-import { IPlayer, ICategory, IUserTask, IDailyQuest, IReferral } from "@/types"
+import { IPlayer, ICategory, ITask, IDailyQuest, IReferral } from "@/types"
   export interface IUserState {
     player: IPlayer | null
     shop: ICategory[]
@@ -7,8 +7,8 @@ import { IPlayer, ICategory, IUserTask, IDailyQuest, IReferral } from "@/types"
     referralsTotal: number
     referralsPage: number
     referralsCode: string
-    dailyTasks: IUserTask[]
-    allTasks: IUserTask[]
+    dailyTasks: ITask[]
+    seasonTasks: ITask[]
   }
   
   export interface IUserActions {
@@ -24,6 +24,6 @@ import { IPlayer, ICategory, IUserTask, IDailyQuest, IReferral } from "@/types"
     setReferralsTotal: (total: number) => void
     setReferralsPage: (page: number) => void
     setReferralsCode: (code: string) => void
-    setDailyTasks: (tasks: IUserTask[]) => void
-    setAllTasks: (tasks: IUserTask[]) => void
+    setDailyTasks: (tasks: ITask[]) => void
+    setSeasonTasks: (tasks: ITask[]) => void
   }

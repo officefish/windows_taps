@@ -1,20 +1,35 @@
 import { useCallback } from 'react';
 import { useSnackbar } from 'notistack'; // Assuming you're using notistack for notifications
+import { ITask } from '@/types';
+import { useUserStore } from '@/providers/user';
 
 const useUpdateTasks = (apiFetch: any) => {
   const { enqueueSnackbar } = useSnackbar();
+
+  const { setDailyTasks, setSeasonTasks } = useUserStore();
 
   const updateTasks = useCallback(
     async () => {
       try {
         const res = await apiFetch('/tasks', 'POST', {}, enqueueSnackbar);
-        console.log(res);
+
+        // Filter tasks into dailyTasks and seasonTasks
+        const dailyTasks = res.filter((task: ITask) => task.templateTask.isDaily);
+        const seasonTasks = res.filter((task: ITask) => !task.templateTask.isDaily);
+
+        console.log('Daily Tasks:', dailyTasks);
+        console.log('Season Tasks:', seasonTasks);
+
+        setDailyTasks(dailyTasks);
+        setSeasonTasks(seasonTasks);
+        
+        //console.log(res);
       } catch (error) {
         console.error('Error updating user tasks:', error);
         enqueueSnackbar('Error updating tasks', { variant: 'error' });
       }
     },
-    [apiFetch, enqueueSnackbar] // Dependencies
+    [apiFetch, enqueueSnackbar, setDailyTasks, setSeasonTasks] // Dependencies
   );
 
   return { updateTasks };
