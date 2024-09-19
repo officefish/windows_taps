@@ -3,8 +3,8 @@ import { ITask, Page } from "@/types";
 import { FC, SyntheticEvent, useEffect, useState } from "react"
 
 import { TaskFacebookSVG, TaskInstagramSVG, TaskTelegramSVG } from "@/assets/svg"
-import { allTasks, dailyTasks } from "@/mocks/tasks";
 import TaskDialog from "@/components/dialogs/task.dialog";
+import { useUserStore } from "@/providers/user";
 //import { apiFetch } from "@/services/api";
 //import useValidateTasks from "@/hooks/api/useValidateTasks";
 
@@ -21,13 +21,12 @@ const Tasks: FC = () => {
       setPage(Page.TASKS)
   }, [setPage])
 
-  const [dTasks,] = useState(dailyTasks)
-  const [aTasks,] = useState(allTasks)
+  const { dailyTasks, seasonTasks } = useUserStore()
   const [balance,] = useState(124)
 
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-  const [currentTask, setCurrentTask] = useState<ITask>(allTasks[0])
+  const [currentTask, setCurrentTask] = useState<ITask>(seasonTasks[0])
 
   const handleTaskClick = (task: ITask) => {
       //console.log(task)
@@ -53,13 +52,13 @@ const Tasks: FC = () => {
                 </div>
                 <div className="spacer"></div>
                 <div className="tasks-title">Daily tasks:</div>
-                {dTasks.length > 0 && <TasksList 
-                tasks={dTasks} 
+                {dailyTasks.length > 0 && <TasksList 
+                tasks={dailyTasks} 
                 onTaskCLicked={handleTaskClick} />}
                 <div className="spacer"></div>
                 <div className="tasks-title">All tasks:</div>
-                {dTasks.length > 0 && <TasksList 
-                tasks={aTasks} 
+                {seasonTasks.length > 0 && <TasksList 
+                tasks={seasonTasks} 
                 onTaskCLicked={handleTaskClick}
                 />}
         <TaskDialog 
