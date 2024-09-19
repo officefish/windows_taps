@@ -21,8 +21,7 @@ const Tasks: FC = () => {
       setPage(Page.TASKS)
   }, [setPage])
 
-  const { dailyTasks, seasonTasks } = useUserStore()
-  const [balance,] = useState(124)
+  const { dailyTasks, seasonTasks, player } = useUserStore()
 
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
@@ -48,7 +47,7 @@ const Tasks: FC = () => {
           <h1 className="w-full text-center">Задания</h1>
       </div>
       <div className="mt-2 pussy-stats px-2 pb-2 w-full">
-                    <UserBalance balance={balance} />
+                    <UserBalance balance={player?.balance || 0} />
                 </div>
                 <div className="spacer"></div>
                 <div className="tasks-title">Daily tasks:</div>
