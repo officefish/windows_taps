@@ -5,17 +5,17 @@ import { FC, SyntheticEvent, useEffect, useState } from "react"
 import { TaskFacebookSVG, TaskInstagramSVG, TaskTelegramSVG } from "@/assets/svg"
 import TaskDialog from "@/components/dialogs/task.dialog";
 import { useUserStore } from "@/providers/user";
-//import { apiFetch } from "@/services/api";
-//import useValidateTasks from "@/hooks/api/useValidateTasks";
+import useUpdateTasksStatus from "@/hooks/api/useUpdateTaskStatus";
+import { apiFetch } from "@/services/api";
 
 const Tasks: FC = () => {
 
   const { setPage } = useSiteStore()
-  //const { validateTasks } = useValidateTasks(apiFetch) 
+  const { updateTasksStatus } = useUpdateTasksStatus(apiFetch) 
 
-  // useEffect(() => {
-  //   validateTasks()
-  // }, [validateTasks])
+  useEffect(() => {
+      updateTasksStatus()
+  }, [])
 
   useEffect(() => {
       setPage(Page.TASKS)
@@ -28,7 +28,6 @@ const Tasks: FC = () => {
   const [currentTask, setCurrentTask] = useState<ITask>(seasonTasks[0])
 
   const handleTaskClick = (task: ITask) => {
-      //console.log(task)
       setCurrentTask(task)
       setIsDialogOpen(true)
   }
