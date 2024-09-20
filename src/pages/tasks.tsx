@@ -127,7 +127,7 @@ const TaskItem : FC<TaskItemProps> = (props) => {
   const { task, onClick } = props  
   const { title, baunty } = task.templateTask
 
-  const completed = false
+  const completed = task.status === "COMPLETED"
   
   const handleTaskClick = (e: SyntheticEvent<HTMLDivElement>) => {
       e.preventDefault()
@@ -145,16 +145,36 @@ const TaskItem : FC<TaskItemProps> = (props) => {
               <div className={`task-baunty ${completed? "text-[#CDA6FF]" : ""}`}>+ {baunty}</div>
           </div>
       </div>
-      
-      <div className="">{completed 
-      ? <div className="w-8 h-8 flex items-center justify-center">
-              <img className="w-6 h-6" src="/icons/png/check.png" alt="check" />
-          </div> 
-      : <div className="w-8 h-8">
-              <img className="w-6 h-6" src="/icons/png/unchecked.png" alt="check" />
-        </div>}
+      <div>
+        <span className="text-xs">{task.status}</span>
+        <TaskStatusWidget task={task} />
       </div>
   </div>
+}
+
+interface TaskStatusProps {
+  task: ITask
+}
+
+const TaskStatusWidget:FC<TaskStatusProps> = (props) => {
+  const task = props.task
+
+  const status = task.status
+
+  switch (status) {
+    case "COMPLETED": return (
+      <div className="w-8 h-8 flex items-center justify-center">
+        <img className="w-6 h-6" src="/icons/png/check.png" alt="check" />
+      </div>)
+    case "IN_PROGRESS": return (
+      <div className="w-8 h-8 flex items-center justify-center">
+        <img className="w-6 h-6" src="/icons/png/unchecked.png" alt="check" />
+      </div>)
+    case "PENDING": return (
+      <div className="w-8 h-8 flex items-center justify-center">
+        <img className="w-6 h-6" src="/icons/png/unchecked.png" alt="check" />
+      </div>)
+  }
 }
 
 interface GetIconProps {
