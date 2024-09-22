@@ -1,0 +1,123 @@
+import { useState, useEffect, useRef  } from 'react'
+import Tile from "@/puzzle/tile"
+
+const shuffleArray = (array: number[]): number[] => {
+    // Fisher-Yates shuffle algorithm
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]]
+    }
+    return array
+}
+
+interface IMinigameProps {
+    onWin: () => void 
+    onLose: () => void
+}
+
+
+const PuzzleMinigame: React.FC<IMinigameProps> = (props) => {
+    
+    const { onWin, onLose } = props
+    
+    const [tiles, setTiles] = useState<number[]>([])
+
+    const [timeLeft, setTimeLeft] = useState<number>(180); // 180 seconds = 3 minutes
+    const [isGameActive, setIsGameActive] = useState<boolean>(true);
+
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+    //const navigate = useNavigate()
+
+    useEffect(() => {
+      let initialTiles = Array.from({ length: 16 }, (_, i) => i);
+      initialTiles = shuffleArray(initialTiles);
+      setTiles(initialTiles)
+
+      // Start the timer when the game starts
+    timerRef.current = setInterval(() => {
+        setTimeLeft((prevTime) => {
+          if (prevTime <= 1) {
+            clearInterval(timerRef.current!);
+            setIsGameActive(false); // End the game when time runs out
+            onLose()
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+  
+      return () => {
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+        }
+      };
+    }, [])
+  
+    const handleClick = (index: number) => {
+      const newTiles = [...tiles];
+      const emptyIndex = newTiles.indexOf(0);
+      
+      const isAdjacent = (index === emptyIndex - 1 && emptyIndex % 4 !== 0) ||
+                         (index === emptyIndex + 1 && index % 4 !== 0) ||
+                         index === emptyIndex - 4 || 
+                         index === emptyIndex + 4;
+      
+      if (isAdjacent) {
+        newTiles[emptyIndex] = newTiles[index];
+        newTiles[index] = 0;
+        setTiles(newTiles);
+      }
+
+      checkSolved();
+    };
+
+    const [isSolved, setIsSolved] = useState(false);
+  
+    const checkSolved = () => {
+      for (let i = 0; i < tiles.length - 1; i++) {
+        if (tiles[i] !== i + 1) {
+          setIsSolved(false);
+          return;
+        };
+      }
+      setIsSolved(true);
+    };
+
+    useEffect(() => {
+      if (isSolved) {
+        onWin();
+      }
+    }, [isSolved])
+
+    const formatTime = (seconds: number) => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+      };
+
+    const handleBack = () => {
+        onLose()
+    };
+    
+  
+    return (
+      <div className='flex w-full items-center justify-center flex-col gap-4 p-4'>
+        <div className="puzzle">
+          {tiles.map((number, index) => (
+            <Tile
+              key={index}
+              number={number}
+              onClick={() => handleClick(index)}
+            />
+          ))}
+        </div>
+        <div className="flex flex-col gap-4 w-full items-center justify-center">
+            <p className='text-3xl'>Осталось времени: {formatTime(timeLeft)}</p>
+            {isSolved && <p className="congrats">Поздравляем! Вы выиграли! Возвращайтесь завтра</p>}
+            {!isGameActive && !isSolved && <p className="game-over">Время вышло!</p>}
+        <div className="btn btn-secondary" onClick={handleBack}>Вернуться</div>
+      </div>
+      </div>
+    );
+  };  
+  export default PuzzleMinigame;   
