@@ -32,9 +32,9 @@ const CountdownTimer:FC<CountdownTimerProps> = (props) => {
     return (
       <div>
         {timeLeft > 0 ? (
-          <p>Remaining Time: {formatTime(timeLeft)}</p>
+          <p>Обратный отчет: {formatTime(timeLeft)}</p>
         ) : (
-          <p>The game is now available!</p>
+          <p>Игра доступна!</p>
         )}
       </div>
     );
