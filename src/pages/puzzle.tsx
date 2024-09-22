@@ -6,6 +6,7 @@ import { useLoseMinigame } from '@/hooks/api/useLoseMinigame';
 import { apiFetch } from '@/services/api';
 import { useWinMinigame } from '@/hooks/api/useWinMinigame';
 import CountdownTimer from '@/components/countdown.timer';
+import { useUpdateMinigame } from '@/hooks/api/useUpdateMinigame';
 
 const Puzzle: React.FC = () => {
     
@@ -13,11 +14,12 @@ const Puzzle: React.FC = () => {
   const { loseMinigame } = useLoseMinigame(apiFetch)
   const { winMinigame } = useWinMinigame(apiFetch) 
 
+  const { updateMinigame } = useUpdateMinigame(apiFetch)
+      
   useEffect(() => {
-    console.log(minigame)
+    updateMinigame()
   }, [])
   
-
   const handleWin = () => {
     winMinigame()
   }
@@ -35,7 +37,6 @@ const Puzzle: React.FC = () => {
   };
   
   export default Puzzle;
-
   interface ICountdownTimerProps {
     remainingTime: number
   }
