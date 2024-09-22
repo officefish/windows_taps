@@ -11,7 +11,7 @@ export const useUpdateMinigame = (apiFetch: any) => {
     async () => {
    
       try {
-        const res = await apiFetch('quest/minigame/info', 'POST', {energy:0}, enqueueSnackbar);
+        const res = await apiFetch('/quest/minigame/info', 'POST', {energy:0}, enqueueSnackbar);
         
         console.log(res)
         setMinigame(res);
