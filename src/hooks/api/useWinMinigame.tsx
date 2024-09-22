@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useSnackbar } from 'notistack' // Assuming you're using notistack for notifications
 import { useUserStore } from '@/providers/user';
 
-export const useWinMinigame = (apiFetch: any) => {
+export const useWinMinigame = (apiFetch: any, onSuccess?: () => void) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const { setMinigame } = useUserStore();
@@ -18,6 +18,8 @@ export const useWinMinigame = (apiFetch: any) => {
         if (res) {
             setMinigame(res);
         }
+
+        onSuccess && onSuccess()
 
       } catch (error: any) {
         enqueueSnackbar(`Error during win minigame: ${error}`, { variant: 'error' });

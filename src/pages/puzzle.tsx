@@ -9,16 +9,28 @@ import CountdownTimer from '@/components/countdown.timer';
 import { useUpdateMinigame } from '@/hooks/api/useUpdateMinigame';
 
 const Puzzle: React.FC = () => {
-    
+  
+  const onLoseMinigame = () => {
+    navigate('/')
+  }
+
+  const onWinMinigame = () => {
+    navigate('/')
+  }
+
   const { minigame } = useUserStore()
-  const { loseMinigame } = useLoseMinigame(apiFetch)
-  const { winMinigame } = useWinMinigame(apiFetch) 
+  const { loseMinigame } = useLoseMinigame(apiFetch, onLoseMinigame)
+  const { winMinigame } = useWinMinigame(apiFetch, onWinMinigame) 
 
   const { updateMinigame } = useUpdateMinigame(apiFetch)
       
   useEffect(() => {
     updateMinigame()
   }, [])
+
+  const navigate = useNavigate()
+
+  
   
   const handleWin = () => {
     winMinigame()
