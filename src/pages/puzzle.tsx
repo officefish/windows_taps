@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef  } from 'react'
 import Tile from "@/puzzle/tile"
 import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '@/providers/user';
 //import './Puzzle.css';
 
 const shuffleArray = (array: number[]): number[] => {
@@ -21,6 +22,12 @@ const Puzzle: React.FC = () => {
 
     const timerRef = useRef<NodeJS.Timeout | null>(null);
     const navigate = useNavigate()
+
+    const { minigame } = useUserStore()
+
+    useEffect(() => {
+      console.log(minigame)
+    }, [])
   
     useEffect(() => {
       let initialTiles = Array.from({ length: 16 }, (_, i) => i);

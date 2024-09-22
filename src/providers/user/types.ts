@@ -1,8 +1,15 @@
-import { IPlayer, ICategory, ITask, IDailyQuest, IReferral } from "@/types"
+import { 
+  IPlayer, 
+  ICategory, 
+  ITask, 
+  IDailyQuest,
+  IMinigame, 
+  IReferral } from "@/types"
   export interface IUserState {
     player: IPlayer | null
     shop: ICategory[]
     dailyQuest: IDailyQuest
+    minigame: IMinigame
     referrals: Map<number, IReferral[]> // Updated to Map
     referralsTotal: number
     referralsPage: number
@@ -18,6 +25,7 @@ import { IPlayer, ICategory, ITask, IDailyQuest, IReferral } from "@/types"
     updatePlayerIncome: (income: number) => void 
     setShop: (model: ICategory[]) => void
     setDailyQuest: (dailyQuest: IDailyQuest) => void
+    setMinigame: (minigame: IMinigame) => void
     updateDailyQuest: (recieved: boolean) => void
     setReferrals: (numPage: number, refferals: IReferral[]) => void
     getReferrals: (numPage: number) =>  IReferral[] 

@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, useRef, useContext } from 'react'
 import { createStore, StoreApi, useStore } from 'zustand'
 import { createContext } from 'react' // from 'zustand/context'
 import { IUserState, IUserActions } from './types'
-import { ITask, IPlayer, IDailyQuest, ICategory, IReferral } from '../../types'
+import { ITask, IPlayer, IDailyQuest, IMinigame, ICategory, IReferral } from '../../types'
 
 type IUserStore = IUserState & IUserActions
 
@@ -43,6 +43,7 @@ const createUserStore = () =>
       }),
     shop: [],
     dailyQuest: { claimedToday: false, streak: 0, nextReward: 0, recieved: false },
+    minigame: { isBlocked: false, win: false, remainingTime: 0,},
     referrals: new Map<number, IReferral[]>(),
     referralsTotal: 0,
     referralsPage: 1,
@@ -51,6 +52,7 @@ const createUserStore = () =>
     seasonTasks: [],
     setShop: (shop: ICategory[]) => set(() => ({ shop })),
     setDailyQuest: (dailyQuest: IDailyQuest) => set(() => ({ dailyQuest })),
+    setMinigame: (minigame: IMinigame) => set(() => ({ minigame })),
     updateDailyQuest: (recieved: boolean) => {
       set((state) => {
         return ({
@@ -96,8 +98,10 @@ export const useUserStore = () => {
     shop: useStore(api, (state: IUserStore) => state.shop),
     setShop: useStore(api, (state: IUserStore) => state.setShop),
     dailyQuest: useStore(api, (state: IUserStore) => state.dailyQuest),
+    minigame: useStore(api, (state: IUserStore) => state.minigame),
     updateDailyQuest: useStore(api, (state: IUserStore) => state.updateDailyQuest),
     setDailyQuest: useStore(api, (state: IUserStore) => state.setDailyQuest),
+    setMinigame: useStore(api, (state: IUserStore) => state.setMinigame),
     refferals: useStore(api, (state: IUserStore) => state.referrals),
     dailyTasks: useStore(api, (state: IUserStore) => state.dailyTasks),
     seasonTasks: useStore(api, (state: IUserStore) => state.seasonTasks),    

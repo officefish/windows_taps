@@ -5,7 +5,7 @@ import { useUserStore } from '@/providers/user';
 export const useAllQuestsInfo = (apiFetch: any) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const { setDailyQuest } = useUserStore();
+  const { setDailyQuest, setMinigame } = useUserStore();
 
   const allQuestsInfo = useCallback(
     async () => {
@@ -17,6 +17,10 @@ export const useAllQuestsInfo = (apiFetch: any) => {
 
         if (res.dailyReward) {
             setDailyQuest(res.DailyReward);
+        }
+
+        if (res.minigame) {
+
         }
         
       } catch (error: any) {
