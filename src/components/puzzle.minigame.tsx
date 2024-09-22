@@ -99,7 +99,6 @@ const PuzzleMinigame: React.FC<IMinigameProps> = (props) => {
         onLose()
     };
     
-  
     return (
       <div className='flex w-full items-center justify-center flex-col gap-4 p-4'>
         <div className="puzzle">

@@ -1,4 +1,4 @@
-import { FC, useEffect  } from 'react'
+import { FC, useEffect, useState  } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '@/providers/user';
 import PuzzleMinigame from '@/components/puzzle.minigame';
@@ -28,6 +28,14 @@ const Puzzle: React.FC = () => {
     updateMinigame()
   }, [])
 
+  const [isBlocked, setIsBlocked] = useState(minigame.isBlocked)
+  const [remainingTime, setRemainingTime] = useState(minigame.remainingTime)
+
+  useEffect(() => {
+    setIsBlocked(minigame.isBlocked)
+    setRemainingTime(minigame.remainingTime)
+  }, [minigame])
+
   const navigate = useNavigate()
 
   
@@ -41,8 +49,8 @@ const Puzzle: React.FC = () => {
   }
 
   return (
-      <>{ minigame.isBlocked 
-        ? <MinigameBanner remainingTime={minigame.remainingTime} /> 
+      <>{ isBlocked 
+        ? <MinigameBanner remainingTime={remainingTime} /> 
         : <PuzzleMinigame onWin={handleWin} onLose={handleLose}/>
       }</>
     )
