@@ -14,8 +14,7 @@ export const useUpdateMinigame = (apiFetch: any) => {
         const res = await apiFetch('/quest/minigame/info', 'POST', {energy:0}, enqueueSnackbar);
         
         console.log(res)
-        setMinigame(res);
-        
+        setMinigame(res.minigame);
         
       } catch (error: any) {
         enqueueSnackbar(`Error during allQuestsInfo: ${error}`, { variant: 'error' });

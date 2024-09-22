@@ -37,8 +37,6 @@ const Puzzle: React.FC = () => {
   }, [minigame])
 
   const navigate = useNavigate()
-
-  
   
   const handleWin = () => {
     winMinigame()
