@@ -20,7 +20,7 @@ export const useAllQuestsInfo = (apiFetch: any) => {
         }
 
         if (res.minigame) {
-
+            setMinigame(res.minigame);
         }
         
       } catch (error: any) {
