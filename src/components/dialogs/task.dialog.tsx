@@ -4,7 +4,7 @@ import {
     useEffect, 
 } from 'react'
 // import { StyledDialog } from '@/styled/dialog.styled'
-import { ArrowSVG, SearchSVG } from '@/assets/svg'
+import { ArrowSVG } from '@/assets/svg'
 import { ITask } from '@/types'
 import CloseModalBtn from '../button/close-modal.btn'
 import DialogContent from './dialog.content'
