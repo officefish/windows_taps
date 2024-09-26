@@ -31,9 +31,6 @@ const Tasks: FC = () => {
   }, [setPage])
 
   const { dailyTasks, seasonTasks, player } = useUserStore()
-
- 
-
   const [currentTask, setCurrentTask] = useState<ITask>(seasonTasks[0])
 
   const handleTaskClick = (task: ITask) => {
@@ -46,12 +43,9 @@ const Tasks: FC = () => {
       }
   }
 
-  const handleCheckClick = () => {
+  const handleNavigateClick = () => {
       //
-  }
-
-  const handleJoinClick = () => {
-      //
+      setIsPendingDialogOpen(false)
   }
 
   const handleReadyClick = () => {
@@ -80,8 +74,7 @@ const Tasks: FC = () => {
         <PendingTaskDialog 
             isOpen={isPendingDialogOpen} 
             setIsOpen={setIsPendingDialogOpen}
-            onCheckClick={handleCheckClick}
-            onJoinClick={handleJoinClick}
+            onNavigateClick={handleNavigateClick}
             task={currentTask}
             />
         <ReadyTaskDialog 

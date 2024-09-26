@@ -12,8 +12,7 @@ import DialogContent from './dialog.content'
 interface PendingTaskDialogProps {
   isOpen: boolean
   setIsOpen: (status: boolean) => void
-  onCheckClick: () => void
-  onJoinClick: () => void
+  onNavigateClick: () => void
   task: ITask
 }
 
@@ -23,8 +22,7 @@ export const PendingTaskDialog: FC<PendingTaskDialogProps> = (props) => {
   const {
     setIsOpen,
     isOpen,
-    onCheckClick,
-    onJoinClick,
+    onNavigateClick,
     task
   } = props
 
@@ -50,15 +48,10 @@ export const PendingTaskDialog: FC<PendingTaskDialogProps> = (props) => {
              </div>
              <div className='flex flex-row items-center justify-evenly pt-4'>
                <div 
-                 onClick={()=>onJoinClick()} className='btn border-accent flex flex-row items-center justify-center gap-2'>
-                 Подписаться
-                 <ArrowSVG />
-                 </div>
-               <div 
-                 onClick={()=>onCheckClick()} 
+                 onClick={()=>onNavigateClick()} 
                  className='btn border-accent flex flex-row items-center justify-center gap-2'>
                  Посмотреть
-                 <SearchSVG />
+                 {/* <SearchSVG /> */}
                   {/* <object 
     //             data="/icons/svg/lucide_search.svg" 
     //             type="image/svg+xml"></object>  */}
