@@ -8,6 +8,7 @@ import { useUserStore } from "@/providers/user";
 import useUpdateTasksStatus from "@/hooks/api/useUpdateTaskStatus";
 import { apiFetch } from "@/services/api";
 import useGetTaskBaunty from "@/hooks/api/useGetTaskBaunty";
+import { useNavigate } from "react-router-dom";
 
 const Tasks: FC = () => {
 
@@ -43,9 +44,24 @@ const Tasks: FC = () => {
       }
   }
 
+  const navigate = useNavigate();
   const handleNavigateClick = () => {
-      //
-      setIsPendingDialogOpen(false)
+      const path = currentTask.templateTask.navigate
+      if (!path) {
+        setIsPendingDialogOpen(false)     
+        return
+      }
+
+      if (path.startsWith('http://') || path.startsWith('https://')) {
+        // Если да, открываем ссылку в новой вкладке
+        setIsPendingDialogOpen(false)
+        window.open(path, '_blank');
+      } else {
+        // В противном случае, используем navigate для перехода внутри приложения
+        setIsPendingDialogOpen(false)
+        navigate(path);
+      }
+      
   }
 
   const handleReadyClick = () => {
