@@ -9,7 +9,7 @@ import { ITask } from '@/types'
 import CloseModalBtn from '../button/close-modal.btn'
 import DialogContent from './dialog.content'
 
-interface DialogProps {
+interface PendingTaskDialogProps {
   isOpen: boolean
   setIsOpen: (status: boolean) => void
   onCheckClick: () => void
@@ -17,7 +17,7 @@ interface DialogProps {
   task: ITask
 }
 
-const TaskDialog: FC<DialogProps> = (props) => {
+export const PendingTaskDialog: FC<PendingTaskDialogProps> = (props) => {
   const modalRef = useRef<HTMLDialogElement>(null)
 
   const {
@@ -69,5 +69,55 @@ const TaskDialog: FC<DialogProps> = (props) => {
     </dialog>
   )
 }
-export default TaskDialog
 
+interface ReadyTaskDialogProps {
+  isOpen: boolean
+  setIsOpen: (status: boolean) => void
+  onReadyClick: () => void
+  task: ITask
+}
+
+export const ReadyTaskDialog: FC<ReadyTaskDialogProps> = (props) => {
+  const modalRef = useRef<HTMLDialogElement>(null)
+
+  const {
+    setIsOpen,
+    isOpen,
+    onReadyClick,
+    task
+  } = props
+
+  function onCancel(): void {
+    setIsOpen(false)
+  }
+
+  useEffect(() => {
+    if (!modalRef) return
+    if (!modalRef.current) return
+    const modal = modalRef.current
+    isOpen ? modal.showModal() : modal.close()
+  })
+
+  return (
+        <dialog className='modal overflow-hidden' ref={modalRef}>
+          <div className='w-full h-screen bottom-0 absolute'>
+            <CloseModalBtn handleCancel={onCancel}/>
+          <DialogContent>
+            <div className='w-full flex flex-col justify-center items-center pt-8'>
+                   <div className='dialog-title'>{task.templateTask.title}</div>
+                   <div className='font-bold text-3xl text-secondary'>+{task.templateTask.baunty}</div>
+                   <div className='font-bold text-md text-info py-2'>Задание выполнено. Заберите награду!</div>
+
+             </div>
+             <div className='flex flex-row items-center justify-evenly pt-4'>
+               <div 
+                 onClick={()=>onReadyClick()} className='btn border-accent flex flex-row items-center justify-center gap-2'>
+                 Забрать
+                 <ArrowSVG />
+                 </div>
+            </div>
+          </DialogContent>
+        </div>
+    </dialog>
+  )
+}

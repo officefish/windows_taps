@@ -3,15 +3,24 @@ import { ITask, Page } from "@/types";
 import { FC, SyntheticEvent, useEffect, useState } from "react"
 
 import { TaskFacebookSVG, TaskInstagramSVG, TaskTelegramSVG } from "@/assets/svg"
-import TaskDialog from "@/components/dialogs/task.dialog";
+import { PendingTaskDialog, ReadyTaskDialog } from "@/components/dialogs/task.dialog";
 import { useUserStore } from "@/providers/user";
 import useUpdateTasksStatus from "@/hooks/api/useUpdateTaskStatus";
 import { apiFetch } from "@/services/api";
+import useGetTaskBaunty from "@/hooks/api/useGetTaskBaunty";
 
 const Tasks: FC = () => {
 
+  const [isPendingDialogOpen, setIsPendingDialogOpen] = useState(false)
+  const [isReadyDialogOpen, setIsReadyDialogOpen] = useState(false)
+
+  const onBauntySuccess = () => {
+      setIsReadyDialogOpen(false)
+  }
+
   const { setPage } = useSiteStore()
   const { updateTasksStatus } = useUpdateTasksStatus(apiFetch) 
+  const { getTaskBaunty } = useGetTaskBaunty(apiFetch, onBauntySuccess)
 
   useEffect(() => {
       updateTasksStatus()
@@ -23,13 +32,18 @@ const Tasks: FC = () => {
 
   const { dailyTasks, seasonTasks, player } = useUserStore()
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
+ 
 
   const [currentTask, setCurrentTask] = useState<ITask>(seasonTasks[0])
 
   const handleTaskClick = (task: ITask) => {
       setCurrentTask(task)
-      setIsDialogOpen(true)
+
+      if (task.status === "READY") {
+          setIsReadyDialogOpen(true)
+      } else {
+          setIsPendingDialogOpen(true)
+      }
   }
 
   const handleCheckClick = () => {
@@ -38,6 +52,10 @@ const Tasks: FC = () => {
 
   const handleJoinClick = () => {
       //
+  }
+
+  const handleReadyClick = () => {
+      getTaskBaunty(currentTask.id) 
   }
 
     return (
@@ -59,11 +77,17 @@ const Tasks: FC = () => {
                 tasks={seasonTasks} 
                 onTaskCLicked={handleTaskClick}
                 />}
-        <TaskDialog 
-            isOpen={isDialogOpen} 
-            setIsOpen={setIsDialogOpen}
+        <PendingTaskDialog 
+            isOpen={isPendingDialogOpen} 
+            setIsOpen={setIsPendingDialogOpen}
             onCheckClick={handleCheckClick}
             onJoinClick={handleJoinClick}
+            task={currentTask}
+            />
+        <ReadyTaskDialog 
+            isOpen={isReadyDialogOpen} 
+            setIsOpen={setIsReadyDialogOpen}
+            onReadyClick={handleReadyClick}
             task={currentTask}
             />
     
@@ -164,6 +188,10 @@ const TaskStatusWidget:FC<TaskStatusProps> = (props) => {
     case "COMPLETED": return (
       <div className="w-8 h-8 flex items-center justify-center">
         <img className="w-6 h-6" src="/icons/png/check.png" alt="check" />
+      </div>)
+    case "READY": return (
+      <div className="w-8 h-8 flex items-center justify-center">
+        <img className="w-6 h-6" src="/icons/png/unchecked.png" alt="check" />
       </div>)
     case "IN_PROGRESS": return (
       <div className="w-8 h-8 flex items-center justify-center">
