@@ -81,7 +81,7 @@ return (
             <Route path='/tasks' element={<Tasks/>} />
             <Route path='/shop' element={<Shop/>} />
             <Route path='/offer' element={<Offer/>} />
-            <Route path='/puzzle' element={<Puzzle/>} />
+            <Route path='/minigame' element={<Puzzle/>} />
         </Routes>
       </Content>
       <Footer>

@@ -47,15 +47,17 @@ export const PendingTaskDialog: FC<PendingTaskDialogProps> = (props) => {
                    <div className='font-bold text-3xl text-secondary'>+{task.templateTask.baunty}</div>
              </div>
              <div className='flex flex-row items-center justify-evenly pt-4'>
-               <div 
-                 onClick={()=>onNavigateClick()} 
-                 className='btn border-accent flex flex-row items-center justify-center gap-2'>
-                 Посмотреть
-                 {/* <SearchSVG /> */}
-                  {/* <object 
-    //             data="/icons/svg/lucide_search.svg" 
-    //             type="image/svg+xml"></object>  */}
-               </div>
+               {task.templateTask.navigate ? 
+                  <div 
+                  onClick={()=>onNavigateClick()} 
+                  className='btn border-accent flex flex-row items-center justify-center gap-2'>
+                  Посмотреть
+                  {/* <SearchSVG /> */}
+                    {/* <object 
+      //             data="/icons/svg/lucide_search.svg" 
+      //             type="image/svg+xml"></object>  */}
+             </div>    
+               : null}
             </div>
           </DialogContent>
         </div>
