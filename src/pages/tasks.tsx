@@ -2,7 +2,6 @@ import { useSiteStore } from "@/providers/store";
 import { ITask, Page } from "@/types";
 import { FC, SyntheticEvent, useEffect, useState } from "react"
 
-import { TaskFacebookSVG, TaskInstagramSVG, TaskTelegramSVG } from "@/assets/svg"
 import { PendingTaskDialog, ReadyTaskDialog } from "@/components/dialogs/task.dialog";
 import { useUserStore } from "@/providers/user";
 import useUpdateTasksStatus from "@/hooks/api/useUpdateTaskStatus";
@@ -31,7 +30,7 @@ const Tasks: FC = () => {
       setPage(Page.TASKS)
   }, [setPage])
 
-  const { dailyTasks, seasonTasks, player } = useUserStore()
+  const { dailyTasks, seasonTasks } = useUserStore()
   const [currentTask, setCurrentTask] = useState<ITask>(seasonTasks[0])
 
   const handleTaskClick = (task: ITask) => {
@@ -69,67 +68,39 @@ const Tasks: FC = () => {
   }
 
     return (
-      <div className="overflow-y-scroll h-screen">
-      <div>
-          <h1 className="w-full text-center">Задания</h1>
-      </div>
-      <div className="mt-2 pussy-stats px-2 pb-2 w-full">
-                    <UserBalance balance={player?.balance || 0} />
-                </div>
-                <div className="spacer"></div>
-                <div className="tasks-title">Daily tasks:</div>
-                {dailyTasks.length > 0 && <TasksList 
-                tasks={dailyTasks} 
-                onTaskCLicked={handleTaskClick} />}
-                <div className="spacer"></div>
-                <div className="tasks-title">All tasks:</div>
-                {seasonTasks.length > 0 && <TasksList 
-                tasks={seasonTasks} 
-                onTaskCLicked={handleTaskClick}
-                />}
+      <div className="w-screen overflow-x-hidden">
+        <div className="absolute tasks-bg top-[-80px] z-0"></div>
+        <div className="w-screen flex items-center h-36 mt-6">
+          <img src="/tasks/coin.png" alt="" />
+        </div>
+        <div className="w-screen tasks-title">Заработайте больше монет!</div>
+        <div className="pt-8">
+          {dailyTasks.length > 0 && <TasksList 
+             tasks={dailyTasks} 
+             onTaskCLicked={handleTaskClick} 
+           />}
+        </div> 
+        <div className="tasks-list-title mt-2 pl-4 pb-1">Сезонные задания:</div>
+          {seasonTasks.length > 0 && <TasksList 
+             tasks={seasonTasks} 
+             onTaskCLicked={handleTaskClick}
+           />}
         <PendingTaskDialog 
             isOpen={isPendingDialogOpen} 
             setIsOpen={setIsPendingDialogOpen}
             onNavigateClick={handleNavigateClick}
             task={currentTask}
-            />
-        <ReadyTaskDialog 
+          />
+         <ReadyTaskDialog 
             isOpen={isReadyDialogOpen} 
             setIsOpen={setIsReadyDialogOpen}
             onReadyClick={handleReadyClick}
             task={currentTask}
-            />
-    
-  </div>  )
-}
+          /> 
+      </div>
+  )}
 export default Tasks
 
-interface IUserBalanceProps {
-  balance: number
-}
-
-const UserBalance: FC<IUserBalanceProps> = (props) => {
-  const { balance } = props
-
-  return (
-      <div className="
-      gap-2 bg-accent rounded-lg mt-4 py-4 w-full 
-      ">
-        <div className="h-5 w-full text-base-100 font-bold text-xl text-center">Баланс</div>
-        <div className="
-        flex flex-row items-center justify-center 
-        gap-2 mt-2
-        font-bold text-3xl text-center
-        text-base-100
-        ">
-              {/* <div className="stats-currency">
-                  <img src="/icons/png/brand.png" alt="stats currency" />
-              </div> */}
-               {balance}
-        </div>
-      </div>
-  )
-}
 
 
 interface TaskListsProps {
@@ -158,27 +129,32 @@ interface TaskItemProps {
 const TaskItem : FC<TaskItemProps> = (props) => {
   const { task, onClick } = props  
   const { title, baunty } = task.templateTask
-
-  const completed = task.status === "COMPLETED"
   
   const handleTaskClick = (e: SyntheticEvent<HTMLDivElement>) => {
       e.preventDefault()
       onClick(task)
   }
 
-  return <div onClick={handleTaskClick} className={`btn w-full flex flex-row items-center justify-between h-[62px] ${completed? "bg-base-300" : "bg-base-100"}`}>
+  return <div onClick={handleTaskClick} 
+  className={`
+    btn-no-body 
+    w-full 
+    flex flex-row 
+    items-center justify-between
+    task-item`}>
       <div className="flex flex-row gap-2 items-center justify-center">
-          <div className="w-[50px] h-[50px] flex items-center justify-center">
-              {/* <img className="w-[36px] h-[36px]" src={icon} alt="task" /> */}
-              <Icon id={0} />
+          <div className="w-[80px] h-[60px] flex items-center justify-center pl-4">
+              <Icon type={task.templateTask.type} />
           </div>
           <div className="flex flex-col items-start justify-center gap-2">
               <div className="task-job">{title}</div>
-              <div className={`task-baunty ${completed? "text-[#CDA6FF]" : ""}`}>+ {baunty}</div>
+              <div className="task-baunty flex flex-row gap-3">
+                <img className="w-[18px] h-[18px]" src="/home/coin.png" alt="" />
+                <span>+{baunty}</span>
+              </div>
           </div>
       </div>
       <div>
-        <span className="text-xs">{task.status}</span>
         <TaskStatusWidget task={task} />
       </div>
   </div>
@@ -195,37 +171,47 @@ const TaskStatusWidget:FC<TaskStatusProps> = (props) => {
 
   switch (status) {
     case "COMPLETED": return (
-      <div className="w-8 h-8 flex items-center justify-center">
-        <img className="w-6 h-6" src="/icons/png/check.png" alt="check" />
+      <div className="w-12 h-12 flex items-start justify-center">
+        {/* <img className="w-6 h-6" src="/icons/png/check.png" alt="check" /> */}
+        <div className="w-4 h-4 task-status-completed"></div>
       </div>)
     case "READY": return (
-      <div className="w-8 h-8 flex items-center justify-center">
-        <img className="w-6 h-6" src="/icons/png/unchecked.png" alt="check" />
-      </div>)
+      <div className="w-12 h-12 flex items-start justify-center">
+      {/* <img className="w-6 h-6" src="/icons/png/check.png" alt="check" /> */}
+      <div className="w-4 h-4 task-status-ready"></div>
+    </div>)
     case "IN_PROGRESS": return (
-      <div className="w-8 h-8 flex items-center justify-center">
-        <img className="w-6 h-6" src="/icons/png/unchecked.png" alt="check" />
+      <div className="w-8 h-8 flex items-center justify-center pr-2">
+        <img className="w-4 h-4" src="/tasks/vector.png" alt="check" />
       </div>)
     case "PENDING": return (
-      <div className="w-8 h-8 flex items-center justify-center">
-        <img className="w-6 h-6" src="/icons/png/unchecked.png" alt="check" />
+      <div className="w-8 h-8 flex items-center justify-center pr-2">
+        <img className="w-4 h-4" src="/tasks/vector.png" alt="check" />
       </div>)
   }
 }
 
 interface GetIconProps {
-  id: number
+  type: string
 }
 
 const Icon:FC<GetIconProps> = (props) => {
-  switch (props.id) {
-      case 0:
-          return <TaskTelegramSVG />
-      case 1:
-          return <TaskInstagramSVG />
-      case 2:
-          return <TaskFacebookSVG /> 
+  let src
+  switch (props.type) {
+      case 'DAILY_BAUNTY':
+        src = 'tasks/daily-quest.png'
+        break
+      case 'DAILY_MINIGAME':
+        src = 'tasks/daily-quest.png'
+        break
+      case 'INVITE_COUNT':
+        src = 'tasks/telegram.png'
+        break
+      case 'SUBSCRIPE_CHANNEL':
+        src = 'tasks/telegram.png'
+        break
       default:
-          return <TaskTelegramSVG />
+        src = 'tasks/telegram.png'
   }
+  return <img className="w-[54px] h-[54px]" src={src} alt="icon" />
 }

@@ -1,11 +1,12 @@
 
 export interface IDailyQuest {
-    claimedToday: boolean
-    streak: number
-    nextReward: number
+    baseReward: number,
+    bonus: number, 
+    claimedToday: boolean,
+    maxStreak : number,
+    streak : number
     recieved?: boolean
 }
-
 
 export interface IMinigame {
     isBlocked: boolean,

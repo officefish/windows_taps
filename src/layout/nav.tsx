@@ -7,12 +7,16 @@ const Navigation: FC = () => {
 
   const { page } = useSiteStore()
 
-    return <div className="w-full grid grid-cols-5 bg-base-100 z-50">
-      <NavButton selected={page === Page.HOME} to={'/'} title={'Главная'}/>
-      <NavButton selected={page === Page.SHOP} to={'/shop'} title={'Магазин'}/>
-      <NavButton selected={page === Page.TASKS} to={'/tasks'} title={'Задания'}/>
-      <NavButton selected={page === Page.FRIENDS} to={'/friends'} title={'Друзья'}/>
-      <NavButton selected={page === Page.OFFER} to={'/offer'} title={'Оффер'}/>
+    return <div className="
+    nav-container 
+    grid grid-cols-5
+    m-4  
+    z-50">
+      <NavButton selected={page === Page.HOME} to={'/'} title={'Охота'} index={0}/>
+      <NavButton selected={page === Page.SHOP} to={'/shop'} title={'Инвентарь'} index={1}/>
+      <NavButton selected={page === Page.TASKS} to={'/tasks'} title={'Заманухи'} index={2} />
+      <NavButton selected={page === Page.FRIENDS} to={'/friends'} title={'Фирма'} index={3} />
+      <NavButton selected={page === Page.OFFER} to={'/offer'} title={'Кладовка'} index={4}/>
     </div>
 }
 export default Navigation

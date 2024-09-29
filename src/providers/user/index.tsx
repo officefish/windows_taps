@@ -42,7 +42,13 @@ const createUserStore = () =>
         })
       }),
     shop: [],
-    dailyQuest: { claimedToday: false, streak: 0, nextReward: 0, recieved: false },
+    dailyQuest: { 
+      claimedToday: false, 
+      streak: 0, 
+      maxStreak: 8, 
+      bonus:50,
+      baseReward: 200,
+      recieved: false },
     minigame: { isBlocked: false, win: false, remainingTime: 0,},
     referrals: new Map<number, IReferral[]>(),
     referralsTotal: 0,

@@ -16,7 +16,7 @@ export const useDailyQuestInfo = (apiFetch: any) => {
    
       try {
         const res = await apiFetch('/quest/daily-reward/info', 'POST', {energy:0}, enqueueSnackbar);
-        setDailyQuest(res)
+        setDailyQuest(res);
         
       } catch (error: any) {
         //console.error('Error during login:', error);

@@ -2,22 +2,23 @@ import { FC } from "react"
 
 interface IUserMinProps {
     photoUrl: string
-    fullname: string
+    fullname?: string
+    username: string
 }
 
 const UserMin:FC<IUserMinProps> = (props) => {
-    const { photoUrl, fullname } = props
+    const { photoUrl, fullname, username } = props
     return (
-        <div className="flex flex-row h-full items-center mt-2">
-            <div className="avatar">
-                <div className="mask mask-squircle w-12">
-                    <img src={photoUrl} />
-                </div>
+        <div className="h-full w-full flex flex-row"
+        >
+            <div className="pl-2 pt-2">
+                <img className="rounded-full w-10 h-10" src={photoUrl} />
             </div>
-            <div className="flex h-full justify-start items-center ml-4">{fullname}</div>
-        </div>
-       
-        
+            <div>
+                {fullname && <div className="fullname">{fullname}</div>}
+                {username.length && <div className="username">@{username}</div>}
+            </div>
+        </div>       
     )
 }
 

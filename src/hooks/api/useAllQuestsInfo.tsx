@@ -16,7 +16,7 @@ export const useAllQuestsInfo = (apiFetch: any) => {
         console.log(res)
 
         if (res.dailyReward) {
-            setDailyQuest(res.DailyReward);
+            setDailyQuest(res.dailyReward);
         }
 
         if (res.minigame) {
