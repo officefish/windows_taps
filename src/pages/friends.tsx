@@ -99,7 +99,18 @@ const Friends: FC = () => {
         Приглашай заговорщиков в фирму и собирай подогрев.
       </div>
       {refferals 
-        ? <div>Нужна верстка!</div>
+        ?  <div className="
+        friends-description friends-slot 
+        flex flex-col items-center justify-start 
+        gap-1 px-2 mt-3
+        h-[100px] pt-2
+      ">
+      <div className="function-btn pt-4">Забрать сбор</div>
+      <div className="flex flex-row items-center justify-between w-full px-5 !h-[42px]">
+        Фирма принесла вам доход.
+        <div className="flex flex-row gap-2">0 <img className="w-6 h-6" src="/home/coin.png" alt="" /></div> 
+      </div>
+      </div>
         : <div className="
           friends-description friends-slot 
           flex flex-row items-center justify-center 
@@ -111,7 +122,9 @@ const Friends: FC = () => {
       }
       <div className="friends-devider mt-3 px-4">Список ваших друзей.</div>
       {refferals 
-        ? <div>Нужна верстка!</div>
+        ? <div>
+          {refferals && <FriendsList friends={refferals || []} />}
+        </div>
         : <div className="
         friends-description friends-slot 
         flex flex-row items-center justify-center 
@@ -166,40 +179,6 @@ const Friends: FC = () => {
 export default Friends
 
 /*
-interface IFriendsHeaderProps {
-  referral: string
-  onShare: () => void
-  onCopy: () => void
-}
-
-const FriendsHeader:FC<IFriendsHeaderProps> = (props) => {
-  const {referral, onShare, onCopy} = props
-  return (
-    <>
-        <div>
-          <h1 className="w-full text-center">Друзья</h1>
-        </div>
-        <div className='gap-2 bg-accent rounded-lg mt-4 py-4'>
-          <h5 className="pb-4 col-span-5 text-center text-base-100 font-bold text-xl">Ссылка для друзей.</h5>
-          <div className="flex flex-row gap-2 mx-2 justify-between">
-            <input className="mx-4 input px-8 w-[70%] md:w-[90%]" type="text" value={referral} onChange={()=>referral}></input>
-            <div className="flex flex-row gap-2 items-center justify-center mx-2">
-              <div className="btn" onClick={onCopy}>
-                <img className="w-[26px] h-[26px]" src="/icons/png/tabler_copy.png" alt="copy referal" />
-              </div>
-              <div className="btn mr-2" onClick={onShare}>
-                <img className="w-[26px] h-[26px]" src="/icons/png/tabler_share.png" alt="share referal" />
-              </div>
-            </div>
-          </div>
-        </div>
-    </>
-    
-  )
-}
-*/
-
-/*
 interface IFriendsNavProps {
   numFriends: number
   numLine: number
@@ -232,7 +211,7 @@ const FriendsNav: FC<IFriendsNavProps> = (props) => {
     </div>
   )
 }
-
+*/
 interface UserItemProps {
   player: IReferral
 }
@@ -251,34 +230,24 @@ const FriendsList: FC<FriendsListProps> = (props) => {
 const UserItem: FC<UserItemProps> = (props) => {
   const { player } = props
   
-  return <div className="w-full flex flex-row justify-between h-[52px]">
-      <div className="flex flex-row gap-2 items-center">
-          <img className="w-[36px] h-[36px] rounded-full" 
+  return <div className="friends-description friends-slot 
+      h-[75px] flex flex-row 
+      items-center justify-between mx-2">
+      <div className="flex flex-row gap-4 items-center pl-2">
+          <img className="w-[55px] h-[55px] rounded-full" 
           src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt={player.username} />
-          <div className="flex flex-col">
+          <div className="flex flex-col items-start justify-between h-full">
               <div className="sm-user-name">{player.username}</div>
-              <div className="sm-user-status">
-                  {true ? `Active · ${player.incomePerHour}%` : `Inactive · ${player.balance} Tap`}
+              <div className="sm-user-status pt-4">
+                  {`Active · ${player.balance}`}
               </div>
           </div>
       </div>
-      <div className="flex items-center justify-center">
-          <div className={`user-bonus ${true ? 'bg-[#696969]' : 'bg-[#886867]'} `}>+{player.incomePerHour}</div>
+      
+      <div className="user-income flex flex-row gap-2 items-center justify-center pr-4">
+        + {player.incomePerHour}
+        <img className="w-6 h-6" src="/home/coin.png" alt="" />
       </div>
-  </div>
+    </div>
 }
 
-const Invite = () => {
-
-  return (
-      <div className="w-full h-[40%] flex flex-col items-center justify-center gap-4">
-          <div className="invite-title">Nothing here...</div>
-          <div className="btn flex flex-row gap-1">
-              Приглашайте друзей
-              <img className="w-[26px] h-[26px]" src="/icons/png/tabler_share_black.png" alt="share referal"></img>
-          </div>
-      </div>
-      )
-}
-
-*/

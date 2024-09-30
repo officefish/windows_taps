@@ -715,38 +715,35 @@ body {
 }
 
 .sm-user-name {
-  /* font-family: Poppins; */
-  font-size: 24px;
-  font-weight: 600;
-  /* line-height: 36px; */
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 700;
+  /* line-height: 21.09px; */
+  letter-spacing: 0.04em;
   text-align: left;
-  color: 0xFFF;  
+
+  color: white;
 }
 
 .sm-user-status {
-  /* font-family: Poppins; */
-  font-size: 20px;
+  font-family: Roboto;
+  font-size: 13px;
   font-weight: 400;
-  /* line-height: 30px; */
+  /* line-height: 15.23px; */
+  letter-spacing: 0.04em;
   text-align: left;
-  color: #787878;
 }
 
-.user-bonus {
-  height: 28px;
-  padding: 8px 9px 8px 9px;
-  border-radius: 34px;
-  opacity: 0px;
 
-  font-family: Poppins;
-  font-size: 17.14px;
-  font-weight: 800;
-  /* line-height: 25.71px; */
+.user-income {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 400;
+  /* line-height: 15.23px; */
+  letter-spacing: 0.04em;
   text-align: left;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: white;
 }
 
 /* */
