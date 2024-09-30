@@ -123,7 +123,7 @@ const Friends: FC = () => {
       <div className='absolute bottom-24 mb-2 w-screen px-3 flex flex-row justify-between gap-3'>
         <div className='function-btn btn-no-body pt-6'
           onClick={handleShare}
-          >Пригасить
+          >Пригласить друга
         </div>
         <div className='function-btn btn-no-body !w-20 flex items-center justify-center'
           onClick={handleCopy}

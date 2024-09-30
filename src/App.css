@@ -375,6 +375,7 @@ body {
 }
 
 .function-btn {
+  font-family: SF Pro;
   width: 93%;
   height: 70px;
   min-width: 50px;
