@@ -29,7 +29,7 @@ const Friends: FC = () => {
 
     if (referralsCode) {
       //console.log('code:', referralsCode)
-      const message = 'Hey, check out my refferal link!'
+      const message = 'Помоги еноту построить оконную империю!'
       const url = `https://t.me/Curt_Gedel_bot/windows_taps?startapp=referrerId=${referralsCode}`
       setReferralUrl(url)
       const tUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(message)}`;
@@ -74,17 +74,70 @@ const Friends: FC = () => {
       textArea.select();
       try {
         document.execCommand('copy');
-        alert("Text copied using fallback!");
+        //alert("Text copied using fallback!");
       } catch (err) {
-        console.error('Fallback: Oops, unable to copy', err);
+        //console.error('Fallback: Oops, unable to copy', err);
       }
     } else {
-      console.error('Fallback: Text area reference is null');
+      //console.error('Fallback: Text area reference is null');
     }
   }, [])
 
+  return (
+    <>
+      <div className="w-screen">
+      <div className="friends-header py-4">
+        Всегда выгоднее действовать сообща!
+      </div>
+      <div className="
+      friends-description friends-slot 
+      flex flex-row items-center justify-center 
+      gap-2 px-2 mx-2
+      h-[75px]
+      ">
+        <img src="/friends/gift.png" alt="gift" />
+        Приглашай заговорщиков в фирму и собирай подогрев.
+      </div>
+      {refferals 
+        ? <div>Нужна верстка!</div>
+        : <div className="
+          friends-description friends-slot 
+          flex flex-row items-center justify-center 
+          gap-2 px-8 mt-3
+          opacity-70 h-[100px]
+        ">
+        Вам нужно проявлять больше активности, чтобы другие еноты последовали за вами.
+        </div>
+      }
+      <div className="friends-devider mt-3 px-4">Список ваших друзей.</div>
+      {refferals 
+        ? <div>Нужна верстка!</div>
+        : <div className="
+        friends-description friends-slot 
+        flex flex-row items-center justify-center 
+        px-8 mt-3
+        opacity-70 h-[75px]
+        ">Пока еще никто не перешел по вашей ссылке.</div>
+      }   
+    </div>
+      <div className='absolute bottom-24 mb-2 w-screen px-3 flex flex-row justify-between gap-3'>
+        <div className='function-btn btn-no-body pt-6'
+          onClick={handleShare}
+          >Пригасить
+        </div>
+        <div className='function-btn btn-no-body !w-20 flex items-center justify-center'
+          onClick={handleCopy}
+          ><img className="w-10 h-10" src="/friends/copy.png" alt="copy" />
+        </div>
+      </div>   
+    </>
+  
+  )
+
+  /*
   
     return (
+      
       <div className="h-screen px-4">
         <FriendsHeader referral={referralUrl} 
         onShare={handleShare} 
@@ -95,7 +148,8 @@ const Friends: FC = () => {
         <div className="spacer"></div>
         {refferals && <FriendsList friends={refferals || []} />}
         {!refferals && <Invite />}
-         {/* Hidden textarea for fallback copy */}
+         {/* Hidden textarea for fallback copy */
+    /*}
      <  textarea
         ref={textAreaRef}
         className="invisible"
@@ -103,10 +157,14 @@ const Friends: FC = () => {
         readOnly
       />
       </div>
+      
     )
+
+    */
 }
 export default Friends
 
+/*
 interface IFriendsHeaderProps {
   referral: string
   onShare: () => void
@@ -138,7 +196,9 @@ const FriendsHeader:FC<IFriendsHeaderProps> = (props) => {
     
   )
 }
+*/
 
+/*
 interface IFriendsNavProps {
   numFriends: number
   numLine: number
@@ -220,3 +280,4 @@ const Invite = () => {
       )
 }
 
+*/
