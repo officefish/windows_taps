@@ -121,7 +121,7 @@ const Friends: FC = () => {
       }   
     </div>
       <div className='absolute bottom-24 mb-2 w-screen px-3 flex flex-row justify-between gap-3'>
-        <div className='function-btn btn-no-body flex flex-row items-center justify-center gap-4'
+        <div className='function-btn btn-no-body flex flex-row items-center justify-center gap-2 text-nowrap'
           onClick={handleShare}
           >Пригласить друга 
           <img className="w-8 h-8" src="/friends/group.png" alt="friends" />
