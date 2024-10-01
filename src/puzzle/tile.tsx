@@ -8,9 +8,9 @@ interface ITileProps {
 const Tile:FC<ITileProps> = (props) => {
     const { number, onClick } = props
     return (
-    <button className={`tile ${number === 0 ? 'empty' : ''}`} onClick={onClick}>
+    <div className={`tile focus:border-none ${number === 0 ? 'empty' : ''}`} onClick={onClick}>
       {number !== 0 && number}
-    </button>
+    </div>
   );
 }
 

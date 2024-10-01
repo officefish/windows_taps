@@ -30,12 +30,8 @@ const CountdownTimer:FC<CountdownTimerProps> = (props) => {
     };
   
     return (
-      <div>
-        {timeLeft > 0 ? (
-          <p>Обратный отчет: {formatTime(timeLeft)}</p>
-        ) : (
-          <p>Игра доступна!</p>
-        )}
+      <div className='flex flex-row items-center justify-center w-screen mt-4'>
+        <p className='minigame-timer'>{formatTime(timeLeft)}</p>
       </div>
     );
   };

@@ -12,4 +12,5 @@ export interface IMinigame {
     isBlocked: boolean,
     remainingTime: number,
     win: boolean
+    baunty?: number
 } 

@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef  } from 'react'
 import Tile from "@/puzzle/tile"
+import WinMinigameDialog from './dialogs/win-minigame.dialog';
+import { IMinigame } from '@/types';
 
 const shuffleArray = (array: number[]): number[] => {
     // Fisher-Yates shuffle algorithm
@@ -13,12 +15,13 @@ const shuffleArray = (array: number[]): number[] => {
 interface IMinigameProps {
     onWin: () => void 
     onLose: () => void
+    minigame: IMinigame
 }
 
 
 const PuzzleMinigame: React.FC<IMinigameProps> = (props) => {
     
-    const { onWin, onLose } = props
+    const { onWin, onLose, minigame } = props
     
     const [tiles, setTiles] = useState<number[]>([])
 
@@ -39,7 +42,6 @@ const PuzzleMinigame: React.FC<IMinigameProps> = (props) => {
           if (prevTime <= 1) {
             clearInterval(timerRef.current!);
             setIsGameActive(false); // End the game when time runs out
-            onLose()
             return 0;
           }
           return prevTime - 1;
@@ -72,7 +74,8 @@ const PuzzleMinigame: React.FC<IMinigameProps> = (props) => {
     };
 
     const [isSolved, setIsSolved] = useState(false);
-  
+    // const [isSolved, setIsSolved] = useState(true);
+
     const checkSolved = () => {
       for (let i = 0; i < tiles.length - 1; i++) {
         if (tiles[i] !== i + 1) {
@@ -83,16 +86,18 @@ const PuzzleMinigame: React.FC<IMinigameProps> = (props) => {
       setIsSolved(true);
     };
 
+    const [isWinDialogOpen, setIsWinDialogOpen] = useState( false );
+
     useEffect(() => {
-      if (isSolved) {
-        onWin();
-      }
+       if (isSolved) {
+         setIsWinDialogOpen(true);
+       }
     }, [isSolved])
 
     const formatTime = (seconds: number) => {
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = seconds % 60;
-        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        return `${minutes < 10 ? '0' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
       };
 
     const handleBack = () => {
@@ -100,8 +105,13 @@ const PuzzleMinigame: React.FC<IMinigameProps> = (props) => {
     };
     
     return (
-      <div className='flex w-full items-center justify-center flex-col gap-4 p-4'>
-        <div className="puzzle">
+      <>
+      <div className='
+      h-full w-screen top-0 absolute z-50 bg-black'>
+        <div className='flex flex-row items-center justify-center w-screen mt-12'>
+          <p className='minigame-timer'>{formatTime(timeLeft)}</p>
+        </div>
+        <div className="puzzle mt-16 flex items-center w-full justify-center">
           {tiles.map((number, index) => (
             <Tile
               key={index}
@@ -110,13 +120,25 @@ const PuzzleMinigame: React.FC<IMinigameProps> = (props) => {
             />
           ))}
         </div>
-        <div className="flex flex-col gap-4 w-full items-center justify-center">
-            <p className='text-3xl'>Осталось времени: {formatTime(timeLeft)}</p>
-            {isSolved && <p className="congrats">Поздравляем! Вы выиграли! Возвращайтесь завтра</p>}
-            {!isGameActive && !isSolved && <p className="game-over">Время вышло!</p>}
-        <div className="btn btn-secondary" onClick={handleBack}>Вернуться</div>
+        <div className='absolute top-4 right-4 cursor-pointer' onClick={handleBack}>
+          <img className='w-6 h-6' src="/shop/close.png" alt="close" />
+        </div>
+        {!isGameActive && !isSolved && 
+           <div className='absolute bottom-4 w-screen pl-6'>
+           <div className='function-btn btn-no-body pt-6'
+             onClick={handleBack}
+             >Выйти
+           </div>
+         </div>  
+        }
       </div>
-      </div>
+      <WinMinigameDialog 
+      isOpen={isWinDialogOpen} 
+      onClose={handleBack} 
+      onWinClick={onWin} 
+      minigame={minigame} />
+      </>
+      
     );
   };  
   export default PuzzleMinigame;   

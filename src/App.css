@@ -812,33 +812,79 @@ body {
   text-align: left;
 }
 
+.minigame-title {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 900;
+  /* line-height: 34px; */
+  letter-spacing: 0.04em;
+  text-align: center;
+
+  color: white;
+}
+
+.minigame-title span {
+  color: #DFDC2B;
+}
+
+.minigame-timer {
+  width: 138px;
+  height: 48px;
+  border-radius: 40px;
+
+  padding-top: 12px;
+  padding-right: 24px;
+
+  background: linear-gradient(92.12deg, rgba(255, 255, 255, 0.11) -9.53%, rgba(255, 255, 255, 0.06) 103.34%);
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 900;
+  /* line-height: 34px; */
+  letter-spacing: 0.04em;
+  text-align: right;
+  
+  color: white;
+}
+
 /* Puzzle styles */
 .puzzle {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  grid-template-rows: repeat(4, 100px);
-  gap: 5px;
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: repeat(4, 80px);
+  gap: 4px;
 }
 
 .tile {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   font-size: 24px;
+
+  border: transparent;
+
+  border-radius: 8px;
+  background: #222222;
   /* background-color: var(--s); */
-  /* border: 2px solid var(--s); */
-  @apply bg-primary text-primary-content border-primary border-2 
-  hover:border-primary 
-  focus:border-primary 
-  active:border-primary;
+  border: 2px solid var(--s);
   cursor: pointer;
 }
 
 .tile.empty {
-  background-color: white;
+  background-color: #FFF04F;
   border: none;
+}
+
+.win-minigame-title {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 900;
+  /* line-height: 34px; */
+  letter-spacing: 0.04em;
+  text-align: center;
+
+  color: white;
 }
 
 .congrats {
