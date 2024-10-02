@@ -905,3 +905,21 @@ body {
   transform: scale(1);
   cursor: not-allowed;
 }
+
+.offer-bg {
+  background-image: url("/offer/offer-bg.png");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+
+.offer-title {
+  font-family: Roboto;
+  font-size: 28px;
+  font-weight: 700;
+  /* line-height: 32.81px; */
+  letter-spacing: 0.04em;
+  text-align: center;
+
+  color: white;
+}

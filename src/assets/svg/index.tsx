@@ -1,4 +1,9 @@
+export * from './home'
+export * from './nav'
+
 import { FC } from "react"
+
+
 
 export const CloseSVG: FC = () => <svg xmlns="http://www.w3.org/2000/svg" width="129" height="129" viewBox="0 0 129 129" fill="none">
 <g filter="url(#filter0_d_46_356)">

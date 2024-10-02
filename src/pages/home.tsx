@@ -7,6 +7,8 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useUserStore } from "@/providers/user";
 
+import { CalendarSvg, CoinSvg, EnergySvg, GamepadSvg, GearSwg, QuestionSvg } from "@/assets/svg";
+
 import useTapper from "@/hooks/useTapper";
 
 
@@ -75,7 +77,7 @@ const Home: FC = () => {
           className="btn-no-body flex flex-row gap-1 home-btn daily-bg items-center justify-start pl-2 w-[120px]"
           onClick={handleDaily}
           >
-            <img className="w-8 h-8" src="/home/calendar.png" alt="daily" />
+            <CalendarSvg width={40} height={40} />
             Дневная 
             награда
           </div>
@@ -83,7 +85,7 @@ const Home: FC = () => {
           className="btn-no-body flex flex-row gap-1 home-btn minigame-bg items-center justify-start pl-2 w-[108px]"
           onClick={handleMiniGame}
           >
-            <img className="w-8 h-8" src="/home/gamepad.png" alt="daily" />
+            <GamepadSvg width={40} height={40} />
             Мини 
             игра
           </div>
@@ -91,25 +93,23 @@ const Home: FC = () => {
             <div className="flex flex-col h-full items-center justify-center pl-2">
               <div className="flex flex-row justify-stretch items-center gap-1 text-lg">
                 {player?.incomePerHour}
-                <img className="w-4 h-4" src="/home/question.png" alt="income per hour" />
+                <QuestionSvg width={32} height={32} />
               </div>
               Прибыль в час
             </div>
             <span className="home-spacer"></span>
             <div className="flex flex-col h-full items-center justify-center pr-4">
-              <img className="w-6 h-6" src="/home/gear.png" alt="settings" />
+              <GearSwg width={24} height={26} />
             </div>
           </div>
         </div>
         {/* Balance  */}
         <div className="w-screen flex flex-row items-center justify-center gap-2 pt-4 balance-label">
-            <img className="w-10 h-10" src="/home/coin.png" alt="balance" />
+            <CoinSvg width={39} height={39} />
             <div>{balance}</div>
           </div>
         <div className="absolute home-gradient bottom-0"></div>  
         <div className="absolute bottom-28 px-2">
-
-
           <div className="flex flex-col items-center justify-center cursor-pointer pr-12"
            onTouchEnd={handleTouch} onMouseDown={handleDown}
           >
@@ -120,65 +120,23 @@ const Home: FC = () => {
             <div className="w-full h-16 flex flex-row items-center justify-between">
               <div className="flex flex-col items-start justify-center gap-1 pl-4">
                 <div className="flex flex-row items-center justify-center gap-1 text-lg coin-power">
-                  <img className="w-6 h-6" src="/home/coin.png" alt="coin power" />
+                  <img className="w-6 h-6" src="/home/coin.svg" alt="coin power" />
                   + {player?.levelId}
                 </div>
                 <div className="flex fler-row items-start justify-center gap-1 text-white opacity-60">
                   Прибыль за час
-                  <img className="w-6 h-6" src="/home/question.png" alt="income per hour" />                
+                  <img className="w-6 h-6" src="/home/question.svg" alt="income per hour" />                
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center gap-2 pr-2">
-                <img src="/home/energy.png" alt="" />
-                <div className="home-energy">{energy}/{player?.energyMax}</div>
+              <EnergySvg />
+              <div className="home-energy">{energy}/{player?.energyMax}</div>
               </div>
             </div>
           </div>
-
-         
         </div>
       </div>
     </div>
-  //     <div className="mt-4 w-full">
-  //       <div className="flex items-center justify-center w-full">
-  //         <div className="rounded-3xl border-2 border-primary h-full w-96 flex flex-col items-center justify-center py-2">
-  //           <div className="flex flex-row justify-between items-center gap-2 w-full px-4">
-  //             <div className="btn btn-secondary btn-sm" onClick={handleDaily}>Дневная награда</div>
-  //             <div className="text-primary text-lg">{getRankNameByRank(player?.rank || RankType.SHEETER)}</div>
-  //             <div className="btn btn-secondary btn-sm" onClick={handleMiniGame}>Миниигра</div>
-  //           </div>
-  //           <div className="flex flex-row justify-between items-center gap-2 mt-2">
-  //             <div className="col-span-2 flex justify-end">
-  //               <UserBalance balance={balance} />
-  //             </div>
-  //           </div>
-  //           <div className="w-64 h-64 cursor-pointer btn rounded-full mt-4" 
-  //           onTouchEnd={handleTouch} onMouseDown={handleDown}
-  //           >
-  //             <img className="w-full h-full rounded-full" src="clicker-3.jpg" />
-  //           </div>
-  //         </div>
-  //       </div>
-       
-  //         <div className="flex flex-row gap-2 items-center mt-4 w-full justify-center">
-  //           <img className="w-12 h-12 bg-accent" src="./energy-svg.svg" />
-  //           <div className="h-full flex flex-col items-center justify-center gap-2">
-  //             <div className="w-full text-accent text-center">{energy} / {player?.energyMax}</div>
-  //             <progress className="progress progress-accent w-56 ml-4" value={energy} max={player?.energyMax}></progress>
-  //           </div>
-  //       </div>
-  //     </div>
-  //   </div>
-  // 
-  //    <RatingDialog
-  //     isOpen={isRatingDialogOpen}
-  //     setIsOpen={setIsRatingDialogOpen}
-  //     level={1}
-  //     income={0}
-  //     bestUsers={bestUsers}
-  //     /> 
-
-  //  </div>
-  )
+   )
 }
 export default Home

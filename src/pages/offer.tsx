@@ -21,8 +21,9 @@ const Offer: FC = () => {
   
 
     return (
-    <div className=''>
-      
+    <div className='offer-bg w-sceen h-screen'>
+      <div 
+      className="offer-title w-full h-full flex items-center justify-center pt-44">Доступно на уровне "Диллер"</div>
    </div>)
 }
 export default Offer
